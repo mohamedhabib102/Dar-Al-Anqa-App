@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
+import Link from "next/link";
 
 
 
@@ -34,7 +35,7 @@ const Login: React.FC = () => {
                 className="relative z-10 w-[93%] md:w-[480px]"
             >
                 {/* Glassmorphism Card */}
-                <div className="relative overflow-hidden backdrop-blur-[6px] bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl">
+                <div className="relative overflow-y-auto max-h-[85vh] backdrop-blur-[6px] bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
 
                     {/* Decorative top glow */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-linear-to-r from-transparent via-(--main-color) to-transparent opacity-50"></div>
@@ -118,6 +119,10 @@ const Login: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <Link href="/" className="cursor-pointer text-(--main-color)">
+                            العودة الى الصفحة الرئيسية
+                        </Link>
 
                         <motion.button
                             whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(var(--main-color-rgb), 0.3)" }}

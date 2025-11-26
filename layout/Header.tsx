@@ -21,11 +21,11 @@ const Header: React.FC = () => {
                 <CustomContainer>
                     <nav className="flex items-center justify-between">
                         <Logo />
-                        <motion.ul 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="lg:flex hidden flex-row-reverse gap-6">
+                        <motion.ul
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="lg:flex hidden flex-row-reverse gap-6">
                             <li>
                                 <Link
                                     href="/"
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                            <Link
+                                <Link
                                     href="/books"
                                     className={`px-4 py-2 text-lg font-medium transition rounded-md
                             ${pathName === "/books"
@@ -49,8 +49,8 @@ const Header: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                            <Link
-                            href="/about"
+                                <Link
+                                    href="/about"
                                     className={`px-5 py-2 text-lg font-medium transition rounded-md
                             ${pathName === "/about"
                                             ? "text-white bg-(--main-color)"
@@ -61,11 +61,11 @@ const Header: React.FC = () => {
                             </li>
                         </motion.ul>
 
-                        <motion.div 
-                         initial={{ x: 50, opacity: 0 }}
-                         animate={{ x: 0, opacity: 1 }}
-                         transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="flex items-center gap-4 flex-row-reverse">
+                        <motion.div
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="flex items-center gap-4 flex-row-reverse">
                             <ToggleNavbar setToggle={setToggle} toggle={toggle} />
                             <Link href="/sign-in" className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-[#a08b21]">
                                 <span className="font-medium">انضم الآن</span>
