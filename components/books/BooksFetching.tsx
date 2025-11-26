@@ -17,28 +17,28 @@ const books = [
         title: "اللص والكلاب",
         author: "نجيب محفوظ",
         price: 200,
-        image: "/images/duneImage.jpg"
+        image: "/images/book.png"
     },
     {
         id: 2,
         title: "ثلاثية غرناطة",
         author: "رضوى عاشور",
         price: 130,
-        image: "/images/duneImage.jpg"
+        image: "/images/book.png"
     },
     {
         id: 3,
         title: "رجال في الشمس",
         author: "غسان كنفاني",
         price: 80,
-        image: "/images/duneImage.jpg"
+        image: "/images/book.png"
     },
     {
         id: 4,
         title: "الخيميائي",
         author: "باولو كويلو",
         price: 150,
-        image: "/images/duneImage.jpg"
+        image: "/images/book.png"
     }
 ];
 

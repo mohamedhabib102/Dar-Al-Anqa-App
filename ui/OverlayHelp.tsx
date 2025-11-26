@@ -57,10 +57,10 @@ const OverlayHelp: React.FC<OverlayMessage> = ({ toggle, setToggle }) => {
                         className="fixed top-0 left-0 inset-0 z-40 bg-black/50 backdrop-blur-sm"
                     />
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, x: "-50%", y: "-50%" }}
+                        initial={{ opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }}
                         animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
-                        exit={{ opacity: 0, scale: 0.9, x: "-50%", y: "-50%" }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="fixed top-1/2 left-1/2 z-50 lg:w-96 w-10/12 bg-gray-800 py-6 px-4 rounded-2xl shadow-2xl border border-gray-700"
                     >
                         <button onClick={() => setToggle(false)} className="cursor-pointer transition duration-200 hover:text-(--main-color) text-gray-400 hover:rotate-90 absolute top-4 right-4">
