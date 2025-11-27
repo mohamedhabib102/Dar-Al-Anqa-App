@@ -1,0 +1,64 @@
+{
+    "HomePage": {
+        "landing": {
+            "title": "Bienvenue dans notre bibliothèque",
+            "subTitle": "Je lis",
+            "description": "Découvrez une large gamme de livres dans différents domaines. Parcourez, achetez et lisez vos livres préférés facilement.",
+            "button": "Parcourir les livres"
+        },
+        "books": {
+            "title": "Les Livres",
+            "description": "Découvrez une large gamme de livres dans différents domaines. Parcourez, achetez et lisez vos livres préférés facilement."
+        }
+    },
+    "MyBooks": {
+        "title": "Mes Livres",
+        "description": "Bienvenue dans Mes Livres! Ici vous trouverez tous les livres que vous avez achetés, prêts à lire à tout moment. Commencez à découvrir vos titres préférés et profitez d'une expérience de lecture fluide et sans effort ici"
+    },
+    "bookDetails": {
+        "title": "Détails du livre",
+        "description": "Découvrez tout ce que vous devez savoir sur ce livre. Parcourez les détails complets, lisez la description et apprenez-en plus sur l'auteur et le prix avant de prendre votre décision d'achat",
+        "addToCart": "Ajouter au panier",
+        "author": "Auteur"
+    },
+    "Header": {
+        "home": "Accueil",
+        "books": "Livres",
+        "myBooks": "Mes Livres",
+        "about": "À propos",
+        "signIn": "Rejoindre maintenant",
+        "dashboard": "Tableau de bord",
+        "publisher": "Maison d'édition",
+        "author": "Auteur",
+        "pending-books": "Livres en attente",
+        "logout": "Se deconnecter"
+    },
+    "auth": {
+        "title": "heureux de vous revoir",
+        "description": "connectez-vous pour continuer",
+        "name": "Nom complet",
+        "phone": "Numéro de téléphone",
+        "password": "Mot de passe",
+        "role": "Type de compte",
+        "roleDescription": {
+            "user": "Utilisateur",
+            "author": "Auteur",
+            "publushhouse": "Maison d'édition"
+        },
+        "togoHome": "Retourner à l'accueil",
+        "signUp": "Se connecter",
+        "passwordShow": "Afficher le mot de passe",
+        "passwordHide": "Masquer le mot de passe",
+        "errors": {
+            "allFieldsRequired": "Tous les champs sont obligatoires",
+            "phoneInvalid": "Le numéro de téléphone est invalide",
+            "passwordInvalid": "Le mot de passe doit comporter au moins 8 caractères et contenir uniquement des lettres et des chiffres"
+        }
+    },
+    "LocaleSwitcher": {
+        "label": "Changer de langue",
+        "en": "EN",
+        "ar": "AR",
+        "fr": "FR"
+    }
+}

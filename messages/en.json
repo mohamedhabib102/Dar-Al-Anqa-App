@@ -1,0 +1,64 @@
+{
+    "HomePage": {
+        "landing": {
+            "title": "Welcome to our Library",
+            "subTitle": "Je lis",
+            "description": "Discover a wide range of books in various fields. Browse, buy, and read your favorite books easily.",
+            "button": "Browse Books"
+        },
+        "books": {
+            "title": "Books",
+            "description": "Discover a wide range of books in various fields. Browse, buy, and read your favorite books easily."
+        }
+    },
+    "MyBooks": {
+        "title": "My Books",
+        "description": "Welcome to My Books! Here you'll find all the books you've purchased, ready to read anytime. Start exploring your favorite titles and enjoy a smooth, seamless reading experience right here"
+    },
+    "bookDetails": {
+        "title": "Book Details",
+        "description": "Discover everything you need to know about this book. Browse the complete details, read the description, and learn about the author and price before making your purchase decision",
+        "addToCart": "Add To Cart",
+        "author": "Author"
+    },
+    "Header": {
+        "home": "Home",
+        "books": "Books",
+        "myBooks": "My Books",
+        "about": "About Us",
+        "signIn": "Join Now",
+        "dashboard": "Dashboard",
+        "publisher": "Publisher",
+        "author": "Author",
+        "pending-books": "Pending Books",
+        "logout": "Logout"
+    },
+    "auth": {
+        "title": "welcome back",
+        "description": " sign in to continue in  ",
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "password": "Password",
+        "role": "Role Account",
+        "roleDescription": {
+            "user": "User",
+            "author": "Author",
+            "publushhouse": "Publush House"
+        },
+        "togoHome": "Go to Home",
+        "signUp": "Sign Up",
+        "passwordShow": "Show password",
+        "passwordHide": "Hide password",
+        "errors": {
+            "allFieldsRequired": "All fields are required",
+            "phoneInvalid": "Phone number is invalid",
+            "passwordInvalid": "Password must be at least 8 characters and contain only letters and numbers"
+        }
+    },
+    "LocaleSwitcher": {
+        "label": "Change Language",
+        "en": "EN",
+        "ar": "AR",
+        "fr": "FR"
+    }
+}

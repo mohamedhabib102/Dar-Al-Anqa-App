@@ -19,11 +19,11 @@ const Logo: React.FC = () => {
           alt="Logo"
           width={60}
           height={100}
-          className="w-13 rounded-lg"
+          className="w-13 rounded-lg mr-1"
         />
 
         <span className="text-(--main-color) font-semibold text-2xl">
-          دار العنقاء
+        Je lis
         </span>
       </motion.h1>
     </Link>

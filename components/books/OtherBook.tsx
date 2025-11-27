@@ -1,22 +1,24 @@
 import BooksFetching from "@/components/books/BooksFetching";
 import CustomContainer from "@/ui/CustomContainer"
 import CustomTitle from "@/ui/CustomTitle"
+import {  useTranslations } from "next-intl";
 
 
 
 
 
 const OtherBook: React.FC = () => {
+    const t = useTranslations("HomePage")
     return (
         <>
-        <section className="py-16">
+        <section className="py-16" id="BooksShow">
             <CustomContainer>
                 <CustomTitle
-                title="الكتب"
-                description="اكتشف مجموعة متنوعة من الكتب في مختلف المجالات، واختيار ما يناسب اهتماماتك بسهولة"
+                title={t("books.title")}
+                description={t("books.description")}
                 success={true}
                 />
-                <BooksFetching count={6}/>
+                <BooksFetching count=""/>
             </CustomContainer>
         </section>
         </>
