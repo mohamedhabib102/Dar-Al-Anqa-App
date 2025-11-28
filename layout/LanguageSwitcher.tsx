@@ -60,7 +60,7 @@ export default function LanguageSwitcher({screen}: {screen: 'mobile' | 'desktop'
                                 onClick={() => changeLocale(loc)}
                                 className={`w-full px-2.5 py-2 text-left transition-all duration-200 ${locale === loc
                                         ? 'bg-[#b9a127] text-white font-semibold'
-                                        : 'hover:bg-amber-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
+                                        : 'hover:bg-amber-50  text-gray-200'
                                     } cursor-pointer rounded-lg`}
                             >
                                 {localeNames[loc]}
