@@ -42,6 +42,7 @@ const BooksDashboard: React.FC = () => {
             <AddNewBook
                 toggle={toggle}
                 setToggle={setToggle}
+                pathLink="api/boos"
             />
 
             <CustomTitle
