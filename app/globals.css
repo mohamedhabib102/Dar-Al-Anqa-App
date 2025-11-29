@@ -43,3 +43,7 @@ body {
   }
 }
 
+.language-btn-hover:hover {
+  background-color: #374151 !important;
+  color: #e5e7eb !important;
+}

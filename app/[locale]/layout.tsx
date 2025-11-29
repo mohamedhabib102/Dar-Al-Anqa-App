@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { PopupProvider } from "@/utils/popupContext";
+import PopupMessage from "@/layout/PopupMessage";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -37,7 +39,10 @@ export default async function LocaleLayout({
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${rubik.variable}`}>
       <body className={`antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <PopupProvider>
+            {children}
+            <PopupMessage />
+          </PopupProvider>
         </NextIntlClientProvider>
       </body>
     </html>

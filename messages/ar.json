@@ -19,7 +19,8 @@
         "title": "تفاصيل الكتاب",
         "description": "اكتشف كل ما تحتاج معرفته عن هذا الكتاب. تصفح التفاصيل الكاملة، اقرأ الوصف، وتعرف على المؤلف والسعر قبل اتخاذ قرار الشراء",
         "addToCart": "أضف إلى السلة",
-        "author": "المؤلف"
+        "author": "المؤلف",
+        "purchasesCount": "عدد المشتريات"
     },
     "Header": {
         "home": "الرئيسية",
@@ -31,7 +32,8 @@
         "publisher": "دار النشر",
         "author": "المؤلف",
         "pending-books": "الكتب المعلقة",
-        "logout": "تسجيل الخروج"
+        "logout": "تسجيل الخروج",
+        "accountNotAccepted": "حسابك لم يتم قبوله بعد"
     },
     "auth": {
         "title": "مرحباً بعودتك",
@@ -51,7 +53,7 @@
         "passwordHide": "إخفاء كلمة المرور",
         "errors": {
             "allFieldsRequired": "جميع الحقول مطلوبة",
-            "phoneInvalid": "رقم الهاتف غير صحيح",
+            "phoneInvalid": "رقم الهاتف يجب أن يكون 5 أرقام على الأقل",
             "passwordInvalid": "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي على حروف وأرقام فقط"
         }
     },
@@ -60,5 +62,59 @@
         "en": "الإنجليزية",
         "ar": "العربية",
         "fr": "الفرنسية"
+    },
+    "Popup": {
+        "successMessage": "تم إتمام الطلب بنجاح",
+        "addToCartSuccess": "تم إضافة الكتاب إلى السلة بنجاح",
+        "addToCartError": "حدث خطأ أثناء إضافة الكتاب إلى السلة",
+        "loginRequired": "يجب تسجيل الدخول أولاً",
+        "ok": "حسناً"
+    },
+    "AddBookForm": {
+        "title": "إضافة كتاب جديد",
+        "bookName": "اسم الكتاب",
+        "bookNamePlaceholder": "أدخل اسم الكتاب",
+        "bookDescription": "وصف الكتاب",
+        "bookDescriptionPlaceholder": "أدخل وصف مختصر للكتاب",
+        "price": "السعر (ج.م)",
+        "pricePlaceholder": "أدخل سعر الكتاب",
+        "bookImage": "صورة الكتاب",
+        "bookImagePlaceholder": "اضغط لاختيار صورة الكتاب",
+        "bookImageHint": "JPG, PNG, GIF - الحد الأقصى 5 ميجابايت",
+        "bookFile": "ملف الكتاب (PDF)",
+        "bookFilePlaceholder": "اضغط لاختيار ملف PDF",
+        "bookFileHint": "PDF فقط - الحد الأقصى 50 ميجابايت",
+        "submit": "إضافة الكتاب",
+        "cancel": "إلغاء",
+        "success": "تم إضافة الكتاب بنجاح",
+        "error": "حدث خطأ أثناء إضافة الكتاب",
+        "required": "*",
+        "imageError": "يرجى اختيار صورة فقط",
+        "pdfError": "يرجى اختيار ملف PDF فقط"
+    },
+    "Dashboard": {
+        "view": "عرض",
+        "pendingBooks": {
+            "title": "الكتب المعلقة",
+            "description": "مراجعة والموافقة على الكتب المعلقة",
+            "noBooks": "لا توجد كتب معلقة",
+            "bookId": "معرف الكتاب",
+            "bookName": "اسم الكتاب",
+            "bookDescription": "الوصف",
+            "userId": "معرف المستخدم",
+            "price": "السعر",
+            "approve": "قبول",
+            "reject": "رفض"
+        }
+    },
+    "AuthorPage": {
+        "title": "لوحة تحكم المؤلف",
+        "description": "إدارة كتبك وعرض حالتها",
+        "addNewBook": "إضافة كتاب جديد",
+        "myBooks": "كتبي المنشورة",
+        "noBooks": "لم تقم بنشر أي كتب بعد",
+        "view": "عرض",
+        "price": "السعر",
+        "purchases": "المبيعات"
     }
 }

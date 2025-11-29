@@ -19,7 +19,8 @@
         "title": "Book Details",
         "description": "Discover everything you need to know about this book. Browse the complete details, read the description, and learn about the author and price before making your purchase decision",
         "addToCart": "Add To Cart",
-        "author": "Author"
+        "author": "Author",
+        "purchasesCount": "Purchases"
     },
     "Header": {
         "home": "Home",
@@ -31,7 +32,8 @@
         "publisher": "Publisher",
         "author": "Author",
         "pending-books": "Pending Books",
-        "logout": "Logout"
+        "logout": "Logout",
+         "accountNotAccepted": "Your account has not been accepted yet"
     },
     "auth": {
         "title": "welcome back",
@@ -51,7 +53,7 @@
         "passwordHide": "Hide password",
         "errors": {
             "allFieldsRequired": "All fields are required",
-            "phoneInvalid": "Phone number is invalid",
+            "phoneInvalid": "Phone number must be at least 5 digits",
             "passwordInvalid": "Password must be at least 8 characters and contain only letters and numbers"
         }
     },
@@ -60,5 +62,59 @@
         "en": "EN",
         "ar": "AR",
         "fr": "FR"
+    },
+    "Popup": {
+        "successMessage": "Order completed successfully",
+        "addToCartSuccess": "Book added to cart successfully",
+        "addToCartError": "Error adding book to cart",
+        "loginRequired": "Please login first",
+        "ok": "OK"
+    },
+    "AddBookForm": {
+        "title": "Add New Book",
+        "bookName": "Book Name",
+        "bookNamePlaceholder": "Enter book name",
+        "bookDescription": "Book Description",
+        "bookDescriptionPlaceholder": "Enter a brief description of the book",
+        "price": "Price (EGP)",
+        "pricePlaceholder": "Enter book price",
+        "bookImage": "Book Image",
+        "bookImagePlaceholder": "Click to select book image",
+        "bookImageHint": "JPG, PNG, GIF - Maximum 5 MB",
+        "bookFile": "Book File (PDF)",
+        "bookFilePlaceholder": "Click to select PDF file",
+        "bookFileHint": "PDF only - Maximum 50 MB",
+        "submit": "Add Book",
+        "cancel": "Cancel",
+        "success": "Book added successfully",
+        "error": "An error occurred while adding the book",
+        "required": "*",
+        "imageError": "Please select an image only",
+        "pdfError": "Please select a PDF file only"
+    },
+    "Dashboard": {
+        "view": "View",
+        "pendingBooks": {
+            "title": "Pending Books",
+            "description": "Review and approve pending books",
+            "noBooks": "No pending books",
+            "bookId": "Book ID",
+            "bookName": "Book Name",
+            "bookDescription": "Description",
+            "userId": "User ID",
+            "price": "Price",
+            "approve": "Approve",
+            "reject": "Reject"
+        }
+    },
+    "AuthorPage": {
+        "title": "Author Dashboard",
+        "description": "Manage your books and view their status",
+        "addNewBook": "Add New Book",
+        "myBooks": "My Published Books",
+        "noBooks": "You haven't published any books yet",
+        "view": "View",
+        "price": "Price",
+        "purchases": "Purchases"
     }
 }

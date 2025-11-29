@@ -12,9 +12,6 @@ import OverlayReview from "@/ui/OverlayReview";
 interface MyBooksFetch {
     book_Id: number;
     book_Name: string;
-    book_Description: string;
-    author?: string;
-    price?: number;
     image?: string;
     file_Path: string;
     reviews_Count: number;
@@ -127,9 +124,6 @@ const MyBooksUser: React.FC = () => {
                                 fill
                                 className="object-cover transition-transform duration-500"
                             />
-                            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
-                                {book.author || (local === "ar" ? "غير محدد" : local === "en" ? "Unknown" : "Inconnu")}
-                            </div>
 
                             {/* Overlay Actions */}
                             <div className="absolute top-3 right-3 flex items-center flex-col gap-3">

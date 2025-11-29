@@ -42,7 +42,8 @@ const BooksDashboard: React.FC = () => {
             <AddNewBook
                 toggle={toggle}
                 setToggle={setToggle}
-                pathLink="api/boos"
+                pathLink="api/books"
+                getBooks={getAllBooks}
             />
 
             <CustomTitle
@@ -101,14 +102,11 @@ const BooksDashboard: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-2">
-                                    <button className="flex-1 bg-(--main-color) hover:bg-[#8b7a26] text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors cursor-pointer">
-                                        {locale === "ar" ? "عرض" : locale === "en" ? "View" : "Voir"}
-                                    </button>
+                                {/* <div className="flex gap-2">
                                     <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors cursor-pointer">
                                         {locale === "ar" ? "حذف" : locale === "en" ? "Delete" : "Supprimer"}
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     ))

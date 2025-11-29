@@ -2,9 +2,11 @@
 
 import CustomTitle from "@/ui/CustomTitle";
 import api from "@/utils/api";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { FaBook, FaDollarSign, FaUser, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaBook, FaDollarSign, FaUser, FaCheckCircle, FaTimesCircle, FaEye } from "react-icons/fa";
+import ShowBookContent from "@/components/books/ShowBookContent";
+import { AxiosError } from "axios";
 
 
 interface PendingBook {
@@ -21,7 +23,9 @@ interface PendingBook {
 
 const PendingBooks: React.FC = () => {
     const [books, setBooks] = useState<PendingBook[]>([]);
-    const locale = useLocale();
+    const [showBookToggle, setShowBookToggle] = useState(false);
+    const [selectedBook, setSelectedBook] = useState<PendingBook | null>(null);
+    const t = useTranslations("Dashboard");
 
     const getPendingBooks = async () => {
         try {
@@ -29,7 +33,11 @@ const PendingBooks: React.FC = () => {
             setBooks(res.data);
             console.log(res.data);
         } catch (error) {
-            console.log(error);
+            const err = error as AxiosError;
+            console.log(err);
+            if (err.response?.status === 404) {
+                setBooks([]);
+            }
         }
     };
 
@@ -53,6 +61,11 @@ const PendingBooks: React.FC = () => {
         }
     };
 
+    const handleViewBook = (book: PendingBook) => {
+        setSelectedBook(book);
+        setShowBookToggle(true);
+    };
+
     useEffect(() => {
         getPendingBooks();
     }, []);
@@ -60,8 +73,8 @@ const PendingBooks: React.FC = () => {
     return (
         <>
             <CustomTitle
-                title={locale === "ar" ? "الكتب المعلقة" : locale === "en" ? "Pending Books" : "Livres en attente"}
-                description={locale === "ar" ? "مراجعة والموافقة على الكتب المعلقة" : locale === "en" ? "Review and approve pending books" : "Examiner et approuver les livres en attente"}
+                title={t("pendingBooks.title")}
+                description={t("pendingBooks.description")}
                 success={false}
             />
 
@@ -70,7 +83,7 @@ const PendingBooks: React.FC = () => {
                     <div className="text-center py-12 bg-white rounded-lg shadow">
                         <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
                         <p className="text-gray-500 text-lg">
-                            {locale === "ar" ? "لا توجد كتب معلقة" : locale === "en" ? "No pending books" : "Aucun livre en attente"}
+                            {t("pendingBooks.noBooks")}
                         </p>
                     </div>
                 ) : (
@@ -87,7 +100,7 @@ const PendingBooks: React.FC = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-500">
-                                            {locale === "ar" ? "معرف الكتاب" : locale === "en" ? "Book ID" : "ID du livre"}
+                                            {t("pendingBooks.bookId")}
                                         </p>
                                         <p className="font-semibold text-gray-800">{book.book_Id}</p>
                                     </div>
@@ -98,7 +111,7 @@ const PendingBooks: React.FC = () => {
                                     <FaBook className="text-(--main-color) text-2xl" />
                                     <div>
                                         <p className="text-xs text-gray-500">
-                                            {locale === "ar" ? "اسم الكتاب" : locale === "en" ? "Book Name" : "Nom du livre"}
+                                            {t("pendingBooks.bookName")}
                                         </p>
                                         <p className="font-semibold text-gray-800 truncate max-w-[200px]" title={book.book_Name}>
                                             {book.book_Name}
@@ -110,7 +123,7 @@ const PendingBooks: React.FC = () => {
                                 <div className="flex items-center gap-3">
                                     <div className="w-full">
                                         <p className="text-xs text-gray-500">
-                                            {locale === "ar" ? "الوصف" : locale === "en" ? "Description" : "Description"}
+                                            {t("pendingBooks.bookDescription")}
                                         </p>
                                         <p className="text-sm text-gray-700 line-clamp-2" title={book.book_Description}>
                                             {book.book_Description}
@@ -123,7 +136,7 @@ const PendingBooks: React.FC = () => {
                                     <FaUser className="text-(--main-color) text-2xl" />
                                     <div>
                                         <p className="text-xs text-gray-500">
-                                            {locale === "ar" ? "معرف المستخدم" : locale === "en" ? "User ID" : "ID utilisateur"}
+                                            {t("pendingBooks.userId")}
                                         </p>
                                         <p className="font-semibold text-gray-800">{book.user_ID}</p>
                                     </div>
@@ -134,7 +147,7 @@ const PendingBooks: React.FC = () => {
                                     <FaDollarSign className="text-(--main-color) text-2xl" />
                                     <div>
                                         <p className="text-xs text-gray-500">
-                                            {locale === "ar" ? "السعر" : locale === "en" ? "Price" : "Prix"}
+                                            {t("pendingBooks.price")}
                                         </p>
                                         <p className="font-semibold text-gray-800">{book.price}</p>
                                     </div>
@@ -143,18 +156,25 @@ const PendingBooks: React.FC = () => {
                                 {/* Action Buttons */}
                                 <div className="flex gap-2 justify-end">
                                     <button
+                                        onClick={() => handleViewBook(book)}
+                                        className="cursor-pointer flex items-center gap-2 bg-(--main-color) hover:bg-[#8b7a26] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                                    >
+                                        <FaEye />
+                                        {t("view")}
+                                    </button>
+                                    <button
                                         onClick={() => handleApprove(book.book_Id)}
                                         className="cursor-pointer flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                                     >
                                         <FaCheckCircle />
-                                        {locale === "ar" ? "قبول" : locale === "en" ? "Approve" : "Approuver"}
+                                        {t("pendingBooks.approve")}
                                     </button>
                                     <button
                                         onClick={() => handleReject(book.book_Id)}
                                         className="cursor-pointer flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                                     >
                                         <FaTimesCircle />
-                                        {locale === "ar" ? "رفض" : locale === "en" ? "Reject" : "Rejeter"}
+                                        {t("pendingBooks.reject")}
                                     </button>
                                 </div>
                             </div>
@@ -162,6 +182,14 @@ const PendingBooks: React.FC = () => {
                     ))
                 )}
             </div>
+
+            {selectedBook && (
+                <ShowBookContent
+                    toggle={showBookToggle}
+                    setToggle={setShowBookToggle}
+                    book={selectedBook}
+                />
+            )}
         </>
     );
 };

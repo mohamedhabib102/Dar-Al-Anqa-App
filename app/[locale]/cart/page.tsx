@@ -9,6 +9,8 @@ import Image from "next/image"
 import { FaTrash } from "react-icons/fa"
 import Header from "@/layout/Header"
 import { useRouter } from "next/navigation"
+import { usePopup } from "@/utils/popupContext"
+import { useTranslations } from "next-intl"
 
 interface CartItem {
     book_Id: number;
@@ -26,6 +28,8 @@ const Cart: React.FC = () => {
     const { userData } = useAuth()
     const locale = useLocale()
     const router = useRouter()
+    const { showPopup } = usePopup()
+    const t = useTranslations("Popup")
     const [cartItems, setCartItems] = useState<CartItem[]>([])
     const [books, setBooks] = useState<Book[]>([])
     const [totalPrice, setTotalPrice] = useState<number>(0)
@@ -35,7 +39,7 @@ const Cart: React.FC = () => {
 
     const getCartItems = async () => {
         if (!userData?.userId) return;
-        
+
         try {
             setLoading(true);
             const res = await api.get(`/api/Cart/${userData.userId}/items`)
@@ -51,7 +55,7 @@ const Cart: React.FC = () => {
 
     const getTotalPrice = async () => {
         if (!userData?.userId) return;
-        
+
         try {
             const res = await api.get(`/api/Cart/${userData.userId}/total-price`)
             console.log(res.data);
@@ -75,7 +79,7 @@ const Cart: React.FC = () => {
 
     const deleteCartItem = async (book_Id: number) => {
         if (!userData?.userId) return;
-        
+
         try {
             await api.delete("/api/Cart/items", {
                 data: {
@@ -109,12 +113,13 @@ const Cart: React.FC = () => {
                 user_Id: userData.userId,
                 payment_status: "success"
             });
-            
+
             console.log("Payment successful:", response.data);
-            alert(locale === "ar" ? "تم إتمام الطلب بنجاح" : locale === "en" ? "Order completed successfully" : "Commande terminée avec succès")
-            
-            // Redirect to home or books page
-            router.push(`/${locale}/books`)
+
+            showPopup(t("successMessage"), () => {
+                router.push(`/${locale}/books`);
+            });
+
         } catch (error) {
             console.error("Error during checkout:", error);
             alert(locale === "ar" ? "حدث خطأ أثناء إتمام الطلب" : locale === "en" ? "Error during checkout" : "Erreur lors de la commande")
@@ -257,12 +262,12 @@ const Cart: React.FC = () => {
                                         {totalPrice} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
                                     </span>
                                 </div>
-                                <button 
+                                <button
                                     onClick={handleCheckout}
                                     disabled={checkoutLoading || cartItems.length === 0}
                                     className="w-full px-6 py-3 bg-(--main-color) text-white rounded-lg font-bold text-lg hover:opacity-90 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {checkoutLoading 
+                                    {checkoutLoading
                                         ? (locale === "ar" ? "جاري المعالجة..." : locale === "en" ? "Processing..." : "Traitement en cours...")
                                         : (locale === "ar" ? "إتمام الطلب" : locale === "en" ? "Checkout" : "Commander")
                                     }

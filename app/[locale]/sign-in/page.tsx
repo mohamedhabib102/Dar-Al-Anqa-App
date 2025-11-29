@@ -49,10 +49,15 @@ const Login: React.FC = () => {
       Ahmed7000880
 
 
-      user
+      athor
      201091435222
      hmbara7000
 
+
+     publisher 
+     كريمة بتاعت البهايهم
+     102125554
+    MMHhhh70000
     
      */
 
@@ -72,7 +77,7 @@ const Login: React.FC = () => {
                 setMessage(t("errors.allFieldsRequired"));
                 return;
             }
-            const rex = /^\+20?\d{11}$/g;
+            const rex = /^\d{5,}$/g;
             if (!authData.phoneNumber || !rex.test(authData.phoneNumber)) {
                 setLoading(false);
                 setMessage(t("errors.phoneInvalid"));

@@ -19,7 +19,8 @@
         "title": "Détails du livre",
         "description": "Découvrez tout ce que vous devez savoir sur ce livre. Parcourez les détails complets, lisez la description et apprenez-en plus sur l'auteur et le prix avant de prendre votre décision d'achat",
         "addToCart": "Ajouter au panier",
-        "author": "Auteur"
+        "author": "Auteur",
+        "purchasesCount": "Achats"
     },
     "Header": {
         "home": "Accueil",
@@ -31,7 +32,8 @@
         "publisher": "Maison d'édition",
         "author": "Auteur",
         "pending-books": "Livres en attente",
-        "logout": "Se deconnecter"
+        "logout": "Se deconnecter",
+        "accountNotAccepted": "Votre compte n'a pas encore été accepté"
     },
     "auth": {
         "title": "heureux de vous revoir",
@@ -51,7 +53,7 @@
         "passwordHide": "Masquer le mot de passe",
         "errors": {
             "allFieldsRequired": "Tous les champs sont obligatoires",
-            "phoneInvalid": "Le numéro de téléphone est invalide",
+            "phoneInvalid": "Le numéro de téléphone doit comporter au moins 5 chiffres",
             "passwordInvalid": "Le mot de passe doit comporter au moins 8 caractères et contenir uniquement des lettres et des chiffres"
         }
     },
@@ -60,5 +62,59 @@
         "en": "EN",
         "ar": "AR",
         "fr": "FR"
+    },
+    "Popup": {
+        "successMessage": "Commande terminée avec succès",
+        "addToCartSuccess": "Livre ajouté au panier avec succès",
+        "addToCartError": "Erreur lors de l'ajout du livre au panier",
+        "loginRequired": "Veuillez vous connecter d'abord",
+        "ok": "D'accord"
+    },
+    "AddBookForm": {
+        "title": "Ajouter un nouveau livre",
+        "bookName": "Nom du livre",
+        "bookNamePlaceholder": "Entrez le nom du livre",
+        "bookDescription": "Description du livre",
+        "bookDescriptionPlaceholder": "Entrez une brève description du livre",
+        "price": "Prix (EGP)",
+        "pricePlaceholder": "Entrez le prix du livre",
+        "bookImage": "Image du livre",
+        "bookImagePlaceholder": "Cliquez pour sélectionner l'image du livre",
+        "bookImageHint": "JPG, PNG, GIF - Maximum 5 Mo",
+        "bookFile": "Fichier du livre (PDF)",
+        "bookFilePlaceholder": "Cliquez pour sélectionner le fichier PDF",
+        "bookFileHint": "PDF uniquement - Maximum 50 Mo",
+        "submit": "Ajouter le livre",
+        "cancel": "Annuler",
+        "success": "Livre ajouté avec succès",
+        "error": "Une erreur s'est produite lors de l'ajout du livre",
+        "required": "*",
+        "imageError": "Veuillez sélectionner une image uniquement",
+        "pdfError": "Veuillez sélectionner un fichier PDF uniquement"
+    },
+    "Dashboard": {
+        "view": "Voir",
+        "pendingBooks": {
+            "title": "Livres en attente",
+            "description": "Examiner et approuver les livres en attente",
+            "noBooks": "Aucun livre en attente",
+            "bookId": "ID du livre",
+            "bookName": "Nom du livre",
+            "bookDescription": "Description",
+            "userId": "ID utilisateur",
+            "price": "Prix",
+            "approve": "Approuver",
+            "reject": "Rejeter"
+        }
+    },
+    "AuthorPage": {
+        "title": "Tableau de bord de l'auteur",
+        "description": "Gérez vos livres et consultez leur statut",
+        "addNewBook": "Ajouter un nouveau livre",
+        "myBooks": "Mes livres publiés",
+        "noBooks": "Vous n'avez pas encore publié de livres",
+        "view": "Voir",
+        "price": "Prix",
+        "purchases": "Achats"
     }
 }

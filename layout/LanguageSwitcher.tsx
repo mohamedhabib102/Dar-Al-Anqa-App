@@ -6,7 +6,7 @@ import { FaGlobe, FaChevronDown } from 'react-icons/fa';
 import { useState } from 'react';
 import { routing } from '@/i18n/routing';
 
-export default function LanguageSwitcher({screen}: {screen: 'mobile' | 'desktop'}) {
+export default function LanguageSwitcher({ screen }: { screen: 'mobile' | 'desktop' }) {
     const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
@@ -59,8 +59,8 @@ export default function LanguageSwitcher({screen}: {screen: 'mobile' | 'desktop'
                                 key={loc}
                                 onClick={() => changeLocale(loc)}
                                 className={`w-full px-2.5 py-2 text-left transition-all duration-200 ${locale === loc
-                                        ? 'bg-[#b9a127] text-white font-semibold'
-                                        : 'hover:bg-amber-50  text-gray-200'
+                                    ? 'bg-[#b9a127] text-white font-semibold'
+                                    : 'language-btn-hover text-gray-200'
                                     } cursor-pointer rounded-lg`}
                             >
                                 {localeNames[loc]}

@@ -1,11 +1,13 @@
 "use client"
 import api from "@/utils/api";
 import { useAuth } from "@/utils/contextapi";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaCartPlus, FaEye, FaStar } from "react-icons/fa";
+import { usePopup } from "@/utils/popupContext";
+import ScrollAnimation from "@/ui/ScrollAnimation";
 
 
 interface BooksFetchingProps {
@@ -17,6 +19,8 @@ interface BooksFetchingProps {
     purchases_Count: number;
     price: number;
     image: string;
+    image_Url?: string;
+    user_Name: string;
     reviews_Count: number
 }
 
@@ -27,10 +31,12 @@ type Props = {
 const BooksFetching: React.FC<Props> = ({ count }) => {
     const local = useLocale()
     const { userData } = useAuth();
+    const { showPopup } = usePopup();
+    const t = useTranslations("Popup");
     const [books, setBooks] = useState<BooksFetchingProps[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const getAllBooks = async() => {
+    const getAllBooks = async () => {
         try {
             setLoading(true);
             const res = await api.get("/api/Books/all")
@@ -47,7 +53,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     const addToCart = async (book_Id: number, price: number) => {
         try {
             if (!userData?.userId) {
-                alert(local === "ar" ? "يجب تسجيل الدخول أولاً" : "Please login first");
+                showPopup(t("loginRequired"), () => { });
                 return;
             }
 
@@ -56,12 +62,12 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                 book_Id: book_Id,
                 price: price
             });
-            
+
             console.log("Item added to cart:", response.data);
-            alert(local === "ar" ? "تم إضافة الكتاب إلى السلة بنجاح" : "Book added to cart successfully");
+            showPopup(t("addToCartSuccess"), () => { });
         } catch (error) {
             console.error("Error adding to cart:", error);
-            alert(local === "ar" ? "حدث خطأ أثناء إضافة الكتاب إلى السلة" : "Error adding book to cart");
+            showPopup(t("addToCartError"), () => { });
         }
     }
 
@@ -69,7 +75,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
         getAllBooks()
     }, [])
 
-    const displayBooks = count === "success" ? books : books.slice(0, 6);
+    const displayBooks = count === "success" ? books : books.slice(0, 4);
 
     if (loading) {
         return (
@@ -89,52 +95,54 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-            {displayBooks.map((book) => (
-                <div key={book.book_Id} className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
-                    <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
-                        <Image
-                            src={book.image || "/images/book.png"}
-                            alt={book.book_Name}
-                            fill
-                            className="object-cover transition-transform duration-500"
-                        />
-                        <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
-                            {book.user_ID || "—"}
-                        </div>
+            {displayBooks.map((book, index) => (
+                <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
+                    <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
+                        <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
+                            <Image
+                                src={book.image || book.image_Url || "/book.png"}
+                                alt={book.book_Name}
+                                fill
+                                className="object-cover transition-transform duration-500"
+                            />
+                            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                {book.user_Name || "—"}
+                            </div>
 
-                        {/* Overlay Actions */}
-                        <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
-                            <button 
-                                onClick={() => addToCart(book.book_Id, book.price)}
-                                className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" 
-                                title="أضف للسلة"
-                            >
-                                <FaCartPlus size={18}
-                                />
-                            </button>
-                            <Link href={`/${local}/books/${book.book_Id}`}>
-                                <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
-                                    <FaEye size={18}
+                            {/* Overlay Actions */}
+                            <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
+                                <button
+                                    onClick={() => addToCart(book.book_Id, book.price)}
+                                    className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
+                                    title="أضف للسلة"
+                                >
+                                    <FaCartPlus size={18}
                                     />
                                 </button>
-                            </Link>
+                                <Link href={`/${local}/books/${book.book_Id}`}>
+                                    <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
+                                        <FaEye size={18}
+                                        />
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="p-4 text-right">
-                        <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
-                        <div className="flex items-center justify-between mt-3">
-                            <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
-                            <div className="flex items-center gap-1">
-                                <span className="text-sm font-medium text-gray-500">{book.reviews_Count || 0}</span>
-                                <FaStar
-                                    size={20}
-                                    className="text-yellow-500 transition text-xs"
-                                />
+                        <div className="p-4 text-right">
+                            <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
+                            <div className="flex items-center justify-between mt-3">
+                                <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
+                                    <FaStar
+                                        size={20}
+                                        className="text-yellow-500 transition text-xs"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ScrollAnimation>
             ))}
         </div>
     )
