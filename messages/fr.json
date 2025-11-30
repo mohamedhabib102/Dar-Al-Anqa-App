@@ -3,17 +3,17 @@
         "landing": {
             "title": "Bienvenue dans notre bibliothèque",
             "subTitle": "Je lis",
-            "description": "Découvrez une large gamme de livres dans différents domaines. Parcourez, achetez et lisez vos livres préférés facilement.",
+            "description": "Découvrez une large gamme de livres dans divers domaines. Parcourez, achetez et lisez vos livres préférés facilement.",
             "button": "Parcourir les livres"
         },
         "books": {
-            "title": "Les Livres",
-            "description": "Découvrez une large gamme de livres dans différents domaines. Parcourez, achetez et lisez vos livres préférés facilement."
+            "title": "Livres",
+            "description": "Découvrez une large gamme de livres dans divers domaines. Parcourez, achetez et lisez vos livres préférés facilement."
         }
     },
     "MyBooks": {
-        "title": "Mes Livres",
-        "description": "Bienvenue dans Mes Livres! Ici vous trouverez tous les livres que vous avez achetés, prêts à lire à tout moment. Commencez à découvrir vos titres préférés et profitez d'une expérience de lecture fluide et sans effort ici"
+        "title": "Mes livres",
+        "description": "Bienvenue dans Mes livres ! Vous trouverez ici tous les livres que vous avez achetés, prêts à être lus à tout moment. Commencez à explorer vos titres préférés et profitez d'une expérience de lecture fluide et transparente ici même"
     },
     "bookDetails": {
         "title": "Détails du livre",
@@ -25,19 +25,19 @@
     "Header": {
         "home": "Accueil",
         "books": "Livres",
-        "myBooks": "Mes Livres",
-        "about": "À propos",
-        "signIn": "Rejoindre maintenant",
+        "myBooks": "Mes livres",
+        "about": "À propos de nous",
+        "signIn": "Rejoindre",
         "dashboard": "Tableau de bord",
-        "publisher": "Maison d'édition",
+        "publisher": "Éditeur",
         "author": "Auteur",
         "pending-books": "Livres en attente",
-        "logout": "Se deconnecter",
+        "logout": "Déconnexion",
         "accountNotAccepted": "Votre compte n'a pas encore été accepté"
     },
     "auth": {
-        "title": "heureux de vous revoir",
-        "description": "connectez-vous pour continuer",
+        "title": "bonjour",
+        "description": " connectez-vous pour continuer ",
         "name": "Nom complet",
         "phone": "Numéro de téléphone",
         "password": "Mot de passe",
@@ -47,14 +47,14 @@
             "author": "Auteur",
             "publushhouse": "Maison d'édition"
         },
-        "togoHome": "Retourner à l'accueil",
-        "signUp": "Se connecter",
+        "togoHome": "Aller à l'accueil",
+        "signUp": "S'inscrire",
         "passwordShow": "Afficher le mot de passe",
         "passwordHide": "Masquer le mot de passe",
         "errors": {
             "allFieldsRequired": "Tous les champs sont obligatoires",
             "phoneInvalid": "Le numéro de téléphone doit comporter au moins 5 chiffres",
-            "passwordInvalid": "Le mot de passe doit comporter au moins 8 caractères et contenir uniquement des lettres et des chiffres"
+            "passwordInvalid": "Le mot de passe doit comporter au moins 8 caractères et ne contenir que des lettres et des chiffres"
         }
     },
     "LocaleSwitcher": {
@@ -67,8 +67,9 @@
         "successMessage": "Commande terminée avec succès",
         "addToCartSuccess": "Livre ajouté au panier avec succès",
         "addToCartError": "Erreur lors de l'ajout du livre au panier",
-        "loginRequired": "Veuillez vous connecter d'abord",
-        "ok": "D'accord"
+        "loginRequired": "Veuillez d'abord vous connecter",
+        "ok": "OK",
+        "search": "Recherche"
     },
     "AddBookForm": {
         "title": "Ajouter un nouveau livre",
@@ -90,7 +91,10 @@
         "error": "Une erreur s'est produite lors de l'ajout du livre",
         "required": "*",
         "imageError": "Veuillez sélectionner une image uniquement",
-        "pdfError": "Veuillez sélectionner un fichier PDF uniquement"
+        "pdfError": "Veuillez sélectionner un fichier PDF uniquement",
+        "pdfSizeError": "La taille du fichier PDF ne doit pas dépasser 50 Mo",
+        "imageSizeError": "La taille de l'image ne doit pas dépasser 5 Mo",
+        "badRequestError": "Données envoyées invalides. Veuillez vérifier tous les champs"
     },
     "Dashboard": {
         "view": "Voir",
@@ -116,5 +120,15 @@
         "view": "Voir",
         "price": "Prix",
         "purchases": "Achats"
+    },
+    "About": {
+        "title": "À propos de nous",
+        "description": "Nous sommes une maison d'édition de premier plan dédiée à la diffusion des connaissances et de la culture en fournissant les meilleurs livres dans divers domaines. Nous croyons que la lecture est la clé du progrès et de l'avancement, c'est pourquoi nous tenons à sélectionner les meilleures œuvres littéraires et scientifiques pour nos chers lecteurs.",
+        "address": "Adresse: Le Caire, Égypte",
+        "phone": "Téléphone: +20 100 000 0000",
+        "email": "Email: info@yourlibrary.com"
+    },
+    "Footer": {
+        "rights": "Tous droits réservés"
     }
 }

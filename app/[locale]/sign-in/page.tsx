@@ -10,6 +10,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { useAuth } from "@/utils/contextapi";
 import api from "@/utils/api";
 import { TbLoader2 } from "react-icons/tb";
+import Cookies from "js-cookie";
 
 
 interface authData {
@@ -125,6 +126,7 @@ const Login: React.FC = () => {
                 password: "",
                 role: ""
             })
+            Cookies.set("isDone", "isDone");
         } catch (error) {
             setLoading(false);
         } finally {

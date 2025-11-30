@@ -33,7 +33,7 @@
         "author": "Author",
         "pending-books": "Pending Books",
         "logout": "Logout",
-         "accountNotAccepted": "Your account has not been accepted yet"
+        "accountNotAccepted": "Your account has not been accepted yet"
     },
     "auth": {
         "title": "welcome back",
@@ -68,7 +68,8 @@
         "addToCartSuccess": "Book added to cart successfully",
         "addToCartError": "Error adding book to cart",
         "loginRequired": "Please login first",
-        "ok": "OK"
+        "ok": "OK",
+        "search": "Search"
     },
     "AddBookForm": {
         "title": "Add New Book",
@@ -90,7 +91,10 @@
         "error": "An error occurred while adding the book",
         "required": "*",
         "imageError": "Please select an image only",
-        "pdfError": "Please select a PDF file only"
+        "pdfError": "Please select a PDF file only",
+        "pdfSizeError": "PDF file size must not exceed 50 MB",
+        "imageSizeError": "Image size must not exceed 5 MB",
+        "badRequestError": "Invalid data sent. Please check all fields"
     },
     "Dashboard": {
         "view": "View",
@@ -116,5 +120,15 @@
         "view": "View",
         "price": "Price",
         "purchases": "Purchases"
+    },
+    "About": {
+        "title": "About Us",
+        "description": "We are a leading publishing house dedicated to spreading knowledge and culture by providing the best books in various fields. We believe that reading is the key to progress and advancement, so we are keen to select the best literary and scientific works for our dear readers.",
+        "address": "Address: Cairo, Egypt",
+        "phone": "Phone: +20 100 000 0000",
+        "email": "Email: info@yourlibrary.com"
+    },
+    "Footer": {
+        "rights": "All rights reserved"
     }
 }

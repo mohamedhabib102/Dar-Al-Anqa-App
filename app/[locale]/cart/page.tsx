@@ -20,7 +20,7 @@ interface CartItem {
 interface Book {
     book_Id: number;
     book_Name: string;
-    image: string;
+    image_Url: string;
     price: number;
 }
 
@@ -214,7 +214,7 @@ const Cart: React.FC = () => {
                                                 {/* Book Image */}
                                                 <div className="relative h-[200px] md:h-[150px] w-full md:w-[150px] overflow-hidden bg-gray-100 rounded-lg shrink-0">
                                                     <Image
-                                                        src={book?.image || "/images/book.png"}
+                                                        src={book?.image_Url || "/images/book.png"}
                                                         alt={book?.book_Name || (locale === "ar" ? "كتاب" : locale === "en" ? "Book" : "Livre")}
                                                         fill
                                                         className="object-cover"

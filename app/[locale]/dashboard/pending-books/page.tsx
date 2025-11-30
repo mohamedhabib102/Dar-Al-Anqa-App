@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FaBook, FaDollarSign, FaUser, FaCheckCircle, FaTimesCircle, FaEye } from "react-icons/fa";
 import ShowBookContent from "@/components/books/ShowBookContent";
 import { AxiosError } from "axios";
+import Image from "next/image";
 
 
 interface PendingBook {
@@ -19,6 +20,7 @@ interface PendingBook {
     is_Accepted: boolean;
     purchases_Count: number;
     reviews_Count: number;
+    image_Url: string;
 }
 
 const PendingBooks: React.FC = () => {
@@ -92,7 +94,7 @@ const PendingBooks: React.FC = () => {
                             key={book.book_Id}
                             className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 border-r-4 border-(--main-color)"
                         >
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 items-center">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
                                 {/* Book ID */}
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 rounded-full bg-(--main-color) flex items-center justify-center text-white font-bold text-lg">
@@ -108,7 +110,14 @@ const PendingBooks: React.FC = () => {
 
                                 {/* Book Name */}
                                 <div className="flex items-center gap-3">
-                                    <FaBook className="text-(--main-color) text-2xl" />
+                                    {/* <FaBook className="text-(--main-color) text-2xl" /> */}
+                                    <Image
+                                        src={book.image_Url || "/book.png"}
+                                        alt={book.book_Name}
+                                        width={50}
+                                        height={50}
+                                        className="w-12 h-12 rounded-full"
+                                    />
                                     <div>
                                         <p className="text-xs text-gray-500">
                                             {t("pendingBooks.bookName")}

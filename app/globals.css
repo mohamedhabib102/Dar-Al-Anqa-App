@@ -47,3 +47,8 @@ body {
   background-color: #374151 !important;
   color: #e5e7eb !important;
 }
+
+.custom_hover:hover {
+  transition: 0.3s;
+  background-color: #193cb8;
+}

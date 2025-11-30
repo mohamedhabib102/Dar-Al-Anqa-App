@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { PopupProvider } from "@/utils/popupContext";
 import PopupMessage from "@/layout/PopupMessage";
+import Footer from "@/layout/Footer";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -37,11 +38,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${rubik.variable}`}>
-      <body className={`antialiased`}>
+      <body className={`antialiased flex flex-col min-h-screen`}>
         <NextIntlClientProvider messages={messages}>
           <PopupProvider>
-            {children}
+            <div className="grow">
+              {children}
+            </div>
             <PopupMessage />
+            <Footer />
           </PopupProvider>
         </NextIntlClientProvider>
       </body>

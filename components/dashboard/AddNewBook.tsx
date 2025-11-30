@@ -27,6 +27,7 @@ interface PropsAddNewBook {
 }
 
 
+
 const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, getBooks }) => {
     const { userData } = useAuth();
     const t = useTranslations("AddBookForm");
@@ -40,6 +41,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
     })
     const [fileName, setFileName] = useState<string>("");
     const [imageName, setImageName] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -63,6 +65,13 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file && file.type === "application/pdf") {
+            // Check file size (50 MB = 50 * 1024 * 1024 bytes)
+            const maxSize = 50 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert(t("pdfSizeError"))
+                e.target.value = ""
+                return
+            }
             setData(prev => ({
                 ...prev,
                 file_Path: file
@@ -77,6 +86,13 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file && file.type.startsWith("image/")) {
+            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert(t("imageSizeError"))
+                e.target.value = ""
+                return
+            }
             setData(prev => ({
                 ...prev,
                 image: file
@@ -89,6 +105,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
+        setLoading(true)
         e.preventDefault()
         try {
             const formData = new FormData();
@@ -98,14 +115,12 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
             formData.append("Book_Description", data.book_Description);
             formData.append("Price", data.price.toString());
 
-            // Send "string" as requested for File_Path
-            formData.append("File_Path", "string");
-
-            // Append Image_Url as empty string (required by backend model)
-            formData.append("Image_Url", "string");
-
             if (data.image) {
                 formData.append("image", data.image);
+            }
+
+            if (data.file_Path) {
+                formData.append("pdf", data.file_Path);
             }
 
             const res = await api.post(pathLink, formData, {
@@ -118,10 +133,15 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
             alert(t("success"));
             handleClose()
             getBooks()
-
-        } catch (error) {
+            setLoading(false)
+        } catch (error: any) {
             console.log(error);
-            alert(t("error"))
+            // Check if error is 400 Bad Request
+            if (error.response && error.response.status === 400) {
+                alert(t("badRequestError"))
+            } else {
+                alert(t("error"))
+            }
         }
     }
 
@@ -265,7 +285,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                 type="submit"
                                 className="cursor-pointer flex-1 bg-(--main-color) text-white py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
                             >
-                                {t("submit")}
+                                {loading ? "........." : t("submit")}
                             </button>
                             <button
                                 type="button"

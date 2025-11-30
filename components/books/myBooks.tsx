@@ -12,7 +12,7 @@ import OverlayReview from "@/ui/OverlayReview";
 interface MyBooksFetch {
     book_Id: number;
     book_Name: string;
-    image?: string;
+    image_Url?: string;
     file_Path: string;
     reviews_Count: number;
 }
@@ -38,18 +38,7 @@ const MyBooksUser: React.FC = () => {
             setLoading(true)
             const res = await api.get(`/api/Books/GetMyBooks?userId=${userData.userId}`)
             console.log(res.data)
-            // Add default values for missing fields
-            const booksWithDefaults = (res.data || []).map((book: any) => ({
-                ...book,
-                author: book.author || (local === "ar" ? "غير محدد" : local === "en" ? "Unknown" : "Inconnu"),
-                image: book.image || "/images/book.png",
-                price: book.price || 0,
-                file_Path: book.file_Path
-            }))
-            setBooks(booksWithDefaults)
-            if (booksWithDefaults.length > 0 && !selectedBook) {
-                setSelectedBook(booksWithDefaults[0])
-            }
+            setBooks(res.data)
         } catch (error) {
             console.log(error)
             setBooks([])
@@ -64,6 +53,8 @@ const MyBooksUser: React.FC = () => {
 
     const handleOpenBook = (book: MyBooksFetch) => {
         setSelectedBook(book);
+
+        console.log(book);
         setToggle(true);
     };
 
@@ -119,7 +110,7 @@ const MyBooksUser: React.FC = () => {
                     <div key={book.book_Id} className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
                         <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
                             <Image
-                                src={book.image || "/images/book.png"}
+                                src={book.image_Url || "/images/book.png"}
                                 alt={book.book_Name}
                                 fill
                                 className="object-cover transition-transform duration-500"

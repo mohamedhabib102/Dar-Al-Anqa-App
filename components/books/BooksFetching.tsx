@@ -35,6 +35,10 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     const t = useTranslations("Popup");
     const [books, setBooks] = useState<BooksFetchingProps[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [search, setSearch] = useState<string>("");
+
+    const filterSearch =
+        books.filter((book) => book.book_Name.toLowerCase().includes(search.toLowerCase()))
 
     const getAllBooks = async () => {
         try {
@@ -93,58 +97,139 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
         );
     }
 
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-            {displayBooks.map((book, index) => (
-                <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
-                    <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
-                        <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
-                            <Image
-                                src={book.image || book.image_Url || "/book.png"}
-                                alt={book.book_Name}
-                                fill
-                                className="object-cover transition-transform duration-500"
-                            />
-                            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
-                                {book.user_Name || "—"}
-                            </div>
 
-                            {/* Overlay Actions */}
-                            <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
-                                <button
-                                    onClick={() => addToCart(book.book_Id, book.price)}
-                                    className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
-                                    title="أضف للسلة"
-                                >
-                                    <FaCartPlus size={18}
+    if (count !== "success"){
+        return(
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+                    {filterSearch.slice(0, 4).map((book, index) => (
+                        <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
+                            <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
+                                <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
+                                    <Image
+                                        src={book.image || book.image_Url || "/book.png"}
+                                        alt={book.book_Name}
+                                        fill
+                                        className="object-cover transition-transform duration-500"
                                     />
-                                </button>
-                                <Link href={`/${local}/books/${book.book_Id}`}>
-                                    <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
-                                        <FaEye size={18}
-                                        />
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
+                                    <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                        {book.user_Name || "—"}
+                                    </div>
 
-                        <div className="p-4 text-right">
-                            <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
-                            <div className="flex items-center justify-between mt-3">
-                                <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
-                                <div className="flex items-center gap-1">
-                                    <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
-                                    <FaStar
-                                        size={20}
-                                        className="text-yellow-500 transition text-xs"
-                                    />
+                                    {/* Overlay Actions */}
+                                    <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
+                                        <button
+                                            onClick={() => addToCart(book.book_Id, book.price)}
+                                            className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
+                                            title="أضف للسلة"
+                                        >
+                                            <FaCartPlus size={18}
+                                            />
+                                        </button>
+                                        <Link href={`/${local}/books/${book.book_Id}`}>
+                                            <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
+                                                <FaEye size={18}
+                                                />
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 text-right">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
+                                    <div className="flex items-center justify-between mt-3">
+                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
+                                        <div className="flex items-center gap-1">
+                                            <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
+                                            <FaStar
+                                                size={20}
+                                                className="text-yellow-500 transition text-xs"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </ScrollAnimation>
-            ))}
-        </div>
+                        </ScrollAnimation>
+                ))}
+                </div>
+            </>
+        )
+    }
+
+    return (
+        <>
+            {count === "success" && (
+                <div>
+                    <input
+                        type="text"
+                        placeholder={`${t("search")}`}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full py-2 px-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:border-(--main-color)"
+                    />
+                </div>
+            )}
+
+
+
+            {filterSearch.length === 0 ? (
+                <div className="text-center py-12">
+                    <p className="text-gray-500 text-lg">لا توجد نتائج للبحث</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+                    {filterSearch.map((book, index) => (
+                        <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
+                            <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
+                                <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
+                                    <Image
+                                        src={book.image || book.image_Url || "/book.png"}
+                                        alt={book.book_Name}
+                                        fill
+                                        className="object-cover transition-transform duration-500"
+                                    />
+                                    <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                        {book.user_Name || "—"}
+                                    </div>
+
+                                    {/* Overlay Actions */}
+                                    <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
+                                        <button
+                                            onClick={() => addToCart(book.book_Id, book.price)}
+                                            className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
+                                            title="أضف للسلة"
+                                        >
+                                            <FaCartPlus size={18}
+                                            />
+                                        </button>
+                                        <Link href={`/${local}/books/${book.book_Id}`}>
+                                            <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
+                                                <FaEye size={18}
+                                                />
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 text-right">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
+                                    <div className="flex items-center justify-between mt-3">
+                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
+                                        <div className="flex items-center gap-1">
+                                            <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
+                                            <FaStar
+                                                size={20}
+                                                className="text-yellow-500 transition text-xs"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ScrollAnimation>
+                    ))}
+                </div>)}
+
+        </>
     )
 }
 export default BooksFetching;
