@@ -33,7 +33,8 @@
         "author": "Auteur",
         "pending-books": "Livres en attente",
         "logout": "Déconnexion",
-        "accountNotAccepted": "Votre compte n'a pas encore été accepté"
+        "accountNotAccepted": "Votre compte n'a pas encore été accepté",
+        "orders": "Commandes"
     },
     "auth": {
         "title": "bonjour",
@@ -42,7 +43,11 @@
         "phone": "Numéro de téléphone",
         "password": "Mot de passe",
         "role": "Type de compte",
+        "next": "Suivant",
+        "categories": "Catégories",
+        "register": "S'inscrire",
         "roleDescription": {
+            "select": "Sélectionner",
             "user": "Utilisateur",
             "author": "Auteur",
             "publushhouse": "Maison d'édition"
@@ -94,7 +99,9 @@
         "pdfError": "Veuillez sélectionner un fichier PDF uniquement",
         "pdfSizeError": "La taille du fichier PDF ne doit pas dépasser 50 Mo",
         "imageSizeError": "La taille de l'image ne doit pas dépasser 5 Mo",
-        "badRequestError": "Données envoyées invalides. Veuillez vérifier tous les champs"
+        "badRequestError": "Données envoyées invalides. Veuillez vérifier tous les champs",
+        "category": "Catégorie",
+        "selectCategory": "Sélectionner la catégorie"
     },
     "Dashboard": {
         "view": "Voir",
@@ -109,6 +116,48 @@
             "price": "Prix",
             "approve": "Approuver",
             "reject": "Rejeter"
+        },
+        "orders": {
+            "title": "Commandes",
+            "noOrders": "Aucune commande trouvée",
+            "bookName": "Nom du livre",
+            "clientName": "Nom du client",
+            "status": "Statut",
+            "actions": "Actions",
+            "approve": "Approuver",
+            "reject": "Rejeter",
+            "uploadReceipt": "Télécharger le reçu",
+            "cancel": "Annuler",
+            "pending": "En attente"
+        },
+        "users": {
+            "title": "Utilisateurs",
+            "name": "Nom",
+            "role": "Rôle",
+            "profits": "Profits",
+            "author": "Auteur",
+            "publisher": "Éditeur"
+        },
+        "authors": {
+            "title": "Auteurs",
+            "books": "Livres",
+            "profits": "Profits"
+        },
+        "publishers": {
+            "title": "Éditeurs",
+            "books": "Livres",
+            "profits": "Profits"
+        },
+        "withdrawalRequests": {
+            "title": "Demandes de retrait",
+            "noRequests": "Aucune demande de retrait",
+            "requesterName": "Nom du demandeur",
+            "amount": "Montant",
+            "method": "Méthode de paiement",
+            "number": "Numéro",
+            "actions": "Actions",
+            "approve": "Approuver",
+            "reject": "Rejeter"
         }
     },
     "AuthorPage": {
@@ -119,7 +168,10 @@
         "noBooks": "Vous n'avez pas encore publié de livres",
         "view": "Voir",
         "price": "Prix",
-        "purchases": "Achats"
+        "purchases": "Achats",
+        "profit": "Bénéfice",
+        "withdrawalRequest": "Demande de retrait",
+        "AllProfits": "Toutes les profits"
     },
     "About": {
         "title": "À propos de nous",
@@ -130,5 +182,37 @@
     },
     "Footer": {
         "rights": "Tous droits réservés"
+    },
+    "WithdrawalRequest": {
+        "title": "Demande de retrait",
+        "paymentMethod": "Méthode de paiement",
+        "selectPaymentMethod": "Sélectionner la méthode de paiement",
+        "vodafoneCash": "Vodafone Cash",
+        "fawry": "Fawry",
+        "visa": "Visa",
+        "paypal": "PayPal",
+        "phoneNumber": "Numéro de téléphone",
+        "accountNumber": "Numéro de compte",
+        "amount": "Montant",
+        "enterAmount": "Entrez le montant du retrait",
+        "submit": "Envoyer la demande",
+        "cancel": "Annuler",
+        "success": "Demande de retrait envoyée avec succès",
+        "error": "Erreur lors de l'envoi de la demande",
+        "enterPhoneNumber": "Entrez le numéro de téléphone",
+        "enterAccountNumber": "Entrez le numéro de compte"
+    },
+    "PublisherDashboard": {
+        "publisher_title": "Publisher",
+        "publisher_description": "Manage registered publishers in the platform",
+        "no_publishers": "No publishers registered",
+        "user_id": "User ID",
+        "name": "Name",
+        "phone_number": "Phone Number",
+        "role": "Role",
+        "accepted": "Accepted",
+        "pending": "Pending",
+        "accept": "Accept",
+        "reject": "Reject"
     }
 }

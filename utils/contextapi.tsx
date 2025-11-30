@@ -13,6 +13,7 @@ interface DataUser {
     role: string | null;
     isAccepted?: boolean | null;
     token: string | null;
+    isDone: boolean | null;
 }
 
 interface AuthContextType {
@@ -33,8 +34,9 @@ const getUserDataFromCookies = (): DataUser | null => {
     const role = Cookies.get("role");
     const token = Cookies.get("token");
     const isAccepted = Cookies.get("isAccepted");
+    const isDone = Cookies.get("isDone");
 
-    if (!userId && !role && !token && !isAccepted) {
+    if (!userId && !role && !token && !isAccepted && !isDone) {
         return null;
     }
 
@@ -42,7 +44,8 @@ const getUserDataFromCookies = (): DataUser | null => {
         userId: userId ? Number(userId) : null,
         role: role ?? null,
         token: token ?? null,
-        isAccepted: isAccepted ? isAccepted === "true" : null
+        isAccepted: isAccepted ? isAccepted === "true" : null,
+        isDone: isDone ? isDone === "true" : null
     };
 };
 
@@ -65,6 +68,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         Cookies.set("role", payload.role ?? "", cookieOptions);
         Cookies.set("token", payload.token ?? "", cookieOptions);
         Cookies.set("isAccepted", String(payload.isAccepted ?? false), cookieOptions);
+        Cookies.set("isDone", String(payload.isDone ?? false), cookieOptions);
 
         setIsLoading(false);
     };
@@ -76,6 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         Cookies.remove("role");
         Cookies.remove("token");
         Cookies.remove("isAccepted");
+        Cookies.remove("isDone");
         setIsLoading(false);
 
         window.location.href = redirectTo ?? "/";

@@ -1,24 +1,24 @@
 {
     "HomePage": {
         "landing": {
-            "title": "Welcome to our Library",
-            "subTitle": "Je lis",
-            "description": "Discover a wide range of books in various fields. Browse, buy, and read your favorite books easily.",
+            "title": "Welcome to our library",
+            "subTitle": "I Read",
+            "description": "Discover a wide range of books in various fields. Browse, purchase, and read your favorite books easily.",
             "button": "Browse Books"
         },
         "books": {
             "title": "Books",
-            "description": "Discover a wide range of books in various fields. Browse, buy, and read your favorite books easily."
+            "description": "Discover a wide range of books in various fields. Browse, purchase, and read your favorite books easily."
         }
     },
     "MyBooks": {
         "title": "My Books",
-        "description": "Welcome to My Books! Here you'll find all the books you've purchased, ready to read anytime. Start exploring your favorite titles and enjoy a smooth, seamless reading experience right here"
+        "description": "Welcome to My Books! Here you will find all the books you have purchased, ready to read anytime. Start exploring your favorite titles and enjoy a smooth and seamless reading experience right here."
     },
     "bookDetails": {
         "title": "Book Details",
-        "description": "Discover everything you need to know about this book. Browse the complete details, read the description, and learn about the author and price before making your purchase decision",
-        "addToCart": "Add To Cart",
+        "description": "Discover everything you need to know about this book. Browse full details, read the description, and learn more about the author and price before making your purchase decision.",
+        "addToCart": "Add to Cart",
         "author": "Author",
         "purchasesCount": "Purchases"
     },
@@ -27,34 +27,39 @@
         "books": "Books",
         "myBooks": "My Books",
         "about": "About Us",
-        "signIn": "Join Now",
+        "signIn": "Sign In",
         "dashboard": "Dashboard",
         "publisher": "Publisher",
         "author": "Author",
         "pending-books": "Pending Books",
         "logout": "Logout",
-        "accountNotAccepted": "Your account has not been accepted yet"
+        "accountNotAccepted": "Your account has not been accepted yet",
+        "orders": "Orders"
     },
     "auth": {
-        "title": "welcome back",
-        "description": " sign in to continue in  ",
+        "title": "Hello",
+        "description": "Log in to continue",
         "name": "Full Name",
         "phone": "Phone Number",
         "password": "Password",
-        "role": "Role Account",
+        "role": "Account Type",
+        "next": "Next",
+        "categories": "Categories",
+        "register": "Register",
         "roleDescription": {
+            "select": "Select",
             "user": "User",
             "author": "Author",
-            "publushhouse": "Publush House"
+            "publushhouse": "Publishing House"
         },
         "togoHome": "Go to Home",
         "signUp": "Sign Up",
-        "passwordShow": "Show password",
-        "passwordHide": "Hide password",
+        "passwordShow": "Show Password",
+        "passwordHide": "Hide Password",
         "errors": {
             "allFieldsRequired": "All fields are required",
-            "phoneInvalid": "Phone number must be at least 5 digits",
-            "passwordInvalid": "Password must be at least 8 characters and contain only letters and numbers"
+            "phoneInvalid": "Phone number must have at least 5 digits",
+            "passwordInvalid": "Password must be at least 8 characters long and contain only letters and numbers"
         }
     },
     "LocaleSwitcher": {
@@ -67,18 +72,18 @@
         "successMessage": "Order completed successfully",
         "addToCartSuccess": "Book added to cart successfully",
         "addToCartError": "Error adding book to cart",
-        "loginRequired": "Please login first",
+        "loginRequired": "Please log in first",
         "ok": "OK",
         "search": "Search"
     },
     "AddBookForm": {
-        "title": "Add New Book",
+        "title": "Add a New Book",
         "bookName": "Book Name",
-        "bookNamePlaceholder": "Enter book name",
+        "bookNamePlaceholder": "Enter the book name",
         "bookDescription": "Book Description",
         "bookDescriptionPlaceholder": "Enter a brief description of the book",
         "price": "Price (EGP)",
-        "pricePlaceholder": "Enter book price",
+        "pricePlaceholder": "Enter the price of the book",
         "bookImage": "Book Image",
         "bookImagePlaceholder": "Click to select book image",
         "bookImageHint": "JPG, PNG, GIF - Maximum 5 MB",
@@ -94,7 +99,9 @@
         "pdfError": "Please select a PDF file only",
         "pdfSizeError": "PDF file size must not exceed 50 MB",
         "imageSizeError": "Image size must not exceed 5 MB",
-        "badRequestError": "Invalid data sent. Please check all fields"
+        "badRequestError": "Invalid data sent. Please check all fields",
+        "category": "Category",
+        "selectCategory": "Select Category"
     },
     "Dashboard": {
         "view": "View",
@@ -109,26 +116,104 @@
             "price": "Price",
             "approve": "Approve",
             "reject": "Reject"
+        },
+        "orders": {
+            "title": "Orders",
+            "noOrders": "No orders found",
+            "bookName": "Book Name",
+            "clientName": "Client Name",
+            "status": "Status",
+            "actions": "Actions",
+            "approve": "Approve",
+            "reject": "Reject",
+            "uploadReceipt": "Upload Receipt",
+            "cancel": "Cancel",
+            "pending": "Pending"
+        },
+        "users": {
+            "title": "Users",
+            "name": "Name",
+            "role": "Role",
+            "profits": "Profits",
+            "author": "Author",
+            "publisher": "Publisher"
+        },
+        "authors": {
+            "title": "Authors",
+            "books": "Books",
+            "profits": "Profits"
+        },
+        "publishers": {
+            "title": "Publishers",
+            "books": "Books",
+            "profits": "Profits"
+        },
+        "withdrawalRequests": {
+            "title": "Withdrawal Requests",
+            "noRequests": "No withdrawal requests",
+            "requesterName": "Requester Name",
+            "amount": "Amount",
+            "method": "Payment Method",
+            "number": "Number",
+            "actions": "Actions",
+            "approve": "Approve",
+            "reject": "Reject"
         }
     },
     "AuthorPage": {
         "title": "Author Dashboard",
         "description": "Manage your books and view their status",
-        "addNewBook": "Add New Book",
+        "addNewBook": "Add a New Book",
         "myBooks": "My Published Books",
-        "noBooks": "You haven't published any books yet",
+        "noBooks": "You have not published any books yet",
         "view": "View",
         "price": "Price",
-        "purchases": "Purchases"
+        "purchases": "Purchases",
+        "profit": "Profit",
+        "withdrawalRequest": "Withdrawal Request",
+        "AllProfits": "All Profits"
     },
     "About": {
         "title": "About Us",
-        "description": "We are a leading publishing house dedicated to spreading knowledge and culture by providing the best books in various fields. We believe that reading is the key to progress and advancement, so we are keen to select the best literary and scientific works for our dear readers.",
+        "description": "We are a leading publishing house dedicated to spreading knowledge and culture by providing the best books in various fields. We believe that reading is the key to progress and development, so we are keen to select the best literary and scientific works for our valued readers.",
         "address": "Address: Cairo, Egypt",
         "phone": "Phone: +20 100 000 0000",
         "email": "Email: info@yourlibrary.com"
     },
     "Footer": {
         "rights": "All rights reserved"
-    }
+    },
+    "WithdrawalRequest": {
+        "title": "Withdrawal Request",
+        "paymentMethod": "Payment Method",
+        "selectPaymentMethod": "Select Payment Method",
+        "vodafoneCash": "Vodafone Cash",
+        "fawry": "Fawry",
+        "visa": "Visa",
+        "paypal": "PayPal",
+        "phoneNumber": "Phone Number",
+        "accountNumber": "Account Number",
+        "amount": "Amount",
+        "enterAmount": "Enter withdrawal amount",
+        "submit": "Submit Request",
+        "cancel": "Cancel",
+        "success": "Withdrawal request submitted successfully",
+        "error": "Error submitting withdrawal request",
+        "enterPhoneNumber": "Enter phone number",
+        "enterAccountNumber": "Enter account number"
+    },
+    "PublisherDashboard": {
+  "publisher_title": "Publisher",
+  "publisher_description": "Manage registered publishers in the platform",
+  "no_publishers": "No publishers registered",
+  "user_id": "User ID",
+  "name": "Name",
+  "phone_number": "Phone Number",
+  "role": "Role",
+  "accepted": "Accepted",
+  "pending": "Pending",
+  "accept": "Accept",
+  "reject": "Reject"
+}
+
 }

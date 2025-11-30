@@ -1,12 +1,13 @@
 "use client"
 import Header from "@/layout/Header"
 import CustomContainer from "@/ui/CustomContainer"
+import { useAuth } from "@/utils/contextapi"
 import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import { MdDashboard, MdLibraryBooks, MdBusiness, MdOutlinePending } from "react-icons/md"
-
-
 
 
 interface DashboardProps {
@@ -14,10 +15,23 @@ interface DashboardProps {
 }
 
 
+
+
+
 const DashboardLayout: React.FC<DashboardProps> = ({ children }) => {
     const pathName = usePathname()
     const locale = useLocale()
     const t = useTranslations("Header")
+    const {userData} = useAuth()
+    const router = useRouter()
+
+
+
+    useEffect(() => {
+        if (userData?.role !== "Admin" || !userData?.userId) {
+            router.push(`/${locale}/`)
+        }
+   }, [userData?.role])
     return (
         <>
             <Header />

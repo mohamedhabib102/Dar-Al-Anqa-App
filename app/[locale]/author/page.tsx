@@ -10,6 +10,8 @@ import { FaPlus, FaBook, FaCheckCircle, FaClock, FaDollarSign, FaShoppingCart, F
 import Image from "next/image"
 import api from "@/utils/api"
 import ShowBookContent from "@/components/books/ShowBookContent"
+import { useRouter } from "next/navigation"
+import OverlayWithdrawalReq from "@/ui/OverlayWithdrawalReq"
 
 interface AuthorBook {
     book_Id: number;
@@ -23,11 +25,31 @@ interface AuthorBook {
     is_Accepted: boolean;
     purchases_Count: number;
     reviews_Count: number;
+    // Profit: number;
 }
+
+
+/**
+ 
+  
+  Mohamed
+  0102722778546
+  Ahmed7000
+  
+  
+  admin
+  
+  Admin515
+  01202772455
+  Mojhhgngh4444
+
+ */
 
 const Author: React.FC = () => {
     const locale = useLocale()
+    const router = useRouter()
     const t = useTranslations("AuthorPage");
+    const [toggleWithdrawal, setToggleWithdrawal] = useState<boolean>(false)
     const [toggle, setToggle] = useState<boolean>(false)
     const [isMounted, setIsMounted] = useState(false);
     const { userData } = useAuth()
@@ -58,15 +80,20 @@ const Author: React.FC = () => {
     }, [userData?.userId]);
 
 
-
-    /*
-    GGG
-    01024748554
-    BmmggghH7000
-    */
+    useEffect(() => {
+        if (userData?.role !== "Author"){
+            router.push("/");
+        }
+    }, [userData?.role]);
 
     return (
         <>
+          <OverlayWithdrawalReq
+          toggle={toggleWithdrawal}
+          setToggle={setToggleWithdrawal}
+        //   getAllOrders={getAuthorBooks}
+          />
+
             <AddNewBook
                 toggle={toggle}
                 setToggle={setToggle}
@@ -82,7 +109,11 @@ const Author: React.FC = () => {
                         success={true}
                     />
                     {isMounted && userData?.isAccepted && (
-                        <div className="mb-8 flex justify-end">
+                        <div className="mb-8 flex justify-between">
+                            <div className="flex items-center gap-2">
+                                <span className="text-gray-500 text-lg font-medium">{t("AllProfits")}</span>
+                                <span className="text-(--main-color) text-lg font-medium">1500</span>
+                            </div>
                             <button
                                 onClick={() => setToggle(!toggle)}
                                 className="flex items-center gap-2 transition duration-300 cursor-pointer bg-(--main-color) text-white px-6 py-3 rounded-lg hover:bg-[#8b7a26] font-bold shadow-lg hover:shadow-xl"
@@ -90,11 +121,19 @@ const Author: React.FC = () => {
                                 <FaPlus />
                                 {t("addNewBook")}
                             </button>
+                        
                         </div>
                     )}
 
                     <div className="mb-6">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">{t("myBooks")}</h3>
+                        <div className={
+                            `
+                            flex  gap-4 justify-between items-center  mb-6 border-b pb-4
+                            `
+                        }>
+                            <h3 className="text-2xl font-bold text-gray-800">{t("myBooks")}</h3>
+                            <button onClick={() => setToggleWithdrawal(!toggleWithdrawal)} className="cursor-pointer w-1/2 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 text-white py-2.5 rounded-lg transition-colors font-medium">{t("withdrawalRequest")}</button>
+                        </div>
                         {books.length === 0 ? (
                             <div className="text-center py-12 bg-white rounded-lg shadow">
                                 <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
@@ -118,7 +157,11 @@ const Author: React.FC = () => {
                                         </div>
                                         <div className="p-6">
                                             <h4 className="text-xl font-bold text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h4>
-                                            <p className="text-gray-600 text-sm mb-4 line-clamp-2 h-10">{book.book_Description}</p>
+                                            <p className="text-gray-600 text-sm mb-0 line-clamp-2 h-10">{book.book_Description}</p>
+                                            <div className="flex justify-between items-center mb-2 text-sm text-gray-500">
+                                                <span> {t("profit")} </span>
+                                                <span> 1500 </span>
+                                            </div>
 
                                             <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
                                                 <span className="flex items-center gap-1"><FaDollarSign className="text-(--main-color)" /> {book.price}</span>
@@ -137,6 +180,8 @@ const Author: React.FC = () => {
                                 ))}
                             </div>
                         )}
+
+                        
                     </div>
                 </CustomContainer>
             </section>

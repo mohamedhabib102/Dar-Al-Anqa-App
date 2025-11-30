@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
-import { FaGlobe, FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import { useState } from 'react';
 import { routing } from '@/i18n/routing';
 
@@ -35,7 +35,7 @@ export default function LanguageSwitcher({ screen }: { screen: 'mobile' | 'deskt
                 aria-label={t('label')}
             >
                 <div className="flex items-center gap-2">
-                    <FaGlobe className="text-lg" />
+                    {/* <FaGlobe className="text-lg" /> */}
                     <span>{localeNames[locale]}</span>
                 </div>
                 <FaChevronDown className={`text-sm transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />

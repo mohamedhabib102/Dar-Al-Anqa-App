@@ -55,7 +55,7 @@ const BookById: React.FC = () => {
     const addToCart = async () => {
         try {
             if (!userData?.userId) {
-                showPopup(tPopup("loginRequired"), () => { });
+                showPopup(tPopup("loginRequired"), () => { }, true);
                 return;
             }
 
@@ -71,7 +71,7 @@ const BookById: React.FC = () => {
             showPopup(tPopup("addToCartSuccess"), () => { });
         } catch (error) {
             console.error("Error adding to cart:", error);
-            showPopup(tPopup("addToCartError"), () => { });
+            showPopup(tPopup("addToCartError"), () => { }, true);
         }
     };
 

@@ -2,12 +2,17 @@
 
 import api from "@/utils/api"
 import { useAuth } from "@/utils/contextapi"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IoClose } from "react-icons/io5"
 import { MdCloudUpload } from "react-icons/md"
 import { FaImage } from "react-icons/fa"
 import { useTranslations } from "next-intl"
+import { fetchCategories } from "@/utils/GetAllCategory"
 
+interface Category {
+    category_Id: number;
+    category_Name: string;
+}
 
 interface AddNewBookProps {
     user_ID: number,
@@ -15,9 +20,10 @@ interface AddNewBookProps {
     book_Description: string,
     file_Path: File | null,
     image: File | null,
-    price: number
-}
+    price: number,
+    category: Category
 
+}
 
 interface PropsAddNewBook {
     toggle: boolean,
@@ -25,8 +31,6 @@ interface PropsAddNewBook {
     pathLink: string;
     getBooks: () => void
 }
-
-
 
 const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, getBooks }) => {
     const { userData } = useAuth();
@@ -37,11 +41,29 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
         book_Description: "",
         file_Path: null,
         image: null,
-        price: 0
+        price: 0,
+        category: {
+            category_Id: 0,
+            category_Name: ""
+        }
     })
+
     const [fileName, setFileName] = useState<string>("");
     const [imageName, setImageName] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false);
+    const [category, setCategory] = useState<Category[]>([]);
+    const [inputFocused, setInputFocused] = useState<boolean>(false);
+    const [selected, setSelected] = useState<string[]>([]);
+
+    const addOption = (option: string) => {
+        if (!selected.includes(option)) {
+            setSelected([...selected, option]);
+        }
+    }
+
+    const removeOption = (option: string) => {
+        setSelected(selected.filter((item) => item !== option));
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -114,6 +136,16 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
             formData.append("Book_Name", data.book_Name);
             formData.append("Book_Description", data.book_Description);
             formData.append("Price", data.price.toString());
+            // Map selected category names to IDs
+            const selectedIds = selected.map(name =>
+                category.find(c => c.category_Name === name)?.category_Id
+            ).filter((id): id is number => id !== undefined);
+
+            selectedIds.forEach(id => {
+                formData.append("Categories", id.toString());
+            });
+
+            console.log(data);
 
             if (data.image) {
                 formData.append("image", data.image);
@@ -153,11 +185,27 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
             book_Description: "",
             file_Path: null,
             image: null,
-            price: 0
+            price: 0,
+            category: {
+                category_Id: 0,
+                category_Name: ""
+            }
         })
         setFileName("");
         setImageName("");
     }
+
+    useEffect(() => {
+        fetchCategories().then((res) => {
+            setCategory(res)
+        })
+    }, []);
+
+    useEffect(() => {
+        if (userData?.userId) {
+            setData(prev => ({ ...prev, user_ID: Number(userData.userId) }));
+        }
+    }, [userData]);
 
     return (
         <>
@@ -206,9 +254,67 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                 onChange={handleChange}
                                 required
                                 rows={4}
-                                placeholder={t("bookDescriptionPlaceholder")}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none transition resize-none text-right"
                             />
+                        </div>
+
+                        <div className="relative">
+                            <label htmlFor="book_Description" className="block text-gray-700 font-semibold mb-2 text-right">
+                                {t("category")} <span className="text-red-500">{t("required")}</span>
+                            </label>
+                            {/* Selected tags */}
+                            <div className="flex flex-wrap gap-2 mb-2 justify-end">
+                                {selected.map((item, idx) => (
+                                    <span
+                                        key={idx}
+                                        className="bg-(--main-color) text-white px-3 py-1 rounded-full flex items-center gap-2"
+                                    >
+                                        {item}
+                                        <button
+                                            type="button"
+                                            onClick={() => removeOption(item)}
+                                            className="text-sm hover:text-red-300"
+                                        >
+                                            ×
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+
+                            {/* Input Field */}
+                            <input
+                                type="text"
+                                placeholder={t("selectCategory")}
+                                onFocus={() => setInputFocused(true)}
+                                onBlur={() => setTimeout(() => setInputFocused(false), 150)}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none transition text-right"
+                            />
+
+                            {/* Dropdown options */}
+                            {inputFocused && (
+                                <div className="absolute left-0 right-0 top-full mt-1 bg-white shadow-lg border border-gray-200 rounded-lg max-h-60 overflow-y-auto z-20">
+                                    {category.map((cat) => (
+                                        <div
+                                            key={cat.category_Id}
+                                            onClick={() => {
+                                                addOption(cat.category_Name);
+
+                                                // تحديث الداتا (آخر اختيار فقط للـ FormData)
+                                                setData((prev) => ({
+                                                    ...prev,
+                                                    category: {
+                                                        category_Id: cat.category_Id,
+                                                        category_Name: cat.category_Name
+                                                    }
+                                                }));
+                                            }}
+                                            className="px-4 py-3 text-gray-800 cursor-pointer hover:bg-gray-100 transition text-right"
+                                        >
+                                            {cat.category_Name}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div>

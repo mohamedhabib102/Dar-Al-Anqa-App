@@ -114,15 +114,15 @@ const Header: React.FC = () => {
                                     <IoIosArrowForward size={18} className="transition duration-300  group-hover:translate-x-0.5" />
                                 </Link>
                             )}
-                            {isMounted && userData?.userId && (
-                                <Link 
-                                    href={`/${locale}/cart`}
-                                    className="bg-(--main-color) text-white p-2 rounded-full shadow-lg hover:opacity-90 transition-opacity cursor-pointer"
-                                    title={locale === "ar" ? "السلة" : locale === "en" ? "Cart" : "Panier"}
-                                >
-                                    <FaShoppingCart size={18} />
-                                </Link>
-                            )}
+                            
+                            <Link 
+                                href={`/${locale}/cart`}
+                                className="bg-(--main-color) text-white p-2 rounded-full shadow-lg hover:opacity-90 transition-opacity cursor-pointer"
+                                title={locale === "ar" ? "السلة" : locale === "en" ? "Cart" : "Panier"}
+                            >
+                                <FaShoppingCart size={18} />
+                            </Link>
+                            
                             <ToggleNavbar setToggle={setToggle} toggle={toggle} />
                             {isMounted && userData?.userId ? (
                                 <button onClick={() => logout("/" + locale)}

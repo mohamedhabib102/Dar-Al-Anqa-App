@@ -1,134 +1,219 @@
 {
-    "HomePage": {
-        "landing": {
-            "title": " مرحبا بك في مكتبنا ",
-            "subTitle": "Je lis",
-            "description": " اكتشف مجموعة واسعة من الكتب في مختلف المجالات. تصفح، اشترِ، واقرأ كتبك المفضلة بكل سهولة ",
-            "button": " تصفح الكتب "
-        },
-        "books": {
-            "title": "الكتب",
-            "description": "اكتشف مجموعة واسعة من الكتب في مختلف المجالات. تصفح، اشترِ، واقرأ كتبك المفضلة بكل سهولة"
-        }
+  "HomePage": {
+    "landing": {
+      "title": "مرحبًا بك في مكتبتنا",
+      "subTitle": "أنا أقرأ",
+      "description": "اكتشف مجموعة واسعة من الكتب في مختلف المجالات. تصفح، اشترِ، واقرأ كتبك المفضلة بسهولة.",
+      "button": "تصفح الكتب"
     },
-    "MyBooks": {
-        "title": "كتبي",
-        "description": " هنا ستجد جميع الكتب التي قمت بشرائها، جاهزة للقراءة في أي وقت ابدأ باستكشاف عناوينك المفضلة واستمتع بتجربة قراءة سلسة وممتعة  "
-    },
-    "bookDetails": {
-        "title": "تفاصيل الكتاب",
-        "description": "اكتشف كل ما تحتاج معرفته عن هذا الكتاب. تصفح التفاصيل الكاملة، اقرأ الوصف، وتعرف على المؤلف والسعر قبل اتخاذ قرار الشراء",
-        "addToCart": "أضف إلى السلة",
-        "author": "المؤلف",
-        "purchasesCount": "عدد المشتريات"
-    },
-    "Header": {
-        "home": "الرئيسية",
-        "books": "الكتب",
-        "myBooks": "كتبي",
-        "about": "عن الدار",
-        "signIn": "انضم الآن",
-        "dashboard": "لوحة التحكم",
-        "publisher": "دار النشر",
-        "author": "المؤلف",
-        "pending-books": "الكتب المعلقة",
-        "logout": "تسجيل الخروج",
-        "accountNotAccepted": "حسابك لم يتم قبوله بعد"
-    },
-    "auth": {
-        "title": "مرحباً بعودتك",
-        "description": "سجل دخولك للمتابعة",
-        "name": "الاسم الكامل",
-        "phone": "رقم الهاتف",
-        "password": "كلمة المرور",
-        "role": "نوع الحساب",
-        "roleDescription": {
-            "user": "مستخدم",
-            "author": "مؤلف",
-            "publushhouse": "دار نشر"
-        },
-        "togoHome": "العودة إلى الصفحة الرئيسية",
-        "signUp": "تسجيل الدخول",
-        "passwordShow": "إظهار كلمة المرور",
-        "passwordHide": "إخفاء كلمة المرور",
-        "errors": {
-            "allFieldsRequired": "جميع الحقول مطلوبة",
-            "phoneInvalid": "رقم الهاتف يجب أن يكون 5 أرقام على الأقل",
-            "passwordInvalid": "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي على حروف وأرقام فقط"
-        }
-    },
-    "LocaleSwitcher": {
-        "label": "تغيير اللغة",
-        "en": "الإنجليزية",
-        "ar": "العربية",
-        "fr": "الفرنسية"
-    },
-    "Popup": {
-        "successMessage": "تم إتمام الطلب بنجاح",
-        "addToCartSuccess": "تم إضافة الكتاب إلى السلة بنجاح",
-        "addToCartError": "حدث خطأ أثناء إضافة الكتاب إلى السلة",
-        "loginRequired": "يجب تسجيل الدخول أولاً",
-        "ok": "حسناً",
-        "search": "بحث"
-    },
-    "AddBookForm": {
-        "title": "إضافة كتاب جديد",
-        "bookName": "اسم الكتاب",
-        "bookNamePlaceholder": "أدخل اسم الكتاب",
-        "bookDescription": "وصف الكتاب",
-        "bookDescriptionPlaceholder": "أدخل وصف مختصر للكتاب",
-        "price": "السعر (ج.م)",
-        "pricePlaceholder": "أدخل سعر الكتاب",
-        "bookImage": "صورة الكتاب",
-        "bookImagePlaceholder": "اضغط لاختيار صورة الكتاب",
-        "bookImageHint": "JPG, PNG, GIF - الحد الأقصى 5 ميجابايت",
-        "bookFile": "ملف الكتاب (PDF)",
-        "bookFilePlaceholder": "اضغط لاختيار ملف PDF",
-        "bookFileHint": "PDF فقط - الحد الأقصى 50 ميجابايت",
-        "submit": "إضافة الكتاب",
-        "cancel": "إلغاء",
-        "success": "تم إضافة الكتاب بنجاح",
-        "error": "حدث خطأ أثناء إضافة الكتاب",
-        "required": "*",
-        "imageError": "يرجى اختيار صورة فقط",
-        "pdfError": "يرجى اختيار ملف PDF فقط",
-        "pdfSizeError": "حجم ملف PDF يجب ألا يتجاوز 50 ميجابايت",
-        "imageSizeError": "حجم الصورة يجب ألا يتجاوز 5 ميجابايت",
-        "badRequestError": "البيانات المرسلة غير صحيحة. يرجى التحقق من جميع الحقول"
-    },
-    "Dashboard": {
-        "view": "عرض",
-        "pendingBooks": {
-            "title": "الكتب المعلقة",
-            "description": "مراجعة والموافقة على الكتب المعلقة",
-            "noBooks": "لا توجد كتب معلقة",
-            "bookId": "معرف الكتاب",
-            "bookName": "اسم الكتاب",
-            "bookDescription": "الوصف",
-            "userId": "معرف المستخدم",
-            "price": "السعر",
-            "approve": "قبول",
-            "reject": "رفض"
-        }
-    },
-    "AuthorPage": {
-        "title": "لوحة تحكم المؤلف",
-        "description": "إدارة كتبك وعرض حالتها",
-        "addNewBook": "إضافة كتاب جديد",
-        "myBooks": "كتبي المنشورة",
-        "noBooks": "لم تقم بنشر أي كتب بعد",
-        "view": "عرض",
-        "price": "السعر",
-        "purchases": "المبيعات"
-    },
-    "About": {
-        "title": "عن الدار",
-        "description": "نحن دار نشر رائدة نسعى لنشر المعرفة والثقافة من خلال تقديم أفضل الكتب في مختلف المجالات. نؤمن بأن القراءة هي مفتاح التقدم والرقي، ولذلك نحرص على انتقاء أفضل الأعمال الأدبية والعلمية لقرائنا الأعزاء.",
-        "address": "العنوان: القاهرة، مصر",
-        "phone": "هاتف: +20 100 000 0000",
-        "email": "البريد: info@yourlibrary.com"
-    },
-    "Footer": {
-        "rights": "جميع الحقوق محفوظة"
+    "books": {
+      "title": "الكتب",
+      "description": "اكتشف مجموعة واسعة من الكتب في مختلف المجالات. تصفح، اشترِ، واقرأ كتبك المفضلة بسهولة."
     }
+  },
+  "MyBooks": {
+    "title": "كتبي",
+    "description": "مرحبًا بك في قسم كتبي! ستجد هنا جميع الكتب التي قمت بشرائها، جاهزة للقراءة في أي وقت. ابدأ في استكشاف عناوينك المفضلة واستمتع بتجربة قراءة سلسة وسهلة."
+  },
+  "bookDetails": {
+    "title": "تفاصيل الكتاب",
+    "description": "اكتشف كل ما تحتاج معرفته عن هذا الكتاب. اطلع على التفاصيل الكاملة، اقرأ الوصف، وتعرّف على المؤلف والسعر قبل اتخاذ قرار الشراء.",
+    "addToCart": "أضف إلى السلة",
+    "author": "المؤلف",
+    "purchasesCount": "عدد المشتريات"
+  },
+  "Header": {
+    "home": "الرئيسية",
+    "books": "الكتب",
+    "myBooks": "كتبي",
+    "about": "من نحن",
+    "signIn": "انضم",
+    "dashboard": "لوحة التحكم",
+    "publisher": "دار نشر",
+    "author": "مؤلف",
+    "pending-books": "كتب معلقة",
+    "logout": "تسجيل الخروج",
+    "accountNotAccepted": "لم يتم قبول حسابك بعد",
+    "orders": "الطلبات"
+  },
+  "auth": {
+    "title": "مرحبًا",
+    "description": "سجّل الدخول للمتابعة",
+    "name": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "role": "نوع الحساب",
+    "next": "التالي",
+    "categories": "الفئات",
+    "register": "تسجيل",
+    "roleDescription": {
+      "select": "اختر",
+      "user": "مستخدم",
+      "author": "مؤلف",
+      "publushhouse": "دار نشر"
+    },
+    "togoHome": "الذهاب للرئيسية",
+    "signUp": "إنشاء حساب",
+    "passwordShow": "إظهار كلمة المرور",
+    "passwordHide": "إخفاء كلمة المرور",
+    "errors": {
+      "allFieldsRequired": "جميع الحقول مطلوبة",
+      "phoneInvalid": "يجب أن يحتوي رقم الهاتف على 5 أرقام على الأقل",
+      "passwordInvalid": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل وأن تحتوي على أرقام وحروف فقط"
+    }
+  },
+  "LocaleSwitcher": {
+    "label": "تغيير اللغة",
+    "en": "EN",
+    "ar": "AR",
+    "fr": "FR"
+  },
+  "Popup": {
+    "successMessage": "تم إكمال الطلب بنجاح",
+    "addToCartSuccess": "تم إضافة الكتاب إلى السلة بنجاح",
+    "addToCartError": "حدث خطأ أثناء إضافة الكتاب إلى السلة",
+    "loginRequired": "يرجى تسجيل الدخول أولاً",
+    "ok": "حسنًا",
+    "search": "بحث"
+  },
+  "AddBookForm": {
+    "title": "إضافة كتاب جديد",
+    "bookName": "اسم الكتاب",
+    "bookNamePlaceholder": "أدخل اسم الكتاب",
+    "bookDescription": "وصف الكتاب",
+    "bookDescriptionPlaceholder": "أدخل وصفًا مختصرًا للكتاب",
+    "price": "السعر (EGP)",
+    "pricePlaceholder": "أدخل سعر الكتاب",
+    "bookImage": "صورة الكتاب",
+    "bookImagePlaceholder": "اضغط لاختيار صورة الكتاب",
+    "bookImageHint": "JPG, PNG, GIF - الحد الأقصى 5 ميجا",
+    "bookFile": "ملف الكتاب (PDF)",
+    "bookFilePlaceholder": "اضغط لاختيار ملف PDF",
+    "bookFileHint": "PDF فقط - الحد الأقصى 50 ميجا",
+    "submit": "إضافة الكتاب",
+    "cancel": "إلغاء",
+    "success": "تم إضافة الكتاب بنجاح",
+    "error": "حدث خطأ أثناء إضافة الكتاب",
+    "required": "*",
+    "imageError": "يرجى اختيار صورة فقط",
+    "pdfError": "يرجى اختيار ملف PDF فقط",
+    "pdfSizeError": "يجب ألا يتجاوز حجم ملف PDF 50 ميجا",
+    "imageSizeError": "يجب ألا يتجاوز حجم الصورة 5 ميجا",
+    "badRequestError": "بيانات غير صحيحة. يرجى مراجعة جميع الحقول",
+    "category": "الفئة",
+    "selectCategory": "اختر الفئة"
+  },
+  "Dashboard": {
+    "view": "عرض",
+    "pendingBooks": {
+      "title": "كتب معلقة",
+      "description": "مراجعة واعتماد الكتب المعلقة",
+      "noBooks": "لا توجد كتب معلقة",
+      "bookId": "معرف الكتاب",
+      "bookName": "اسم الكتاب",
+      "bookDescription": "الوصف",
+      "userId": "معرف المستخدم",
+      "price": "السعر",
+      "approve": "قبول",
+      "reject": "رفض"
+    },
+    "orders": {
+      "title": "الطلبات",
+      "noOrders": "لا توجد طلبات",
+      "bookName": "اسم الكتاب",
+      "clientName": "اسم العميل",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "approve": "قبول",
+      "reject": "رفض",
+      "uploadReceipt": "رفع الإيصال",
+      "cancel": "إلغاء",
+      "pending": "معلق"
+    },
+    "users": {
+      "title": "المستخدمون",
+      "name": "الاسم",
+      "role": "الدور",
+      "profits": "الأرباح",
+      "author": "مؤلف",
+      "publisher": "ناشر"
+    },
+    "authors": {
+      "title": "المؤلفون",
+      "books": "الكتب",
+      "profits": "الأرباح"
+    },
+    "publishers": {
+      "title": "الناشرون",
+      "books": "الكتب",
+      "profits": "الأرباح"
+    },
+    "withdrawalRequests": {
+      "title": "طلبات السحب",
+      "noRequests": "لا توجد طلبات سحب",
+      "requesterName": "اسم مقدم الطلب",
+      "amount": "المبلغ",
+      "method": "طريقة الدفع",
+      "number": "الرقم",
+      "actions": "الإجراءات",
+      "approve": "قبول",
+      "reject": "رفض"
+    }
+  },
+  "AuthorPage": {
+    "title": "لوحة تحكم المؤلف",
+    "description": "إدارة كتبك واستعراض حالتها",
+    "addNewBook": "إضافة كتاب جديد",
+    "myBooks": "كتبي المنشورة",
+    "noBooks": "لم تقم بنشر أي كتب بعد",
+    "view": "عرض",
+    "price": "السعر",
+    "purchases": "المشتريات",
+    "profit": "الأرباح",
+    "withdrawalRequest": "طلب سحب",
+    "AllProfits": "جميع الأرباح"
+  },
+  "About": {
+    "title": "من نحن",
+    "description": "نحن دار نشر رائدة مكرسة لنشر المعرفة والثقافة من خلال توفير أفضل الكتب في مختلف المجالات. نؤمن بأن القراءة هي مفتاح التقدم، لذلك نحرص على اختيار أفضل الأعمال الأدبية والعلمية لقرّائنا الأعزاء.",
+    "address": "العنوان: القاهرة، مصر",
+    "phone": "الهاتف: +20 100 000 0000",
+    "email": "البريد الإلكتروني: info@yourlibrary.com"
+  },
+  "Footer": {
+    "rights": "جميع الحقوق محفوظة"
+  },
+  "WithdrawalRequest": {
+    "title": "طلب سحب",
+    "paymentMethod": "طريقة الدفع",
+    "selectPaymentMethod": "اختر طريقة الدفع",
+    "vodafoneCash": "فودافون كاش",
+    "fawry": "فوري",
+    "visa": "فيزا",
+    "paypal": "باي بال",
+    "phoneNumber": "رقم الهاتف",
+    "accountNumber": "رقم الحساب",
+    "amount": "المبلغ",
+    "enterAmount": "أدخل مبلغ السحب",
+    "submit": "إرسال الطلب",
+    "cancel": "إلغاء",
+    "success": "تم إرسال طلب السحب بنجاح",
+    "error": "حدث خطأ أثناء إرسال الطلب",
+    "enterPhoneNumber": "أدخل رقم الهاتف",
+    "enterAccountNumber": "أدخل رقم الحساب"
+  },
+  "PublisherDashboard": {
+  "publisher_title": "دور النشر",
+  "publisher_description": "إدارة دور النشر المسجلة في المنصة",
+  "no_publishers": "لا توجد دور نشر مسجلة",
+  "user_id": "معرف المستخدم",
+  "name": "الاسم",
+  "phone_number": "رقم الهاتف",
+  "role": "الدور",
+  "accepted": "مقبول",
+  "pending": "معلق",
+  "accept": "قبول",
+  "reject": "رفض"
+}
+
 }

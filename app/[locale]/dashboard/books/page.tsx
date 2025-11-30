@@ -71,9 +71,9 @@ const BooksDashboard: React.FC = () => {
                         </p>
                     </div>
                 ) : (
-                    books.map((book) => (
+                    books.map((book, index) => (
                         <div
-                            key={book.book_Id}
+                            key={index}
                             className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
                         >
                             {/* Book Image */}
@@ -94,7 +94,7 @@ const BooksDashboard: React.FC = () => {
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-2 text-sm text-gray-600">
                                         <FaUser className="text-(--main-color)" />
-                                        <span>ID: {book.user_ID}</span>
+                                        <span>{locale === "ar" ? "معرف المستخدم": locale === "en" ? "User ID" : "ID utilisateur"}: {book.user_ID}</span>
                                     </div>
                                     <div className="flex items-center gap-1 text-lg font-bold text-(--main-color)">
                                         <FaDollarSign />

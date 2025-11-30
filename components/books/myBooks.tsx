@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import api from "@/utils/api";
 import { useAuth } from "@/utils/contextapi";
 import OverlayReview from "@/ui/OverlayReview";
+import { useRouter } from "next/navigation";
 
 
 interface MyBooksFetch {
@@ -20,6 +21,7 @@ interface MyBooksFetch {
 
 const MyBooksUser: React.FC = () => {
     const local = useLocale()
+    const router = useRouter()
     const { userData } = useAuth()
     const [toggle, setToggle] = useState(false)
     const [reviewToggle, setReviewToggle] = useState(false)
@@ -49,6 +51,12 @@ const MyBooksUser: React.FC = () => {
 
     useEffect(() => {
         getMyBooks()
+    }, [userData?.userId])
+
+    useEffect(() => {
+        if (!userData?.userId) {
+            router.push(`/${local}/`)
+        }
     }, [userData?.userId])
 
     const handleOpenBook = (book: MyBooksFetch) => {
@@ -126,6 +134,8 @@ const MyBooksUser: React.FC = () => {
                                 </button>
                             </div>
                         </div>
+
+
 
                         <div className="p-4 text-right">
                             <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>

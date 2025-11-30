@@ -41,9 +41,10 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
         books.filter((book) => book.book_Name.toLowerCase().includes(search.toLowerCase()))
 
     const getAllBooks = async () => {
+        const iD = userData?.userId;
         try {
             setLoading(true);
-            const res = await api.get("/api/Books/all")
+            const res = await api.get(`/api/Books/all`)
             console.log(res.data);
             setBooks(res.data || []);
         } catch (error) {
@@ -57,7 +58,8 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     const addToCart = async (book_Id: number, price: number) => {
         try {
             if (!userData?.userId) {
-                showPopup(t("loginRequired"), () => { });
+                // showPopup(t("loginRequired"), () => { }, true);
+                location.href = "/" + local + "/sign-in";
                 return;
             }
 
@@ -71,15 +73,13 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
             showPopup(t("addToCartSuccess"), () => { });
         } catch (error) {
             console.error("Error adding to cart:", error);
-            showPopup(t("addToCartError"), () => { });
+            showPopup(t("addToCartError"), () => { }, true);
         }
     }
 
     useEffect(() => {
         getAllBooks()
     }, [])
-
-    const displayBooks = count === "success" ? books : books.slice(0, 4);
 
     if (loading) {
         return (
@@ -97,13 +97,12 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
         );
     }
 
-
-    if (count !== "success"){
-        return(
+    if (count !== "success") {
+        return (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-                    {filterSearch.slice(0, 4).map((book, index) => (
-                        <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+                    {books.slice(0, 4).map((book, index) => (
+                        <ScrollAnimation key={index} delay={index * 0.1}>
                             <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
                                 <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
                                     <Image
@@ -138,7 +137,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                                 <div className="p-4 text-right">
                                     <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
                                     <div className="flex items-center justify-between mt-3">
-                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
+                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
                                         <div className="flex items-center gap-1">
                                             <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
                                             <FaStar
@@ -150,7 +149,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                                 </div>
                             </div>
                         </ScrollAnimation>
-                ))}
+                    ))}
                 </div>
             </>
         )
@@ -170,8 +169,6 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                 </div>
             )}
 
-
-
             {filterSearch.length === 0 ? (
                 <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">لا توجد نتائج للبحث</p>
@@ -179,7 +176,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
                     {filterSearch.map((book, index) => (
-                        <ScrollAnimation key={book.book_Id} delay={index * 0.1}>
+                        <ScrollAnimation key={index} delay={index * 0.1}>
                             <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
                                 <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
                                     <Image
@@ -214,7 +211,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                                 <div className="p-4 text-right">
                                     <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
                                     <div className="flex items-center justify-between mt-3">
-                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : local === "en" ? "USD" : "€"} </span>
+                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
                                         <div className="flex items-center gap-1">
                                             <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
                                             <FaStar

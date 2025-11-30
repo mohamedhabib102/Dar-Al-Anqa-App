@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { IoClose, IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 
 // Correct CSS imports for react-pdf v9+
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -25,7 +25,6 @@ interface ShowBookContentProps {
 
 const ShowBookContent: React.FC<ShowBookContentProps> = ({ toggle, setToggle, book }) => {
     const [numPages, setNumPages] = useState<number | null>(null);
-    const [pageNumber, setPageNumber] = useState<number>(1);
     const [pageDimensions, setPageDimensions] = useState<{ width?: number; height?: number }>({ height: 600 });
 
     // Configure worker dynamically on client side
@@ -47,9 +46,7 @@ const ShowBookContent: React.FC<ShowBookContentProps> = ({ toggle, setToggle, bo
         setNumPages(numPages);
     }
 
-    useEffect(() => {
-        if (toggle) setPageNumber(1);
-    }, [toggle, book]);
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -73,6 +70,8 @@ const ShowBookContent: React.FC<ShowBookContentProps> = ({ toggle, setToggle, bo
         }
     }, []);
 
+    const pdfUrl = book.file_Path ? `/api/proxy-pdf?url=${encodeURIComponent(book.file_Path)}` : null;
+
     return (
         <>
             {/* Backdrop */}
@@ -85,10 +84,7 @@ const ShowBookContent: React.FC<ShowBookContentProps> = ({ toggle, setToggle, bo
             <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-all duration-300 w-full h-full pointer-events-none ${toggle ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
                 <div className={`flex flex-col items-center w-full max-w-5xl h-full max-h-screen p-4 ${toggle ? "pointer-events-auto" : ""}`}>
                     {/* Top Bar: Page Info & Close */}
-                    <div className="w-full flex justify-between items-center mb-4 text-white">
-                        <div className="text-xl font-medium">
-                            {numPages ? `${pageNumber} / ${numPages}` : ''}
-                        </div>
+                    <div className="w-full flex justify-end items-center mb-4 text-white">
                         <button
                             onClick={() => setToggle(false)}
                             className="p-2 hover:bg-white/20 rounded-full transition-colors cursor-pointer"
@@ -101,42 +97,28 @@ const ShowBookContent: React.FC<ShowBookContentProps> = ({ toggle, setToggle, bo
                     <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden">
 
                         {/* Scrollable Area for PDF */}
-                        <div className="w-full h-full overflow-auto flex justify-center items-center custom-scrollbar">
-                            {toggle && (
+                        <div className="w-full h-full overflow-auto flex justify-center custom-scrollbar">
+                            {toggle && pdfUrl && (
                                 <Document
-                                    file={book.file_Path ? book.file_Path : "/book.pdf"}
+                                    file={pdfUrl}
                                     onLoadSuccess={onDocumentLoadSuccess}
-                                    className="flex justify-center items-center"
-                                    loading={<div className="text-white text-xl">Loading PDF...</div>}
-                                    error={<div className="text-red-400 text-xl">Failed to load PDF.</div>}
+                                    className="flex flex-col items-center gap-4 py-4"
+                                    loading={<div className="text-white text-xl mt-10">Loading PDF...</div>}
+                                    error={<div className="text-red-400 text-xl mt-10">Failed to load PDF.</div>}
                                 >
-                                    <Page
-                                        pageNumber={pageNumber}
-                                        {...pageDimensions}
-                                        className="shadow-2xl"
-                                        renderTextLayer={false}
-                                        renderAnnotationLayer={false}
-                                    />
+                                    {numPages && Array.from(new Array(numPages), (el, index) => (
+                                        <Page
+                                            key={`page_${index + 1}`}
+                                            pageNumber={index + 1}
+                                            {...pageDimensions}
+                                            className="shadow-2xl mb-4"
+                                            renderTextLayer={false}
+                                            renderAnnotationLayer={false}
+                                        />
+                                    ))}
                                 </Document>
                             )}
                         </div>
-
-                        {/* Navigation Buttons (Fixed Overlay) */}
-                        <button
-                            disabled={pageNumber <= 1}
-                            onClick={(e) => { e.stopPropagation(); setPageNumber(prev => prev - 1); }}
-                            className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-0 disabled:cursor-default transition-all z-10 cursor-pointer"
-                        >
-                            <IoChevronBack size={30} />
-                        </button>
-
-                        <button
-                            disabled={pageNumber >= (numPages || 0)}
-                            onClick={(e) => { e.stopPropagation(); setPageNumber(prev => prev + 1); }}
-                            className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-0 disabled:cursor-default transition-all z-10 cursor-pointer"
-                        >
-                            <IoChevronForward size={30} />
-                        </button>
                     </div>
                 </div>
             </div>
