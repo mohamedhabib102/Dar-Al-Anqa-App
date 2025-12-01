@@ -125,7 +125,7 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                             </div>
 
                             <div className="flex justify-between items-center pt-2 border-t">
-                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "إجمالي الأرباح:" : locale === "en" ? "Total Earnings:" : "Bénéfice total:"}:</span>
+                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "الرصيد" : locale === "en" ? "Total Balance" : "Solde total"}:</span>
                                 <span className="text-lg font-bold text-green-600">
                                     {authorDetails.authorBalance} {locale === "ar" ? "ج.م" : locale === "en" ? "EGP" : "EGP"}
                                 </span>

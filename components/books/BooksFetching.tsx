@@ -207,6 +207,7 @@ const BooksFetching: React.FC<Props> = () => {
                     {filterSearch.map((book, index) => {
                         const normalizedRating = Math.min(book.reviews_Count / 2.5, 5);
                         const fullStars = Math.round(normalizedRating);
+                        // const reating = pepole / book.reviews_Count;
 
                         return (
                             <ScrollAnimation key={index} delay={index * 0.1}>
