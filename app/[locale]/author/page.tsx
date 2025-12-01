@@ -65,7 +65,6 @@ const Author: React.FC = () => {
         if (!userData?.userId) return;
         try {
             const res = await api.get(`/api/Payment/AuthorRequests/${userData.userId}`);
-            console.log("Withdrawal Requests:", res.data);
             setWithdrawalRequests(res.data);
         } catch (error) {
             console.log("Error fetching withdrawal requests:", error);
@@ -81,7 +80,6 @@ const Author: React.FC = () => {
         if (!userData?.userId) return;
         try {
             const res = await api.get(`/api/Books/GetEarningOfAuthorAndPublisher?User_ID=${userData.userId}`);
-            console.log(res);
             setTotalProfit(res.data);
         } catch (error) {
             console.log(error);

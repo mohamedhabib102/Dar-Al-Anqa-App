@@ -33,10 +33,8 @@ const PendingBooks: React.FC = () => {
         try {
             const res = await api.get("/api/Books/pending-approval");
             setBooks(res.data);
-            console.log(res.data);
         } catch (error) {
             const err = error as AxiosError;
-            console.log(err);
             if (err.response?.status === 404) {
                 setBooks([]);
             }

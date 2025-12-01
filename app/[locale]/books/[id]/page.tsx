@@ -41,7 +41,6 @@ const BookById: React.FC = () => {
         try {
             setLoading(true);
             const res = await api.get("/api/Books/all");
-            console.log(res.data);
             const foundBook = res.data?.find((b: Book) => b.book_Id === bookId);
             setBook(foundBook || null);
         } catch (error) {
@@ -66,8 +65,6 @@ const BookById: React.FC = () => {
                 book_Id: book.book_Id,
                 price: book.price
             });
-
-            console.log("Item added to cart:", response.data);
             showPopup(tPopup("addToCartSuccess"), () => { });
         } catch (error) {
             console.error("Error adding to cart:", error);

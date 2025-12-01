@@ -1,7 +1,8 @@
 "use client"
 import api from "@/utils/api";
 import { useAuth } from "@/utils/contextapi";
-import { useTranslations } from "next-intl"
+import { AxiosError } from "axios";
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { IoClose } from "react-icons/io5"
 
@@ -12,6 +13,7 @@ interface OverlayWithdrawalReqProps {
 
 const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithdrawal, setToggleWithdrawal }) => {
     const t = useTranslations("WithdrawalRequest");
+    const locale = useLocale()
     const [paymentMethod, setPaymentMethod] = useState("");
     const [accountNumber, setAccountNumber] = useState("");
     const [amount, setAmount] = useState<number>(0);
@@ -34,10 +36,7 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithd
                 paymentMethod: paymentMethod,
                 accountNumber: accountNumber
             }
-            console.log("Withdrawal Request Data:", data);
-
             const res = await api.post("/api/Payment/WithdrawRequest", data);
-            console.log("Response:", res.data);
             alert(t("success"));
 
             // Reset form
@@ -45,9 +44,11 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithd
             setAccountNumber("");
             setAmount(0);
             setToggleWithdrawal(false);
-        } catch (error) {
-            console.log("Error:", error);
-            alert("حدث خطأ أثناء إرسال الطلب");
+        } catch (error: AxiosError | any) {
+            console.log("Error:", error.response?.data);
+            if (error.response?.status === 400) {
+                alert(locale === "ar" ? " تاكد من وجود ارباح " : locale === "en" ? "Make sure there are profits" : "Assurez-vous qu’il y a des bénéfices");
+            }
         }
     }
 

@@ -44,7 +44,6 @@ const Cart: React.FC = () => {
         try {
             setLoading(true);
             const res = await api.get(`/api/Cart/${userData.userId}/items`)
-            console.log(res.data);
             setCartItems(res.data || [])
         } catch (error) {
             console.log(error);
@@ -59,7 +58,6 @@ const Cart: React.FC = () => {
 
         try {
             const res = await api.get(`/api/Cart/${userData.userId}/total-price`)
-            console.log(res.data);
             setTotalPrice(res.data || 0)
         } catch (error) {
             console.log(error);
@@ -70,7 +68,6 @@ const Cart: React.FC = () => {
     const getAllBooks = async () => {
         try {
             const res = await api.get("/api/Books/all")
-            console.log(res.data);
             setBooks(res.data || [])
         } catch (error) {
             console.log(error);
