@@ -1,36 +1,64 @@
 "use client"
+import api from "@/utils/api";
+import { useAuth } from "@/utils/contextapi";
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { IoClose } from "react-icons/io5"
 
 interface OverlayWithdrawalReqProps {
-    toggle: boolean;
-    setToggle: (toggle: boolean) => void;
-    getAllOrders?: () => void;
+    toggleWithdrawal: boolean;
+    setToggleWithdrawal: (toggle: boolean) => void;
 }
 
-const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggle, setToggle, getAllOrders }) => {
+const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithdrawal, setToggleWithdrawal }) => {
     const t = useTranslations("WithdrawalRequest");
     const [paymentMethod, setPaymentMethod] = useState("");
-    const [accountDetails, setAccountDetails] = useState("");
-    const [amount, setAmount] = useState("");
+    const [accountNumber, setAccountNumber] = useState("");
+    const [amount, setAmount] = useState<number>(0);
+    const { userData } = useAuth();
 
-    const handleSubmit = (e: React.FormEvent) => {
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ paymentMethod, accountDetails, amount });
-        // Add API call here
-        alert(t("success"));
-        setToggle(false);
+        const user_Id = userData?.userId;
+
+        if (!user_Id) {
+            alert("يجب تسجيل الدخول أولاً");
+            return;
+        }
+
+        try {
+            const data = {
+                user_Id: user_Id,
+                amount: amount,
+                paymentMethod: paymentMethod,
+                accountNumber: accountNumber
+            }
+            console.log("Withdrawal Request Data:", data);
+
+            const res = await api.post("/api/Payment/WithdrawRequest", data);
+            console.log("Response:", res.data);
+            alert(t("success"));
+
+            // Reset form
+            setPaymentMethod("");
+            setAccountNumber("");
+            setAmount(0);
+            setToggleWithdrawal(false);
+        } catch (error) {
+            console.log("Error:", error);
+            alert("حدث خطأ أثناء إرسال الطلب");
+        }
     }
 
-    if (!toggle) return null;
+    if (!toggleWithdrawal) return null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative">
                 <button
-                    onClick={() => setToggle(false)}
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+                    onClick={() => setToggleWithdrawal(false)}
+                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
                 >
                     <IoClose size={24} />
                 </button>
@@ -38,6 +66,7 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggle, set
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">{t("title")}</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Payment Method */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">{t("paymentMethod")}</label>
                         <select
@@ -47,35 +76,35 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggle, set
                             required
                         >
                             <option value="">{t("selectPaymentMethod")}</option>
-                            <option value="vodafoneCash">{t("vodafoneCash")}</option>
-                            <option value="fawry">{t("fawry")}</option>
-                            <option value="visa">{t("visa")}</option>
-                            <option value="paypal">{t("paypal")}</option>
+                            <option value="Vodafone cash">{t("vodafoneCash")}</option>
+                            <option value="Fawry">{t("fawry")}</option>
+                            <option value="Visa">{t("visa")}</option>
+                            <option value="Paypal">{t("paypal")}</option>
                         </select>
                     </div>
 
-                    {paymentMethod && (
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                {paymentMethod === "vodafoneCash" ? t("phoneNumber") : t("accountNumber")}
-                            </label>
-                            <input
-                                type="text"
-                                value={accountDetails}
-                                onChange={(e) => setAccountDetails(e.target.value)}
-                                placeholder={paymentMethod === "vodafoneCash" ? t("enterPhoneNumber") : t("enterAccountNumber")}
-                                className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
-                                required
-                            />
-                        </div>
-                    )}
+                    {/* Account Number */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            {t("accountNumber")}
+                        </label>
+                        <input
+                            type="text"
+                            value={accountNumber}
+                            onChange={(e) => setAccountNumber(e.target.value)}
+                            placeholder={t("enterAccountNumber")}
+                            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
+                            required
+                        />
+                    </div>
 
+                    {/* Amount */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">{t("amount")}</label>
                         <input
                             type="number"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
+                            value={amount || ""}
+                            onChange={(e) => setAmount(Number(e.target.value))}
                             placeholder={t("enterAmount")}
                             className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
                             required
@@ -92,7 +121,7 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggle, set
                         </button>
                         <button
                             type="button"
-                            onClick={() => setToggle(false)}
+                            onClick={() => setToggleWithdrawal(false)}
                             className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-md hover:bg-gray-300 transition font-bold"
                         >
                             {t("cancel")}

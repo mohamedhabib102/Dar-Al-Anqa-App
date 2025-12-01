@@ -40,20 +40,22 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     const filterSearch =
         books.filter((book) => book.book_Name.toLowerCase().includes(search.toLowerCase()))
 
-    const getAllBooks = async () => {
-        const iD = userData?.userId;
-        try {
-            setLoading(true);
-            const res = await api.get(`/api/Books/all`)
-            console.log(res.data);
-            setBooks(res.data || []);
-        } catch (error) {
-            console.log(error);
-            setBooks([]);
-        } finally {
-            setLoading(false);
-        }
+   const getAllBooks = async () => {
+    const id = userData?.userId ? userData.userId : 0; // لو موجود استخدمه، لو لأ خليه 0
+
+    try {
+        setLoading(true);
+        const res = await api.get(`/api/Books/all?userId=${id}`);
+        console.log(res.data);
+        setBooks(res.data || []);
+    } catch (error) {
+        console.log(error);
+        setBooks([]);
+    } finally {
+        setLoading(false);
     }
+};
+
 
     const addToCart = async (book_Id: number, price: number) => {
         try {

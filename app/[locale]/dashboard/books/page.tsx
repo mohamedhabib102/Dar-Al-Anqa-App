@@ -15,7 +15,8 @@ interface Books {
     book_Name: string,
     book_Description: string,
     file_Path: string,
-    price: number
+    price: number;
+    image_Url: string;
 }
 
 const BooksDashboard: React.FC = () => {
@@ -78,7 +79,13 @@ const BooksDashboard: React.FC = () => {
                         >
                             {/* Book Image */}
                             <div className="relative h-64 w-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                <FaBook className="text-6xl text-gray-400" />
+                                {/* <FaBook className="text-6xl text-gray-400" /> */}
+                                <Image
+                                    src={book.image_Url}
+                                    alt={book.book_Name}
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
 
                             {/* Book Details */}

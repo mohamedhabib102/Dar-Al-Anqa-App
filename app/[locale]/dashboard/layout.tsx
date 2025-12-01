@@ -27,11 +27,11 @@ const DashboardLayout: React.FC<DashboardProps> = ({ children }) => {
 
 
 
-    useEffect(() => {
-        if (userData?.role !== "Admin" || !userData?.userId) {
-            router.push(`/${locale}/`)
-        }
-   }, [userData?.role])
+//     useEffect(() => {
+//         if (userData?.role !== "Admin" || !userData?.userId) {
+//             router.push(`/${locale}/`)
+//         }
+//    }, [userData?.role])
     return (
         <>
             <Header />

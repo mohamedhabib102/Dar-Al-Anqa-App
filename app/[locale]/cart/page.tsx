@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl"
 interface CartItem {
     book_Id: number;
     price: number;
+    author_Id: number;
 }
 
 interface Book {
@@ -96,37 +97,52 @@ const Cart: React.FC = () => {
         }
     }
 
-    const handleCheckout = async () => {
-        if (!userData?.userId) {
-            alert(locale === "ar" ? "يجب تسجيل الدخول أولاً" : locale === "en" ? "Please login first" : "Veuillez vous connecter d'abord")
-            return;
-        }
-
-        if (cartItems.length === 0) {
-            alert(locale === "ar" ? "السلة فارغة" : locale === "en" ? "Cart is empty" : "Le panier est vide")
-            return;
-        }
-
-        try {
-            setCheckoutLoading(true);
-            const response = await api.post("/api/Payment", {
-                user_Id: userData.userId,
-                payment_status: "success"
-            });
-
-            console.log("Payment successful:", response.data);
-
-            showPopup(t("successMessage"), () => {
-                router.push(`/${locale}/books`);
-            });
-
-        } catch (error) {
-            console.error("Error during checkout:", error);
-            alert(locale === "ar" ? "حدث خطأ أثناء إتمام الطلب" : locale === "en" ? "Error during checkout" : "Erreur lors de la commande")
-        } finally {
-            setCheckoutLoading(false);
-        }
+   const handleCheckout = async () => {
+    if (!userData?.userId) {
+        alert("يجب تسجيل الدخول أولاً");
+        return;
     }
+
+    if (cartItems.length === 0) {
+        alert("السلة فارغة");
+        return;
+    }
+
+    try {
+        setCheckoutLoading(true);
+
+        const paymentPromises = cartItems.map(async (item) => {
+            const paymentData = {
+                user_Id: userData.userId,
+                book_Id: item.book_Id,
+                author_Id: item.author_Id,
+                platFormFee: Number(0),
+                authorEarnings: Number(0),
+                price: Number(item.price),
+                payment_status: "Completed"
+            };
+
+            console.log("Sending payment for book:", paymentData);
+
+            return await api.post("/api/Payment", paymentData);
+        });
+
+        const responses = await Promise.all(paymentPromises);
+
+        console.log("All payments successful:", responses.map(r => r.data));
+
+        showPopup("تم إتمام الدفع بنجاح", () => {
+            router.push(`/${locale}/books`);
+        });
+
+    } catch (error) {
+        console.error("Error during checkout:", error);
+        alert("حدث خطأ أثناء إتمام الطلب");
+    } finally {
+        setCheckoutLoading(false);
+    }
+};
+
 
     useEffect(() => {
         setMounted(true)

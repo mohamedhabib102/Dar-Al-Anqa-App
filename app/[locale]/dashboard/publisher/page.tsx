@@ -13,10 +13,19 @@ interface Publisher {
     isAccepted: boolean;
 }
 
+
+/*
+   karime
+   0102554544
+   MHGghghgh12345678
+*/
+
 const PublisherDashboard: React.FC = () => {
     const [publishers, setPublishers] = useState<Publisher[]>([])
     const locale = useLocale()
-    const t = useTranslations("PublisherDashboard"); // تحميل الترجمة تلقائياً حسب اللغة
+    const t = useTranslations("PublisherDashboard"); 
+    const [toggleWithdrawal, setToggleWithdrawal] = useState(false);
+    const [totalProfit, setTotalProfit] = useState(0);
 
     const getPublishers = async () => {
         try {
@@ -56,6 +65,7 @@ const PublisherDashboard: React.FC = () => {
                 description={t("publisher_description")}
                 success={false}
             />
+
 
             <div className="space-y-4">
                 {publishers.length === 0 ? (
