@@ -63,6 +63,7 @@ const BookById: React.FC = () => {
             const response = await api.post("/api/Cart/items", {
                 user_Id: userData.userId,
                 book_Id: book.book_Id,
+                author_Id: book.user_ID,
                 price: book.price
             });
             showPopup(tPopup("addToCartSuccess"), () => { });
