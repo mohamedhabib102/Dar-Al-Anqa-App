@@ -52,6 +52,7 @@ const Author: React.FC = () => {
     const [selectedBook, setSelectedBook] = useState<AuthorBook | null>(null);
     const [totalProfit, setTotalProfit] = useState(0);
     const [withdrawalRequests, setWithdrawalRequests] = useState<WithdrawalRequest[]>([]);
+    const [isAccepted, setIsAccepted] = useState(false);
 
     const getAuthorBooks = async () => {
         if (!userData?.userId) return;
@@ -88,6 +89,16 @@ const Author: React.FC = () => {
         }
     }
 
+     const getIsAccepted = async () => {
+        if (!userData?.userId) return;
+        try {
+            const res = await api.get(`/api/Publishers/GetAcceptedPublisher?PublisherID=${userData.userId}`);
+            setIsAccepted(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         setIsMounted(true);
         if (userData?.userId) {
@@ -98,6 +109,7 @@ const Author: React.FC = () => {
 
     useEffect(() => {
         getTotalProfit();
+        getIsAccepted()
     }, []);
 
     useEffect(() => {
@@ -126,7 +138,7 @@ const Author: React.FC = () => {
                         description={t("description")}
                         success={true}
                     />
-                    {isMounted && userData?.isAccepted ? (
+                    {isMounted && isAccepted ? (
                         <div className="mb-8 flex justify-between">
                             <div className="flex items-center gap-2">
                                 <span className="text-gray-500 text-lg font-medium">{t("AllProfits")}</span>
