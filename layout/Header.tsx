@@ -91,7 +91,7 @@ const Header: React.FC = () => {
                             {isMounted && userData?.role === "Author" && (
                               <li>
                                 <Link
-                                        href={locale === "ar" ? "/ar/author" : locale === "fr" ? "/fr/publisher" : "/en/publisher"}
+                                        href={locale === "ar" ? "/ar/author" : locale === "fr" ? "/fr/author" : "/en/author"}
                                         className={`px-4 py-2 text-lg font-medium transition rounded-md
                                  ${pathName === `/${locale}/author`
                                                  ? "text-white bg-(--main-color)"
