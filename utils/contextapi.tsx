@@ -55,9 +55,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const cookieOptions = {
         sameSite: "strict" as const,
-        secure: false,
+        secure: true,
         path: "/",
-        expires: 7
+        expires: 365
     };
 
     const login = (payload: DataUser) => {
