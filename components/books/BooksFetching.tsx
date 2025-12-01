@@ -40,21 +40,21 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     const filterSearch =
         books.filter((book) => book.book_Name.toLowerCase().includes(search.toLowerCase()))
 
-   const getAllBooks = async () => {
-    const id = userData?.userId ? userData.userId : 0; // لو موجود استخدمه، لو لأ خليه 0
+    const getAllBooks = async () => {
+        const id = userData?.userId ? userData.userId : 0; // لو موجود استخدمه، لو لأ خليه 0
 
-    try {
-        setLoading(true);
-        const res = await api.get(`/api/Books/all?userId=${id}`);
-        console.log(res.data);
-        setBooks(res.data || []);
-    } catch (error) {
-        console.log(error);
-        setBooks([]);
-    } finally {
-        setLoading(false);
-    }
-};
+        try {
+            setLoading(true);
+            const res = await api.get(`/api/Books/all?userId=${id}`);
+            console.log(res.data);
+            setBooks(res.data || []);
+        } catch (error) {
+            console.log(error);
+            setBooks([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     const addToCart = async (book_Id: number, price: number) => {
@@ -105,31 +105,31 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
                     {books.slice(0, 4).map((book, index) => (
                         <ScrollAnimation key={index} delay={index * 0.1}>
-                            <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
-                                <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
+                            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
+                                <div className="relative h-48 w-full bg-gray-50 overflow-hidden">
                                     <Image
                                         src={book.image || book.image_Url || "/book.png"}
                                         alt={book.book_Name}
                                         fill
-                                        className="object-cover transition-transform duration-500"
+                                        className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
                                     />
-                                    <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
                                         {book.user_Name || "—"}
                                     </div>
 
                                     {/* Overlay Actions */}
-                                    <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
+                                    <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         <button
                                             onClick={() => addToCart(book.book_Id, book.price)}
-                                            className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
+                                            className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
                                             title="أضف للسلة"
                                         >
-                                            <FaCartPlus size={18}
+                                            <FaCartPlus size={16}
                                             />
                                         </button>
                                         <Link href={`/${local}/books/${book.book_Id}`}>
-                                            <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
-                                                <FaEye size={18}
+                                            <button className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors" title="التفاصيل">
+                                                <FaEye size={16}
                                                 />
                                             </button>
                                         </Link>
@@ -137,16 +137,22 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                                 </div>
 
                                 <div className="p-4 text-right">
-                                    <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
-                                    <div className="flex items-center justify-between mt-3">
-                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
+                                    <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h3>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-lg font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
                                         <div className="flex items-center gap-1">
-                                            <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
-                                            <FaStar
-                                                size={20}
-                                                className="text-yellow-500 transition text-xs"
-                                            />
+                                            {Array.from({ length: book.reviews_Count }).map((_, i) => (
+                                                <FaStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                />
+                                            ))}
+                                            <span className="text-xs font-medium text-gray-500">
+                                                {book.reviews_Count}
+                                            </span>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -159,74 +165,98 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
 
     return (
         <>
-            {count === "success" && (
-                <div>
-                    <input
-                        type="text"
-                        placeholder={`${t("search")}`}
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="w-full py-2 px-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:border-(--main-color)"
-                    />
-                </div>
-            )}
+
+            <div>
+                <input
+                    type="text"
+                    placeholder={`${t("search")}`}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="w-full py-2 px-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:border-(--main-color)"
+                />
+            </div>
+
 
             {filterSearch.length === 0 ? (
                 <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">لا توجد نتائج للبحث</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {filterSearch.map((book, index) => (
                         <ScrollAnimation key={index} delay={index * 0.1}>
-                            <div className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
-                                <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
+
+                            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
+
+                                {/* الصورة */}
+                                <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
                                     <Image
                                         src={book.image || book.image_Url || "/book.png"}
                                         alt={book.book_Name}
                                         fill
-                                        className="object-cover transition-transform duration-500"
+                                        className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
                                     />
-                                    <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+
+                                    {/* اسم الكاتب */}
+                                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
                                         {book.user_Name || "—"}
                                     </div>
 
-                                    {/* Overlay Actions */}
-                                    <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
+                                    {/* الآيقونات */}
+                                    <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         <button
                                             onClick={() => addToCart(book.book_Id, book.price)}
-                                            className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg"
+                                            className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
                                             title="أضف للسلة"
                                         >
-                                            <FaCartPlus size={18}
-                                            />
+                                            <FaCartPlus size={16} />
                                         </button>
+
                                         <Link href={`/${local}/books/${book.book_Id}`}>
-                                            <button className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
-                                                <FaEye size={18}
-                                                />
+                                            <button
+                                                className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
+                                                title="التفاصيل"
+                                            >
+                                                <FaEye size={16} />
                                             </button>
                                         </Link>
                                     </div>
                                 </div>
 
+                                {/* البيانات */}
                                 <div className="p-4 text-right">
-                                    <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
-                                    <div className="flex items-center justify-between mt-3">
-                                        <span className="text-xl font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
+                                    <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>
+                                        {book.book_Name}
+                                    </h3>
+
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-lg font-bold text-(--main-color)">
+                                            {book.price} {local === "ar" ? "ج.م" : "EGP"}
+                                        </span>
+
+                                        {/* ⭐ التقييم بشكل أنضف */}
                                         <div className="flex items-center gap-1">
-                                            <span className="text-sm font-medium text-gray-500">{book.reviews_Count}</span>
-                                            <FaStar
-                                                size={20}
-                                                className="text-yellow-500 transition text-xs"
-                                            />
+                                            {Array.from({ length: 5 }).map((_, i) => (
+                                                <FaStar
+                                                    key={i}
+                                                    size={16}
+                                                    className={i < book.reviews_Count ? "text-yellow-500" : "text-gray-300"}
+                                                />
+                                            ))}
+                                            <span className="text-xs font-medium text-gray-500">
+                                                ({book.reviews_Count})
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </ScrollAnimation>
                     ))}
-                </div>)}
+                </div>
+
+            )}
 
         </>
     )

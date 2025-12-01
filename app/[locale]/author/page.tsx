@@ -106,6 +106,12 @@ const Author: React.FC = () => {
         }
     }, [])
 
+
+    /*
+    kkkk
+    01054544554
+    Mfrthrttd555
+    */
     return (
         <>
             <OverlayWithdrawalReq
@@ -148,12 +154,12 @@ const Author: React.FC = () => {
                         <div className="flex gap-4 justify-between items-center mb-6 border-b pb-4">
                             <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                                 <FaListAlt className="text-(--main-color)" />
-                                تتبع طلباتي
+                                {locale === "ar" ? "تتبع طلباتي" : locale === "en" ? "Track My Orders" : "Suivi de mes commandes"}
                             </h3>
                         </div>
                         {withdrawalRequests.length === 0 ? (
                             <div className="text-center py-8 bg-white rounded-lg shadow">
-                                <p className="text-gray-500">لا توجد طلبات سحب</p>
+                                <p className="text-gray-500">{locale === "ar" ? "لا توجد طلبات سحب" : locale === "en" ? "No withdrawal requests" : "Aucune demande de retrait"}</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -161,7 +167,7 @@ const Author: React.FC = () => {
                                     <div key={request.withdraw_Id} className="bg-white rounded-lg shadow-md p-5 hover:shadow-xl transition-all duration-300 border border-gray-100">
                                         <div className="flex justify-between items-start mb-3">
                                             <h4 className="text-lg font-bold text-gray-800">
-                                                طلب #{request.withdraw_Id}
+                                                {locale === "ar" ? "طلب" : locale === "en" ? "Request" : "Demande"} #{request.withdraw_Id}
                                             </h4>
                                             <span className={`text-xs px-3 py-1 rounded-full font-medium ${request.status === "Approved"
                                                     ? "bg-green-100 text-green-800"
@@ -169,27 +175,32 @@ const Author: React.FC = () => {
                                                         ? "bg-yellow-100 text-yellow-800"
                                                         : "bg-red-100 text-red-800"
                                                 }`}>
-                                                {request.status === "Approved" ? "تمت الموافقة" : request.status === "Pending" ? "قيد المراجعة" : "مرفوض"}
+                                                {request.status === "Approved" ? 
+                                                locale === "ar" ? "تمت الموافقة" : locale === "en" ? "Approved" : "Approuvé" : 
+                                                request.status === "Pending" ? 
+                                                locale === "ar" ? "قيد المراجعة" : locale === "en" ? "Pending" : "En attente" : 
+                                                locale === "ar" ? "مرفوض" : locale === "en" ? "Rejected" : "Refusé"
+                                                }
                                             </span>
                                         </div>
                                         <div className="space-y-2 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-gray-600">المبلغ:</span>
+                                                <span className="text-gray-600">{locale === "ar" ? "المبلغ" : locale === "en" ? "Amount" : "Montant"}:</span>
                                                 <span className="font-bold text-green-600">{request.amount} EGP</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-gray-600">طريقة الدفع:</span>
+                                                <span className="text-gray-600">{locale === "ar" ? "طريقة الدفع" : locale === "en" ? "Payment Method" : "Méthode de paiement"}:</span>
                                                 <span className="font-medium text-blue-600">{request.paymentMethod}</span>
                                             </div>
                                             <div className="flex justify-between text-xs">
-                                                <span className="text-gray-500">تاريخ الطلب:</span>
+                                                <span className="text-gray-500">{locale === "ar" ? "تاريخ الطلب" : locale === "en" ? "Request Date" : "Date de la demande"}:</span>
                                                 <span className="text-gray-500">
                                                     {new Date(request.requestDate).toLocaleDateString('ar-EG')}
                                                 </span>
                                             </div>
                                             {request.approvalDate && request.status === "Approved" && (
                                                 <div className="flex justify-between text-xs">
-                                                    <span className="text-gray-500">تاريخ الموافقة:</span>
+                                                    <span className="text-gray-500">{locale === "ar" ? "تاريخ الموافقة" : locale === "en" ? "Approval Date" : "Date d'approbation"}:</span>
                                                     <span className="text-green-600">
                                                         {new Date(request.approvalDate).toLocaleDateString('ar-EG')}
                                                     </span>
@@ -201,7 +212,6 @@ const Author: React.FC = () => {
                             </div>
                         )}
                     </div>
-
                     <div className="mb-6">
                         <div className="flex gap-4 justify-between items-center mb-6 border-b pb-4">
                             <h3 className="text-2xl font-bold text-gray-800">{t("myBooks")}</h3>
@@ -211,10 +221,10 @@ const Author: React.FC = () => {
                             <div className="text-center py-12 bg-white rounded-lg shadow">
                                 <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
                                 <p className="text-gray-500 text-lg">{locale === "ar" 
-                                 ? "لم يتم قبول كتبك بعد" 
+                                 ? "لم يتم قبول كتابك بعد" 
                                  : locale === "en" 
-                                 ? "Your books have not been approved yet" 
-                                 : "Vos livres n'ont pas encore été approuvés"}</p>
+                                 ? "Your book have not been approved yet" 
+                                 : "Votre livre n'a pas encore été approuvé"}</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -233,13 +243,16 @@ const Author: React.FC = () => {
                                             </div>
                                         </div>
                                         <div className="p-6">
-                                            <h4 className="text-xl font-bold text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h4>
-                                            <p className="text-gray-600 text-sm mb-0 line-clamp-2 h-10">{book.book_Description}</p>
-                                            <div className="flex justify-between items-center mb-2 text-sm text-gray-500">
-                                                <span> {t("profit")} </span>
-                                                <span> 1500 </span>
+                                            <div className="flex justify-between items-center mb-4">
+                                                <div>
+                                                    <h4 className="text-xl font-bold text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h4>
+                                                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 h-10">{book.book_Description}</p>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                <FaEye className="text-(--main-color)"/>
+                                                <span>{book.reviews_Count}</span>
                                             </div>
-
+                                            </div>
                                             <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
                                                 <span className="flex items-center gap-1"><FaDollarSign className="text-(--main-color)" /> {book.price}</span>
                                                 <span className="flex items-center gap-1"><FaShoppingCart className="text-(--main-color)" /> {book.purchases_Count}</span>

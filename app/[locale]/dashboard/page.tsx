@@ -84,8 +84,8 @@ const Dashboard: React.FC = () => {
                             <FaMoneyBillWave className="text-white text-4xl" />
                         </div>
                         <div>
-                            <h2 className="text-white text-lg font-medium mb-1">إجمالي أرباح المنصة</h2>
-                            <p className="text-white/80 text-sm">Total Platform Earnings</p>
+                            <h2 className="text-white text-lg font-medium mb-1">{locale === "ar" ? "إجمالي أرباح المنصة" : locale === "en" ? "Total Platform Earnings" : "Total Earnings de la plateforme"}</h2>
+                            <p className="text-white/80 text-sm">{locale === "ar" ? "إجمالي أرباح المنصة" : locale === "en" ? "Total Platform Earnings" : "Total Earnings de la plateforme"}</p>
                         </div>
                     </div>
                     <div className="text-right">
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
                 </h2>
 
                 {withdrawals.length === 0 ? (
-                    <p className="text-center text-gray-500 py-8">لا توجد طلبات سحب معلقة</p>
+                    <p className="text-center text-gray-500 py-8">{locale === "ar" ? "لا توجد طلبات سحب معلقة" : locale === "en" ? "No Pending Withdrawal Requests" : "Aucune demande de retrait en attente"}</p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {withdrawals.map((withdrawal, index) => (
@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <h3 className="font-bold text-lg text-gray-800">
-                                            طلب #{index + 1}
+                                             {locale === "ar" ? "طلب" : locale === "en" ? "Request" : "Requête"}  # {index + 1}
                                         </h3>
                                         <p className="text-xs text-gray-500">
                                             Author ID: {withdrawal.authorID}
@@ -136,18 +136,18 @@ const Dashboard: React.FC = () => {
                                 <div className="text-gray-600 space-y-2 text-sm">
                                     <div className="flex justify-between">
                                         <span className="font-medium">{t("withdrawalRequests.amount")}:</span>
-                                        <span className="text-green-600 font-bold">{withdrawal.amount} EGP</span>
+                                        <span className="text-green-600 font-bold">{withdrawal.amount} {locale === "ar" ? "ج.م" :  "EGP"}</span>
                                     </div>
 
                                     <div className="flex justify-between">
-                                        <span className="font-medium">طريقة الدفع:</span>
+                                        <span className="font-medium">{locale === "ar" ? "طريقة الدفع" : locale === "en" ? "Payment Method" : "Méthode de paiement"}</span>
                                         <span className="text-blue-600">{withdrawal.paymentMethod}</span>
                                     </div>
 
                                     <div className="flex justify-between text-xs">
-                                        <span className="font-medium">تاريخ الطلب:</span>
+                                        <span className="font-medium">{locale === "ar" ? "تاريخ الطلب" : locale === "en" ? "Request Date" : "Date de demande"}:</span>
                                         <span className="text-gray-500">
-                                            {new Date(withdrawal.requestDate).toLocaleDateString('ar-EG')}
+                                            {new Date(withdrawal.requestDate).toLocaleDateString("ar-eg")}
                                         </span>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@ const Dashboard: React.FC = () => {
                                     onClick={() => handleViewDetails(withdrawal.withdraw_Id, withdrawal.authorID)}
                                     className="w-full bg-(--main-color) hover:opacity-90 text-white py-2 rounded-lg text-sm font-medium transition-all duration-200 mt-2"
                                 >
-                                    عرض التفاصيل والموافقة/الرفض
+                                    {locale === "ar" ? "عرض التفاصيل والموافقة/الرفض" : locale === "en" ? "View Details and Approve/Reject" : "Voir les détails et approuver/refuser"}
                                 </button>
                             </div>
                         ))}

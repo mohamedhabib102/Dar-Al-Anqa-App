@@ -16,7 +16,7 @@ export default function Home() {
     <main>
       <Header />
       <Landing />
-      <OtherBook />
+      {/* <OtherBook /> */}
       <About />
       {/* <OverlayQuestions /> */}
     </main>

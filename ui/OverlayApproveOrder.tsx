@@ -1,5 +1,5 @@
 "use client"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { IoClose } from "react-icons/io5"
 import api from "@/utils/api"
@@ -13,9 +13,9 @@ interface OverlayApproveOrderProps {
 }
 
 interface AuthorDetails {
-    authorID: number;
     authorName: string;
-    authorPlatFormEarning: number;
+    phoneNumber: string;
+    authorBalance: number;
 }
 
 const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
@@ -28,8 +28,9 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
     const t = useTranslations("Dashboard");
     const [authorDetails, setAuthorDetails] = useState<AuthorDetails | null>(null);
     const [loading, setLoading] = useState(false);
+    const locale = useLocale();
 
-    // جلب تفاصيل الـ Author عند فتح الـ Overlay
+
     useEffect(() => {
         if (toggle && authorId) {
             fetchAuthorDetails();
@@ -102,31 +103,31 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                 </button>
 
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-                    تفاصيل طلب السحب
+                   {locale === "ar" ? "تفاصيل طلب السحب" : locale === "en" ? "Withdrawal Details" : "Détails de retrait"}
                 </h2>
 
                 {loading ? (
                     <div className="text-center py-8">
-                        <p className="text-gray-500">جاري التحميل...</p>
+                        <p className="text-gray-500">{locale === "ar" ? "جاري التحميل..." : locale === "en" ? "Loading..." : "Chargement..."}</p>
                     </div>
                 ) : authorDetails ? (
                     <div className="space-y-4">
                         {/* Author Details */}
                         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-gray-600">اسم المؤلف/الناشر:</span>
+                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "اسم المؤلف/الناشر:" : locale === "en" ? "Author/Publisher Name:" : "Nom de l’auteur / de l’éditeur:"}</span>
                                 <span className="text-base font-bold text-gray-800">{authorDetails.authorName}</span>
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-gray-600">ID:</span>
-                                <span className="text-base font-semibold text-gray-700">{authorDetails.authorID}</span>
+                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "رقم الهاتف:" : locale === "en" ? "Phone Number:" : "Numéro de téléphone:"}</span>
+                                <span className="text-base font-semibold text-gray-700">{authorDetails.phoneNumber}</span>
                             </div>
 
                             <div className="flex justify-between items-center pt-2 border-t">
-                                <span className="text-sm font-medium text-gray-600">إجمالي الأرباح:</span>
+                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "إجمالي الأرباح:" : locale === "en" ? "Total Earnings:" : "Bénéfice total:"}:</span>
                                 <span className="text-lg font-bold text-green-600">
-                                    {authorDetails.authorPlatFormEarning} EGP
+                                    {authorDetails.authorBalance} {locale === "ar" ? "ج.م" : locale === "en" ? "EGP" : "EGP"}
                                 </span>
                             </div>
                         </div>
@@ -138,14 +139,14 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                                 disabled={loading}
                                 className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                ✓ موافقة
+                                ✓ {locale === "ar" ? "موافقة" : locale === "en" ? "Approve" : "Approuver"}
                             </button>
                             <button
                                 onClick={handleReject}
                                 disabled={loading}
                                 className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                ✗ رفض
+                                ✗ {locale === "ar" ? "رفض" : locale === "en" ? "Reject" : "Refuser"}
                             </button>
                         </div>
 
@@ -153,12 +154,12 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                             onClick={() => setToggle(false)}
                             className="w-full bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition font-medium mt-2"
                         >
-                            إلغاء
+                            {locale === "ar" ? "إلغاء" : locale === "en" ? "Cancel" : "Annuler"}
                         </button>
                     </div>
                 ) : (
                     <div className="text-center py-8">
-                        <p className="text-gray-500">لا توجد بيانات</p>
+                        <p className="text-gray-500">{locale === "ar" ? "لا توجد بيانات" : locale === "en" ? "No data" : "Aucune donnée"}</p>
                     </div>
                 )}
             </div>
