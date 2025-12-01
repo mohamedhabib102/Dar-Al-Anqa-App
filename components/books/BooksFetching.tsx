@@ -203,7 +203,7 @@ const BooksFetching: React.FC<Props> = () => {
                 </div>
             ) : (
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
                     {filterSearch.map((book, index) => {
                         const normalizedRating = Math.min(book.reviews_Count / 2.5, 5);
                         const fullStars = Math.round(normalizedRating);
@@ -223,7 +223,7 @@ const BooksFetching: React.FC<Props> = () => {
                                         </div>
 
                                         {/* Overlay Actions */}
-                                        <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div className="absolute top-2 right-2 flex flex-col gap-2 transition-opacity duration-300">
                                             <button
                                                 onClick={() => addToCart(book.book_Id, book.price, book.user_ID)}
                                                 className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
