@@ -141,13 +141,31 @@ const MyBooksUser: React.FC = () => {
                             <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
                             <div className="flex items-center justify-between mt-3">
                                 <span className="text-xl font-bold text-(--main-color)">{local === "ar" ? "تم الشراء" : local === "en" ? "Purchased" : "Acheté"}</span>
-                                <div className="flex items-center gap-1">
-                                    <span className="text-sm font-medium text-gray-500">{book.reviews_Count || 0}</span>
-                                    <FaStar
-                                        size={20}
-                                        className="text-yellow-500 transition text-xs"
-                                    />
-                                </div>
+                              <div className="flex items-center gap-1">
+                              
+                                  {(() => {
+                                      const normalizedRating = Math.min((book.reviews_Count || 0) / 2, 5);
+                                      const fullStars = Math.round(normalizedRating);
+                              
+                                      return (
+                                          <>
+                                              {Array.from({ length: 5 }).map((_, i) => (
+                                                  <FaStar
+                                                      key={i}
+                                                      size={16}
+                                                      className={i < fullStars ? "text-yellow-500" : "text-gray-300"}
+                                                  />
+                                              ))}
+                              
+                                              <span className="text-sm font-medium text-gray-500">
+                                                  ({book.reviews_Count || 0})
+                                              </span>
+                                          </>
+                                      );
+                                  })()}
+                              
+                              </div>
+
                             </div>
                             <button
                                 onClick={() => handleOpenReview(book.book_Id)}
