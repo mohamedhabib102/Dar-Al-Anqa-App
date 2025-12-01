@@ -42,7 +42,7 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
         try {
             setLoading(true);
             const res = await api.get(`/api/Payment/DetailsAuthor/${authorId}`);
-            console.log("Author Details:", res.data);
+            console.log( res);
             setAuthorDetails(res.data);
         } catch (error) {
             console.log("Error fetching author details:", error);

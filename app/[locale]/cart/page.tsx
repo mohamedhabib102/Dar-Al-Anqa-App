@@ -112,26 +112,18 @@ const Cart: React.FC = () => {
         try {
             setCheckoutLoading(true);
 
-            const paymentPromises = cartItems.map(async (item) => {
-                const paymentData = {
-                    user_Id: userData.userId,
-                    book_Id: item.book_Id,
-                    author_Id: item.author_Id,
-                    platFormFee: Number(0),
-                    authorEarnings: Number(0),
-                    price: Number(item.price),
-                    payment_status: "Completed"
-                };
+            const cart = cartItems[0]
+            const paymentData = {
+                user_Id: userData.userId,
+                book_Id: cart.book_Id,
+                author_Id: cart.author_Id,
+                platFormFee: 0,
+                authorEarnings: 0,
+                price: totalPrice,
+                payment_status: "Completed"
+            };
 
-                console.log("Sending payment for book:", paymentData);
-
-                return await api.post("/api/Payment", paymentData);
-            });
-
-            const responses = await Promise.all(paymentPromises);
-
-            console.log("All payments successful:", responses.map(r => r.data));
-
+             const  res= api.post("/api/Payment", paymentData);
             showPopup("تم إتمام الدفع بنجاح", () => {
                 router.push(`/${locale}/books`);
             });
@@ -347,7 +339,7 @@ const Cart: React.FC = () => {
                             <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
                                 <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-200">
                                     {locale === "ar" ? "ملخص الطلب" : locale === "en" ? "Order Summary" : "Résumé de la commande"}
-                                </h3>
+                                </h3>D:
                                 <div className="pt-3 border-t border-gray-200 mb-4">
                                     <div className="flex items-center justify-between">
                                         <span className="text-lg font-bold text-gray-800">
