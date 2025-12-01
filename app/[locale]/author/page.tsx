@@ -100,6 +100,12 @@ const Author: React.FC = () => {
         getTotalProfit();
     }, [userData?.userId]);
 
+    useEffect(() => {
+        if (userData?.role !== "Author") {
+            router.push(`/${locale}/`);
+        }
+    }, [])
+
     return (
         <>
             <OverlayWithdrawalReq

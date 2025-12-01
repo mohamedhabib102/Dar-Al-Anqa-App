@@ -78,6 +78,7 @@ const Cart: React.FC = () => {
         }
     }
 
+
     const deleteCartItem = async (book_Id: number) => {
         if (!userData?.userId) return;
 
@@ -97,51 +98,50 @@ const Cart: React.FC = () => {
         }
     }
 
-   const handleCheckout = async () => {
-    if (!userData?.userId) {
-        alert("يجب تسجيل الدخول أولاً");
-        return;
-    }
+    const handleCheckout = async () => {
+        if (!userData?.userId) {
+            alert("يجب تسجيل الدخول أولاً");
+            return;
+        }
 
-    if (cartItems.length === 0) {
-        alert("السلة فارغة");
-        return;
-    }
+        if (cartItems.length === 0) {
+            alert("السلة فارغة");
+            return;
+        }
 
-    try {
-        setCheckoutLoading(true);
+        try {
+            setCheckoutLoading(true);
 
-        const paymentPromises = cartItems.map(async (item) => {
-            const paymentData = {
-                user_Id: userData.userId,
-                book_Id: item.book_Id,
-                author_Id: item.author_Id,
-                platFormFee: Number(0),
-                authorEarnings: Number(0),
-                price: Number(item.price),
-                payment_status: "Completed"
-            };
+            const paymentPromises = cartItems.map(async (item) => {
+                const paymentData = {
+                    user_Id: userData.userId,
+                    book_Id: item.book_Id,
+                    author_Id: item.author_Id,
+                    platFormFee: Number(0),
+                    authorEarnings: Number(0),
+                    price: Number(item.price),
+                    payment_status: "Completed"
+                };
 
-            console.log("Sending payment for book:", paymentData);
+                console.log("Sending payment for book:", paymentData);
 
-            return await api.post("/api/Payment", paymentData);
-        });
+                return await api.post("/api/Payment", paymentData);
+            });
 
-        const responses = await Promise.all(paymentPromises);
+            const responses = await Promise.all(paymentPromises);
 
-        console.log("All payments successful:", responses.map(r => r.data));
+            console.log("All payments successful:", responses.map(r => r.data));
 
-        showPopup("تم إتمام الدفع بنجاح", () => {
-            router.push(`/${locale}/books`);
-        });
-
-    } catch (error) {
-        console.error("Error during checkout:", error);
-        alert("حدث خطأ أثناء إتمام الطلب");
-    } finally {
-        setCheckoutLoading(false);
-    }
-};
+            showPopup("تم إتمام الدفع بنجاح", () => {
+                router.push(`/${locale}/books`);
+            });
+        } catch (error) {
+            console.error("Error during checkout:", error);
+            alert("حدث خطأ أثناء إتمام الطلب");
+        } finally {
+            setCheckoutLoading(false);
+        }
+    };
 
 
     useEffect(() => {
@@ -226,9 +226,9 @@ const Cart: React.FC = () => {
                                             key={index}
                                             className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                                         >
-                                            <div className="flex flex-col md:flex-row gap-4 p-4">
-                                                {/* Book Image */}
-                                                <div className="relative h-[200px] md:h-[150px] w-full md:w-[150px] overflow-hidden bg-gray-100 rounded-lg shrink-0">
+                                            <div className="flex flex-row gap-4 p-4">
+                                                {/* Book Image - Optimized size */}
+                                                <div className="relative h-[120px] w-[85px] md:h-[140px] md:w-[100px] overflow-hidden bg-gray-100 rounded-lg shrink-0 shadow-sm">
                                                     <Image
                                                         src={book?.image_Url || "/images/book.png"}
                                                         alt={book?.book_Name || (locale === "ar" ? "كتاب" : locale === "en" ? "Book" : "Livre")}
@@ -240,21 +240,27 @@ const Cart: React.FC = () => {
                                                 {/* Book Details */}
                                                 <div className="flex-1 flex flex-col justify-between">
                                                     <div>
-                                                        <h3 className="font-bold text-lg text-gray-800 mb-2">
+                                                        <h3 className="font-bold text-base md:text-lg text-gray-800 mb-1 line-clamp-2">
                                                             {book?.book_Name || (locale === "ar" ? "كتاب" : locale === "en" ? "Book" : "Livre")}
                                                         </h3>
-                                                        <div className="flex items-center justify-between">
-                                                            <span className="text-xl font-bold text-(--main-color)">
-                                                                {item.price} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
+                                                        <p className="text-sm text-gray-500 mb-3">
+                                                            {locale === "ar" ? "كتاب إلكتروني" : locale === "en" ? "E-Book" : "Livre électronique"}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xl md:text-2xl font-bold text-(--main-color)">
+                                                            {item.price} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
+                                                        </span>
+                                                        <button
+                                                            onClick={() => deleteCartItem(item.book_Id)}
+                                                            className="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg transition-colors flex items-center gap-2"
+                                                            title={locale === "ar" ? "حذف" : locale === "en" ? "Delete" : "Supprimer"}
+                                                        >
+                                                            <FaTrash size={14} />
+                                                            <span className="text-sm hidden md:inline">
+                                                                {locale === "ar" ? "حذف" : locale === "en" ? "Delete" : "Supprimer"}
                                                             </span>
-                                                            <button
-                                                                onClick={() => deleteCartItem(item.book_Id)}
-                                                                className="cursor-pointer bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-colors"
-                                                                title={locale === "ar" ? "حذف" : locale === "en" ? "Delete" : "Supprimer"}
-                                                            >
-                                                                <FaTrash size={18} />
-                                                            </button>
-                                                        </div>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,30 +270,112 @@ const Cart: React.FC = () => {
                             )}
                         </div>
 
-                        {/* Total Price */}
-                        <div className="lg:col-span-1">
-                            <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
-                                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                    {locale === "ar" ? "الإجمالي" : locale === "en" ? "Total" : "Total"}
+                        {/* Payment & Total Section */}
+                        <div className="lg:col-span-1 space-y-4">
+                            {/* Payment Methods */}
+                            <div className="bg-white rounded-xl shadow-md p-6">
+                                <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-200">
+                                    {locale === "ar" ? "طرق الدفع المتاحة" : locale === "en" ? "Available Payment Methods" : "Méthodes de paiement disponibles"}
                                 </h3>
-                                <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
-                                    <span className="text-lg text-gray-600">
-                                        {locale === "ar" ? "المجموع" : locale === "en" ? "Subtotal" : "Sous-total"}
-                                    </span>
-                                    <span className="text-2xl font-bold text-(--main-color)">
-                                        {totalPrice} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
-                                    </span>
+
+                                <div className="space-y-3">
+                                    {/* Credit/Debit Cards */}
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer">
+                                        <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                            💳
+                                        </div>
+                                        <div className="flex-1">
+                                            <p className="font-semibold text-sm text-gray-800">
+                                                {locale === "ar" ? "بطاقة ائتمان/خصم" : locale === "en" ? "Credit/Debit Card" : "Carte de crédit/débit"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">Visa, Mastercard, Mada</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Digital Wallets */}
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-all cursor-pointer">
+                                        <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                            📱
+                                        </div>
+                                        <div className="flex-1">
+                                            <p className="font-semibold text-sm text-gray-800">
+                                                {locale === "ar" ? "المحافظ الرقمية" : locale === "en" ? "Digital Wallets" : "Portefeuilles numériques"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">Apple Pay, STC Pay</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Bank Transfer */}
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-green-400 hover:bg-green-50 transition-all cursor-pointer">
+                                        <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                            🏦
+                                        </div>
+                                        <div className="flex-1">
+                                            <p className="font-semibold text-sm text-gray-800">
+                                                {locale === "ar" ? "تحويل بنكي" : locale === "en" ? "Bank Transfer" : "Virement bancaire"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {locale === "ar" ? "تحويل مباشر" : locale === "en" ? "Direct transfer" : "Transfert direct"}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Cash on Delivery */}
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-yellow-400 hover:bg-yellow-50 transition-all cursor-pointer">
+                                        <div className="w-10 h-10 bg-linear-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                            💰
+                                        </div>
+                                        <div className="flex-1">
+                                            <p className="font-semibold text-sm text-gray-800">
+                                                {locale === "ar" ? "الدفع عند الاستلام" : locale === "en" ? "Cash on Delivery" : "Paiement à la livraison"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {locale === "ar" ? "نقداً" : locale === "en" ? "Cash" : "Espèces"}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                    <p className="text-xs text-blue-800 text-center">
+                                        🔒 {locale === "ar" ? "جميع المعاملات آمنة ومشفرة" : locale === "en" ? "All transactions are secure and encrypted" : "Toutes les transactions sont sécurisées et cryptées"}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Order Summary */}
+                            <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
+                                <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-200">
+                                    {locale === "ar" ? "ملخص الطلب" : locale === "en" ? "Order Summary" : "Résumé de la commande"}
+                                </h3>
+                                <div className="pt-3 border-t border-gray-200 mb-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-lg font-bold text-gray-800">
+                                            {locale === "ar" ? "الإجمالي" : locale === "en" ? "Total" : "Total"}
+                                        </span>
+                                        <span className="text-2xl font-bold text-(--main-color)">
+                                            {totalPrice} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <button
                                     onClick={handleCheckout}
                                     disabled={checkoutLoading || cartItems.length === 0}
-                                    className="w-full px-6 py-3 bg-(--main-color) text-white rounded-lg font-bold text-lg hover:opacity-90 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full px-6 py-3 bg-(--main-color) text-white rounded-lg font-bold text-base hover:opacity-90 transition-all transform hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
                                 >
                                     {checkoutLoading
                                         ? (locale === "ar" ? "جاري المعالجة..." : locale === "en" ? "Processing..." : "Traitement en cours...")
-                                        : (locale === "ar" ? "إتمام الطلب" : locale === "en" ? "Checkout" : "Commander")
+                                        : (locale === "ar" ? "إتمام الطلب" : locale === "en" ? "Proceed to Checkout" : "Passer à la caisse")
                                     }
                                 </button>
+
+                                <p className="text-xs text-gray-500 text-center mt-3">
+                                    {locale === "ar" ? "بالنقر على 'إتمام الطلب' فإنك توافق على " : locale === "en" ? "By clicking 'Proceed to Checkout' you agree to our " : "En cliquant sur 'Passer à la caisse', vous acceptez nos "}
+                                    <a href="#" className="text-(--main-color) hover:underline">
+                                        {locale === "ar" ? "الشروط والأحكام" : locale === "en" ? "Terms & Conditions" : "Conditions générales"}
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,11 @@
 "use client"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import OverlayApproveOrder from "@/ui/OverlayApproveOrder"
 import api from "@/utils/api";
 import { FaMoneyBillWave } from "react-icons/fa";
+import { useAuth } from "@/utils/contextapi";
+import { useRouter } from "next/navigation";
 
 interface Withdraw {
     amount: number;
@@ -18,6 +20,9 @@ interface Withdraw {
 const Dashboard: React.FC = () => {
     const t = useTranslations("Dashboard");
     const [withdrawals, setWithdrawals] = useState<Withdraw[]>([]);
+    const {userData} = useAuth();
+    const locale = useLocale();
+    const router = useRouter();
     const [platformEarnings, setPlatformEarnings] = useState<number>(0);
     const [toggleApprove, setToggleApprove] = useState(false);
     const [selectedWithdrawId, setSelectedWithdrawId] = useState<number | undefined>(undefined);
@@ -53,6 +58,13 @@ const Dashboard: React.FC = () => {
         setSelectedAuthorId(authorId);
         setToggleApprove(true);
     };
+
+
+    useEffect(() => {
+        if (userData?.role !== "Admin") {
+            router.push(`/${locale}/books`);
+        }
+    }, [])
 
     return (
         <div className="lg:p-6 md:p-4 p-0 space-y-8">

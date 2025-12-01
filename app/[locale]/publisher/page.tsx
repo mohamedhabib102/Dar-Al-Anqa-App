@@ -102,6 +102,12 @@ const Author: React.FC = () => {
         getTotalProfit();
     }, []);
 
+    useEffect(() => {
+        if (userData?.role !== "Publisher") {
+            router.push(`/${locale}/books`);
+        }
+    }, [])
+
     return (
         <>
             <OverlayWithdrawalReq
