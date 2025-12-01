@@ -12,7 +12,7 @@ import ScrollAnimation from "@/ui/ScrollAnimation";
 
 interface BooksFetchingProps {
     book_Id: number;
-    user_ID: string;
+    user_ID: number;
     book_Name: string;
     book_Description: string;
     file_Path: string;
@@ -28,7 +28,7 @@ interface BooksFetchingProps {
 type Props = {
     count: string;
 }
-const BooksFetching: React.FC<Props> = ({ count }) => {
+const BooksFetching: React.FC<Props> = () => {
     const local = useLocale()
     const { userData } = useAuth();
     const { showPopup } = usePopup();
@@ -57,7 +57,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
     };
 
 
-    const addToCart = async (book_Id: number, price: number) => {
+    const addToCart = async (book_Id: number, price: number, author_Id: number) => {
         try {
             if (!userData?.userId) {
                 // showPopup(t("loginRequired"), () => { }, true);
@@ -68,6 +68,7 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
             const response = await api.post("/api/Cart/items", {
                 user_Id: userData.userId,
                 book_Id: book_Id,
+                author_Id: author_Id,
                 price: price
             });
 
@@ -99,69 +100,88 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
         );
     }
 
-    if (count !== "success") {
-        return (
-            <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-                    {books.slice(0, 4).map((book, index) => (
-                        <ScrollAnimation key={index} delay={index * 0.1}>
-                            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
-                                <div className="relative h-48 w-full bg-gray-50 overflow-hidden">
-                                    <Image
-                                        src={book.image || book.image_Url || "/book.png"}
-                                        alt={book.book_Name}
-                                        fill
-                                        className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
-                                        {book.user_Name || "—"}
-                                    </div>
+    //     if (count !== "success") {
+    //         return (
+    //             <>
+    // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+    //     {books.slice(0, 4).map((book, index) => {
 
-                                    {/* Overlay Actions */}
-                                    <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <button
-                                            onClick={() => addToCart(book.book_Id, book.price)}
-                                            className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
-                                            title="أضف للسلة"
-                                        >
-                                            <FaCartPlus size={16}
-                                            />
-                                        </button>
-                                        <Link href={`/${local}/books/${book.book_Id}`}>
-                                            <button className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors" title="التفاصيل">
-                                                <FaEye size={16}
-                                                />
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
+    //         // === ⭐ Normalize Rating (always max 5 stars) ===
+    //         const normalizedRating = Math.min(book.reviews_Count / 2, 5);
+    //         const fullStars = Math.round(normalizedRating);
 
-                                <div className="p-4 text-right">
-                                    <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h3>
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-lg font-bold text-(--main-color)">{book.price}  {local === "ar" ? "ج.م" : "EGP"} </span>
-                                        <div className="flex items-center gap-1">
-                                            {Array.from({ length: book.reviews_Count }).map((_, i) => (
-                                                <FaStar
-                                                    key={i}
-                                                    size={16}
-                                                    className="text-yellow-500"
-                                                />
-                                            ))}
-                                            <span className="text-xs font-medium text-gray-500">
-                                                {book.reviews_Count}
-                                            </span>
-                                        </div>
+    //         return (
+    //             <ScrollAnimation key={index} delay={index * 0.1}>
+    //                 <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </ScrollAnimation>
-                    ))}
-                </div>
-            </>
-        )
-    }
+    //                     {/* === Image === */}
+    //                     <div className="relative h-64 w-full bg-gray-50 overflow-hidden">
+    //                         <Image
+    //                             src={book.image || book.image_Url || "/book.png"}
+    //                             alt={book.book_Name}
+    //                             fill
+    //                             className="object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+    //                         />
+
+    //                         <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+    //                             {book.user_Name || "—"}
+    //                         </div>
+
+    //                         {/* Actions */}
+    //                         <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    //                             <button
+    //                                 onClick={() => addToCart(book.book_Id, book.price)}
+    //                                 className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
+    //                             >
+    //                                 <FaCartPlus size={16} />
+    //                             </button>
+
+    //                             <Link href={`/${local}/books/${book.book_Id}`}>
+    //                                 <button className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors">
+    //                                     <FaEye size={16} />
+    //                                 </button>
+    //                             </Link>
+    //                         </div>
+    //                     </div>
+
+    //                     {/* === Card Body === */}
+    //                     <div className="p-4 text-right">
+    //                         <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>
+    //                             {book.book_Name}
+    //                         </h3>
+
+    //                         <div className="flex items-center justify-between">
+
+    //                             {/* Price */}
+    //                             <span className="text-lg font-bold text-(--main-color)">
+    //                                 {book.price} {local === "ar" ? "ج.م" : "EGP"}
+    //                             </span>
+
+    //                             {/* ⭐ Rating */}
+    //                             <div className="flex items-center gap-1">
+    //                                 {Array.from({ length: 5 }).map((_, i) => (
+    //                                     <FaStar
+    //                                         key={i}
+    //                                         size={16}
+    //                                         className={`${i < fullStars ? "text-yellow-500" : "text-gray-400"}`}
+    //                                     />
+    //                                 ))}
+
+    //                                 <span className="text-xs font-medium text-gray-500">
+    //                                     {book.reviews_Count}
+    //                                 </span>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </ScrollAnimation>
+    //         );
+    //     })}
+    // </div>
+
+    //             </>
+    //         )
+    //     }
 
     return (
         <>
@@ -183,77 +203,71 @@ const BooksFetching: React.FC<Props> = ({ count }) => {
                 </div>
             ) : (
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                    {filterSearch.map((book, index) => (
-                        <ScrollAnimation key={index} delay={index * 0.1}>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+                    {filterSearch.map((book, index) => {
+                        const normalizedRating = Math.min(book.reviews_Count / 2.5, 5);
+                        const fullStars = Math.round(normalizedRating);
 
-                            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
+                        return (
+                            <ScrollAnimation key={index} delay={index * 0.1}>
+                                <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
+                                    <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
+                                        <Image
+                                            src={book.image || book.image_Url || "/book.png"}
+                                            alt={book.book_Name}
+                                            fill
+                                            className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                            {book.user_Name || "—"}
+                                        </div>
 
-                                {/* الصورة */}
-                                <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
-                                    <Image
-                                        src={book.image || book.image_Url || "/book.png"}
-                                        alt={book.book_Name}
-                                        fill
-                                        className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
-                                    />
-
-                                    {/* اسم الكاتب */}
-                                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
-                                        {book.user_Name || "—"}
-                                    </div>
-
-                                    {/* الآيقونات */}
-                                    <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <button
-                                            onClick={() => addToCart(book.book_Id, book.price)}
-                                            className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
-                                            title="أضف للسلة"
-                                        >
-                                            <FaCartPlus size={16} />
-                                        </button>
-
-                                        <Link href={`/${local}/books/${book.book_Id}`}>
+                                        {/* Overlay Actions */}
+                                        <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <button
+                                                onClick={() => addToCart(book.book_Id, book.price, book.user_ID)}
                                                 className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
-                                                title="التفاصيل"
+                                                title="أضف للسلة"
                                             >
-                                                <FaEye size={16} />
+                                                <FaCartPlus size={16} />
                                             </button>
-                                        </Link>
+                                            <Link href={`/${local}/books/${book.book_Id}`}>
+                                                <button
+                                                    className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
+                                                    title="التفاصيل"
+                                                >
+                                                    <FaEye size={16} />
+                                                </button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {/* البيانات */}
-                                <div className="p-4 text-right">
-                                    <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>
-                                        {book.book_Name}
-                                    </h3>
-
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-lg font-bold text-(--main-color)">
-                                            {book.price} {local === "ar" ? "ج.م" : "EGP"}
-                                        </span>
-
-                                        {/* ⭐ التقييم بشكل أنضف */}
-                                        <div className="flex items-center gap-1">
-                                            {Array.from({ length: 5 }).map((_, i) => (
-                                                <FaStar
-                                                    key={i}
-                                                    size={16}
-                                                    className={i < book.reviews_Count ? "text-yellow-500" : "text-gray-300"}
-                                                />
-                                            ))}
-                                            <span className="text-xs font-medium text-gray-500">
-                                                ({book.reviews_Count})
+                                    <div className="p-4 text-right">
+                                        <h3 className="font-bold text-base text-gray-800 mb-2 truncate" title={book.book_Name}>
+                                            {book.book_Name}
+                                        </h3>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-base font-bold text-(--main-color)">
+                                                {book.price} {local === "ar" ? "ج.م" : "EGP"}
                                             </span>
+                                            <div className="flex items-center gap-1">
+                                                {Array.from({ length: 5 }).map((_, i) => (
+                                                    <FaStar
+                                                        key={i}
+                                                        size={14}
+                                                        className={i < fullStars ? "text-yellow-500" : "text-gray-300"}
+                                                    />
+                                                ))}
+                                                <span className="text-xs font-medium text-gray-500">
+                                                    ({book.reviews_Count})
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                        </ScrollAnimation>
-                    ))}
+                            </ScrollAnimation>
+                        );
+                    })}
                 </div>
 
             )}
