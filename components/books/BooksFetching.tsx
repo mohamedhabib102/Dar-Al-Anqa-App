@@ -47,7 +47,6 @@ const BooksFetching: React.FC<Props> = () => {
         try {
             setLoading(true);
             const res = await api.get(`/api/Books/all?userId=${id}`);
-            console.log(res.data);
             setBooks(res.data || []);
         } catch (error) {
             console.log(error);

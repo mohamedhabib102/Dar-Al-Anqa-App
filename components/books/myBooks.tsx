@@ -41,7 +41,6 @@ const MyBooksUser: React.FC = () => {
         try {
             setLoading(true)
             const res = await api.get(`/api/Books/GetMyBooks?userId=${userData.userId}`)
-            console.log(res.data)
             setBooks(res.data)
         } catch (error) {
             console.log(error)
@@ -63,8 +62,6 @@ const MyBooksUser: React.FC = () => {
 
     const handleOpenBook = (book: MyBooksFetch) => {
         setSelectedBook(book);
-
-        console.log(book);
         setToggle(true);
     };
 
