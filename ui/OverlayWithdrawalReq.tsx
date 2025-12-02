@@ -64,23 +64,23 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithd
                     <IoClose size={24} />
                 </button>
 
-                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">{t("title")}</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 ">{t("title")}</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Payment Method */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">{t("paymentMethod")}</label>
+                        <label className="block text-sm font-medium text-gray-700  mb-1">{t("paymentMethod")}</label>
                         <select
                             value={paymentMethod}
                             onChange={(e) => setPaymentMethod(e.target.value)}
-                            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
+                            className="w-full border text-gray-700 border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
                             required
                         >
-                            <option value="">{t("selectPaymentMethod")}</option>
-                            <option value="Vodafone cash">{t("vodafoneCash")}</option>
-                            <option value="Fawry">{t("fawry")}</option>
-                            <option value="Visa">{t("visa")}</option>
-                            <option value="Paypal">{t("paypal")}</option>
+                            <option className="dark:text-gray-700" value="">{t("selectPaymentMethod")}</option>
+                            <option className="dark:text-gray-700" value="Vodafone cash">{t("vodafoneCash")}</option>
+                            <option className="dark:text-gray-700" value="Fawry">{t("fawry")}</option>
+                            <option className="dark:text-gray-700" value="Visa">{t("visa")}</option>
+                            <option className="dark:text-gray-700" value="Paypal">{t("paypal")}</option>
                         </select>
                     </div>
 
@@ -94,20 +94,20 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithd
                             value={accountNumber}
                             onChange={(e) => setAccountNumber(e.target.value)}
                             placeholder={t("enterAccountNumber")}
-                            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
+                            className="w-full border text-gray-700 border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
                             required
                         />
                     </div>
 
                     {/* Amount */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">{t("amount")}</label>
+                        <label className="block text-sm font-medium text-gray-700  mb-1">{t("amount")}</label>
                         <input
                             type="number"
                             value={amount || ""}
                             onChange={(e) => setAmount(Number(e.target.value))}
                             placeholder={t("enterAmount")}
-                            className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
+                            className="w-full border text-gray-700 border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none"
                             required
                             min="1"
                         />

@@ -137,7 +137,7 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                             <button
                                 onClick={handleApprove}
                                 disabled={loading}
-                                className="flex-1 bg-green-500 dark:bg-green-600 dark:hover:bg-(--main-color-rgb) hover:bg-green-600 text-white dark:text-gray-800 py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 bg-green-500 dark:bg-green-600 hover:bg-green-800 text-white dark:text-gray-800 py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 ✓ {locale === "ar" ? "موافقة" : locale === "en" ? "Approve" : "Approuver"}
                             </button>
@@ -152,7 +152,7 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
 
                         <button
                             onClick={() => setToggle(false)}
-                            className="w-full bg-gray-200 dark:bg-(--main-color-rgb) dark:hover:bg-(--main-color) text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition font-medium mt-2"
+                            className="w-full bg-gray-200  text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition font-medium mt-2"
                         >
                             {locale === "ar" ? "إلغاء" : locale === "en" ? "Cancel" : "Annuler"}
                         </button>

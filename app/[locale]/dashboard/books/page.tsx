@@ -56,7 +56,7 @@ const BooksDashboard: React.FC = () => {
             <div className="mb-6 flex justify-end">
                 <button
                     onClick={() => setToggle(!toggle)}
-                    className="flex items-center gap-2 transition duration-300 cursor-pointer bg-(--main-color) text-white px-6 py-3 rounded-lg hover:bg-[#8b7a26] font-bold shadow-lg hover:shadow-xl"
+                    className="flex items-center gap-2 transition duration-300 cursor-pointer bg-(--main-color) text-white px-6 py-3 rounded-lg hover:bg-(--main-color-rgb) font-bold shadow-lg hover:shadow-xl"
                 >
                     <FaPlus />
                     {locale === "ar" ? "إضافة كتاب جديد" : locale === "en" ? "Add New Book" : "Ajouter un nouveau livre"}
