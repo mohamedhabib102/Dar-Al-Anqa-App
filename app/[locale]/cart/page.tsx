@@ -262,69 +262,112 @@ const Cart: React.FC = () => {
                         {/* Payment & Total Section */}
                         <div className="lg:col-span-1 space-y-4">
                             {/* Payment Methods */}
-                            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6">
+                            <div className="bg-white dark:bg-gray-900 rounded-xl">
                                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
                                     {locale === "ar" ? "طرق الدفع المتاحة" : locale === "en" ? "Available Payment Methods" : "Méthodes de paiement disponibles"}
                                 </h3>
-                        
-                            <div className="space-y-3">
-                                {/* Visa */}
-                                <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500 transition-all cursor-pointer">
-                                    <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl">
-                                        💳
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
-                                            Visa
-                                        </p>
-                                    </div>
-                                </div>
-                        
-                                {/* PayPal */}
-                                <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-500 transition-all cursor-pointer">
-                                    <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xl">
-                                        🅿️
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
-                                            PayPal
-                                        </p>
-                                    </div>
-                                </div>
-                        
-                                {/* Fawry */}
-                                <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-500 transition-all cursor-pointer">
-                                    <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white text-xl">
-                                        💵
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
-                                            Fawry
-                                        </p>
-                                    </div>
-                                </div>
-                        
-                                {/* Vodafone Cash */}
-                                <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-500 transition-all cursor-pointer">
-                                    <div className="w-10 h-10 bg-linear-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center text-white text-xl">
-                                        📱
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
-                                            Vodafone Cash
-                                        </p>
-                                    </div>
-                                </div>
+
+                             <div className="lg:col-span-1 space-y-4">
+                                 {/* Payment Methods */}
+                                 <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6">
+                                     <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                         {locale === "ar" ? "طرق الدفع المتاحة" : locale === "en" ? "Available Payment Methods" : "Méthodes de paiement disponibles"}
+                                     </h3>
+                                 <div className="space-y-3">
+                                     {/* Visa */}
+                                     <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500 transition-all cursor-pointer">
+                                         <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                             💳
+                                         </div>
+                                         <div className="flex-1">
+                                             <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                                                 Visa
+                                             </p>
+                                         </div>
+                                     </div>
+                             
+                                     {/* PayPal */}
+                                     <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-500 transition-all cursor-pointer">
+                                         <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                             🅿️
+                                         </div>
+                                         <div className="flex-1">
+                                             <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                                                 PayPal
+                                             </p>
+                                         </div>
+                                     </div>
+                             
+                                     {/* Fawry */}
+                                     <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-500 transition-all cursor-pointer">
+                                         <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                             💵
+                                         </div>
+                                         <div className="flex-1">
+                                             <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                                                 Fawry
+                                             </p>
+                                         </div>
+                                     </div>
+                             
+                                     {/* Vodafone Cash */}
+                                     <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-500 transition-all cursor-pointer">
+                                         <div className="w-10 h-10 bg-linear-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                             📱
+                                         </div>
+                                         <div className="flex-1">
+                                             <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                                                 Vodafone Cash
+                                             </p>
+                                         </div>
+                                     </div>
+                                 </div>
+                             
+                                 <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                     <p className="text-xs text-blue-800 text-center">
+                                         🔒 {locale === "ar" ? "جميع المعاملات آمنة ومشفرة" : locale === "en" ? "All transactions are secure and encrypted" : "Toutes les transactions sont sécurisées et cryptées"}
+                                     </p>
+                                 </div>
+                             </div>
+                             </div>
                             </div>
-                        
-                            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                                <p className="text-xs text-blue-800 text-center">
-                                    🔒 {locale === "ar" ? "جميع المعاملات آمنة ومشفرة" : locale === "en" ? "All transactions are secure and encrypted" : "Toutes les transactions sont sécurisées et cryptées"}
+
+
+                            {/* Order Summary */}
+                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sticky top-4">
+                                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                    {locale === "ar" ? "ملخص الطلب" : locale === "en" ? "Order Summary" : "Résumé de la commande"}
+                                </h3>
+                                <div className="pt-3 border-t border-gray-200 dark:border-gray-800 mb-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
+                                            {locale === "ar" ? "الإجمالي" : locale === "en" ? "Total" : "Total"}
+                                        </span>
+                                        <span className="text-2xl font-bold text-(--main-color)">
+                                            {totalPrice} {locale === "ar" ? "ج.م" : locale === "en" ? "USD" : "€"}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <button
+                                    onClick={handleCheckout}
+                                    disabled={checkoutLoading || cartItems.length === 0}
+                                    className="w-full px-6 py-3 bg-(--main-color) text-white rounded-lg font-bold text-base hover:opacity-90 transition-all transform hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+                                >
+                                    {checkoutLoading
+                                        ? (locale === "ar" ? "جاري المعالجة..." : locale === "en" ? "Processing..." : "Traitement en cours...")
+                                        : (locale === "ar" ? "إتمام الطلب" : locale === "en" ? "Proceed to Checkout" : "Passer à la caisse")
+                                    }
+                                </button>
+
+                                <p className="text-xs text-gray-500 text-center mt-3">
+                                    {locale === "ar" ? "بالنقر على 'إتمام الطلب' فإنك توافق على " : locale === "en" ? "By clicking 'Proceed to Checkout' you agree to our " : "En cliquant sur 'Passer à la caisse', vous acceptez nos "}
+                                    <a href="#" className="text-(--main-color) dark:text-white hover:underline">
+                                        {locale === "ar" ? "الشروط والأحكام" : locale === "en" ? "Terms & Conditions" : "Conditions générales"}
+                                    </a>
                                 </p>
                             </div>
                         </div>
-                        </div>
-
                     </div>
                 </CustomContainer>
             </section>
