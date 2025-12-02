@@ -20,7 +20,7 @@ const Landing: React.FC = () => {
             />
 
             {/* Black Overlay */}
-            <div className="absolute inset-0 bg-black/50" />
+            <div className={`absolute inset-0 bg-black/50 dark:bg-black/60`} />
 
             {/* Content */}
             <motion.div
