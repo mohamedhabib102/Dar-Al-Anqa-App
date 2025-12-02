@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 const Landing: React.FC = () => {
     const t = useTranslations("HomePage");
+    const locale = useLocale();
     return (
         <section className="relative h-[calc(100vh-81px)]">
             {/* Background Image — optimized LCP */}
@@ -37,7 +38,7 @@ const Landing: React.FC = () => {
                 </p>
 
                 <Link
-                    href="/books"
+                    href={`/${locale}/books`}
                     className="block w-fit mx-auto cursor-pointer transition duration-300 bg-(--main-color) hover:bg-[#857421] text-white py-2 px-4 rounded mt-4">{t("landing.button")}
                 </Link>
             </motion.div>
