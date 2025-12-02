@@ -145,8 +145,6 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                 formData.append("Categories", id.toString());
             });
 
-            console.log(data);
-
             if (data.image) {
                 formData.append("image", data.image);
             }
@@ -160,8 +158,6 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                     'Content-Type': 'multipart/form-data'
                 }
             });
-
-            console.log("Response:", res);
             alert(t("success"));
             handleClose()
             getBooks()

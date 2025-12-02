@@ -47,7 +47,7 @@ const OverlayWithdrawalReq: React.FC<OverlayWithdrawalReqProps> = ({ toggleWithd
         } catch (error: AxiosError | any) {
             console.log("Error:", error.response?.data);
             if (error.response?.status === 400) {
-                alert(locale === "ar" ? " تاكد من وجود ارباح " : locale === "en" ? "Make sure there are profits" : "Assurez-vous qu’il y a des bénéfices");
+                alert(locale === "ar" ? " تاكد من وجود من ان رصيد اكبر من 1000 " : locale === "en" ? "Make sure that the balance is greater than 1000" : "Assurez-vous que le solde est supérieur à 1000");
             }
         }
     }
