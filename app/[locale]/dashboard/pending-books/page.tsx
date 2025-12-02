@@ -80,9 +80,9 @@ const PendingBooks: React.FC = () => {
 
             <div className="space-y-4">
                 {books.length === 0 ? (
-                    <div className="text-center py-12 bg-white rounded-lg shadow">
-                        <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
-                        <p className="text-gray-500 text-lg">
+                    <div className="text-center dark:bg-gray-900 py-12 bg-white rounded-lg shadow">
+                        <FaBook className="mx-auto text-6xl text-gray-300 dark:text-white mb-4" />
+                        <p className="text-gray-500 dark:text-white text-lg">
                             {t("pendingBooks.noBooks")}
                         </p>
                     </div>
@@ -95,14 +95,14 @@ const PendingBooks: React.FC = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
                                 {/* Book ID */}
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-full bg-(--main-color) flex items-center justify-center text-white font-bold text-lg">
+                                    <div className="w-12 h-12 rounded-full bg-(--main-color) dark:bg-(--main-color) flex items-center justify-center text-white font-bold text-lg">
                                         #{book.book_Id}
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-gray-500 dark:text-white">
                                             {t("pendingBooks.bookId")}
                                         </p>
-                                        <p className="font-semibold text-gray-800">{book.book_Id}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-white">{book.book_Id}</p>
                                     </div>
                                 </div>
 
@@ -117,10 +117,10 @@ const PendingBooks: React.FC = () => {
                                         className="w-12 h-12 rounded-full"
                                     />
                                     <div>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-gray-500 dark:text-white">
                                             {t("pendingBooks.bookName")}
                                         </p>
-                                        <p className="font-semibold text-gray-800 truncate max-w-[200px]" title={book.book_Name}>
+                                        <p className="font-semibold text-gray-800 dark:text-white truncate max-w-[200px]" title={book.book_Name}>
                                             {book.book_Name}
                                         </p>
                                     </div>
@@ -140,12 +140,12 @@ const PendingBooks: React.FC = () => {
 
                                 {/* User ID */}
                                 <div className="flex items-center gap-3">
-                                    <FaUser className="text-(--main-color) text-2xl" />
+                                    <FaUser className="text-(--main-color) dark:text-(--main-color) text-2xl" />
                                     <div>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-gray-500 dark:text-white">
                                             {t("pendingBooks.userId")}
                                         </p>
-                                        <p className="font-semibold text-gray-800">{book.user_ID}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-white">{book.user_ID}</p>
                                     </div>
                                 </div>
 

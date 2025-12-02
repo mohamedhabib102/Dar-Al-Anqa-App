@@ -126,18 +126,18 @@ const OverlayHelp: React.FC<OverlayMessage> = ({ toggle, setToggle }) => {
                         </ul>
                         {userData?.userId ? (
                             <button onClick={() => logout("/" + locale)}
-                            className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition duration-200 hover:bg-[#a08b21]">
+                            className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition duration-200 hover:bg-(--main-color-rgb)">
                                 <span className="font-medium">{t('logout')}</span>
                                 <IoIosArrowForward size={18} className="transition duration-300  group-hover:translate-x-0.5" />
                             </button>
                         ) : (
-                            <Link href={`/${locale}/sign-in`} className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-3 rounded-xl transition-all duration-200 hover:bg-[#a08b21] shadow-lg shadow-(--main-color)/20">
+                            <Link href={`/${locale}/sign-in`} className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-3 rounded-xl transition-all duration-200 hover:bg-(--main-color-rgb) shadow-lg shadow-(--main-color)/20">
                                 <span className="font-bold">{t("signIn")}</span>
                                 <IoIosArrowForward size={18} className="transition duration-300 group-hover:-translate-x-1" />
                             </Link>
                         )}
                         {userData?.role === "Admin" && (
-                            <Link href={`/${locale}/dashboard`} className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-3 rounded-xl transition-all duration-200 hover:bg-[#a08b21] shadow-lg shadow-(--main-color)/20">
+                            <Link href={`/${locale}/dashboard`} className="mt-3 w-full m-auto cursor-pointer group flex items-center justify-center gap-2 bg-(--main-color) text-white px-6 py-3 rounded-xl transition-all duration-200 hover:bg-(--main-color-rgb) shadow-lg shadow-(--main-color)/20">
                                 <span className="font-bold">{t("dashboard")}</span>
                                 <IoIosArrowForward size={18} className="transition duration-300 group-hover:-translate-x-1" />
                             </Link>

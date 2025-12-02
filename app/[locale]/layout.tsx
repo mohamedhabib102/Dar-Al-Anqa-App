@@ -51,9 +51,9 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <PopupProvider>
             <AuthProvider>
-            <div className="grow">
-              {children}
-            </div>
+              <div className="grow">
+                {children}
+              </div>
             </AuthProvider>
             <PopupMessage />
             <Footer />

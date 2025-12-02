@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ screen }: { screen: 'mobile' | 'deskt
                 onClick={() => setIsOpen(!isOpen)}
                 className={`
                     ${screen === 'mobile' ? 'w-full mt-3 py-3 px-2 justify-between' : 'w-auto'}
-                    flex items-center gap-2 lg:px-2 lg:py-2 px-1.5 py-1.5 rounded-lg  bg-(--main-color) hover:bg-[#a08b21] text-white font-medium transition-all duration-300 shadow-lg cursor-pointer
+                    flex items-center gap-2 lg:px-2 lg:py-2 px-1.5 py-1.5 rounded-lg  bg-(--main-color) hover:bg-(--main-color-rgb) text-white font-medium transition-all duration-300 shadow-lg cursor-pointer
                     `}
                 aria-label={t('label')}
             >

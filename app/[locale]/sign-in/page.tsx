@@ -18,6 +18,7 @@ interface authData {
   username: string;
   phoneNumber: string;
   password: string;
+  e_mail: string;
   role: string;
 }
 
@@ -53,6 +54,7 @@ const Login: React.FC = () => {
     username: "",
     phoneNumber: "",
     password: "",
+    e_mail: "",
     role: "",
   });
 
@@ -236,6 +238,19 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
+                <div className="group">
+                <label className="text-gray-300 text-sm mb-2 block">{t("email")}</label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    name="e_mail"
+                    className="outline-none cursor-pointer w-full px-5 py-3.5 rounded-xl bg-black/20 border border-white/10 text-white"
+                    onChange={handleChange}
+                    value={authData.e_mail}
+                  />
+                </div>
+              </div>
+
               <div className="group">
                 <label className="text-gray-300 text-sm mb-2 block">{t("role")}</label>
                 <select
@@ -253,7 +268,7 @@ const Login: React.FC = () => {
 
               <button
                 type="submit"
-                className="cursor-pointer w-full bg-yellow-600 text-white font-bold py-4 rounded-xl"
+                className="cursor-pointer w-full bg-(--main-color) text-white font-bold py-4 rounded-xl"
               >
                 {t("next")}
               </button>
@@ -273,7 +288,7 @@ const Login: React.FC = () => {
                     key={cat.category_Id}
                     onClick={() => toggleCategory(cat.category_Id)}
                     className={`cursor-pointer p-4 rounded-xl border text-white transition ${selectedCategories.includes(cat.category_Id)
-                        ? "bg-yellow-600 border-yellow-400"
+                        ? "bg-(--main-color) border-(--main-color-rgb)"
                         : "bg-black/20 border-white/10"
                       }`}
                   >
@@ -284,7 +299,7 @@ const Login: React.FC = () => {
 
               <button
                 onClick={handleSubmit}
-                className="cursor-pointer w-full bg-green-600 text-white font-bold py-4 rounded-xl mt-4"
+                className="cursor-pointer w-full bg-(--main-color) text-white font-bold py-4 rounded-xl mt-4"
               >
                 {loading ? (
                   <TbLoader2 className="animate-spin m-auto" />

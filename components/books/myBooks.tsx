@@ -8,6 +8,7 @@ import api from "@/utils/api";
 import { useAuth } from "@/utils/contextapi";
 import OverlayReview from "@/ui/OverlayReview";
 import { useRouter } from "next/navigation";
+import ScrollAnimation from "@/ui/ScrollAnimation";
 
 
 interface MyBooksFetch {
@@ -15,6 +16,7 @@ interface MyBooksFetch {
     book_Name: string;
     image_Url?: string;
     file_Path: string;
+    totalReviews: number;
     reviews_Count: number;
 }
 
@@ -113,70 +115,89 @@ const MyBooksUser: React.FC = () => {
                     onReviewAdded={handleReviewAdded}
                 />
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-                {books.map((book) => (
-                    <div key={book.book_Id} className="book-card custom_scale  bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
-                        <div className="relative h-[300px] w-full overflow-hidden bg-gray-100">
-                            <Image
-                                src={book.image_Url || "/images/book.png"}
-                                alt={book.book_Name}
-                                fill
-                                className="object-cover transition-transform duration-500"
-                            />
+<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+    {books.map((book, index) => {
 
-                            {/* Overlay Actions */}
-                            <div className="absolute top-3 right-3 flex items-center flex-col gap-3">
-                                <button
-                                    onClick={() => handleOpenBook(book)}
-                                    className="cursor-pointer bg-white text-gray-800 p-3 rounded-full transition hover:bg-(--main-color) hover:text-white shadow-lg" title="التفاصيل">
-                                    <FaEye size={18}
-                                    />
-                                </button>
-                            </div>
+        const normalizedRating = Math.min((book.reviews_Count || 0) / book.totalReviews, 5);
+        const fullStars = Math.round(normalizedRating);
+
+        return (
+            <ScrollAnimation key={index} delay={index * 0.1}>
+                <div className="group relative dark:bg-gray-900 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800 overflow-hidden hover:-translate-y-2">
+
+                    {/* Image Container */}
+                    <div className="relative w-full h-48 dark:bg-gray-800 bg-gray-50 overflow-hidden">
+                        <Image
+                            src={book.image_Url || "/images/book.png"}
+                            alt={book.book_Name}
+                            fill
+                            className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
+                        />
+
+                        {/* Username or Purchased Text */}
+                        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                            {local === "ar" ? "تم الشراء" : local === "en" ? "Purchased" : "Acheté"}
                         </div>
 
-
-
-                        <div className="p-4 text-right">
-                            <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{book.book_Name}</h3>
-                            <div className="flex items-center justify-between mt-3">
-                                <span className="text-xl font-bold text-(--main-color)">{local === "ar" ? "تم الشراء" : local === "en" ? "Purchased" : "Acheté"}</span>
-                              <div className="flex items-center gap-1">
-                              
-                                  {(() => {
-                                      const normalizedRating = Math.min((book.reviews_Count || 0) / 2, 5);
-                                      const fullStars = Math.round(normalizedRating);
-                              
-                                      return (
-                                          <>
-                                              {Array.from({ length: 5 }).map((_, i) => (
-                                                  <FaStar
-                                                      key={i}
-                                                      size={16}
-                                                      className={i < fullStars ? "text-yellow-500" : "text-gray-300"}
-                                                  />
-                                              ))}
-                              
-                                              <span className="text-sm font-medium text-gray-500">
-                                                  ({book.reviews_Count || 0})
-                                              </span>
-                                          </>
-                                      );
-                                  })()}
-                              
-                              </div>
-
-                            </div>
+                        {/* Overlay Actions */}
+                        <div className="absolute top-2 right-2 flex flex-col gap-2 transition-opacity duration-300">
                             <button
-                                onClick={() => handleOpenReview(book.book_Id)}
-                                className="w-full mt-3 text-sm font-medium text-white py-2 px-3 rounded-lg cursor-pointer transition hover:bg-gray-700 hover:shadow-lg bg-gray-900"
+                                onClick={() => handleOpenBook(book)}
+                                className="cursor-pointer bg-white text-gray-800 p-2 rounded-full hover:bg-(--main-color) hover:text-white shadow-md transition-colors"
+                                title="التفاصيل"
                             >
-                                {local === "ar" ? "إضافة تقييم" : local === "en" ? "Add Review" : "Ajouter un avis"}
+                                <FaEye size={16} />
                             </button>
                         </div>
                     </div>
-                ))}
-            </div>
+
+                    {/* Content */}
+                    <div className="p-4 text-right">
+                        <h3
+                            className="font-bold text-base dark:text-gray-200 text-gray-800 mb-2 truncate"
+                            title={book.book_Name}
+                        >
+                            {book.book_Name}
+                        </h3>
+
+                        {/* Rating */}
+                        <div className="flex items-center justify-between">
+                            <span className="text-base font-bold text-(--main-color)">
+                                {local === "ar" ? "تم الشراء" : local === "en" ? "Purchased" : "Acheté"}
+                            </span>
+
+                            <div className="flex items-center gap-1">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <FaStar
+                                        key={i}
+                                        size={14}
+                                        className={i < fullStars ? "text-yellow-500" : "text-gray-300"}
+                                    />
+                                ))}
+                                <span className="text-xs font-medium text-gray-500 dark:text-gray-200">
+                                    ({book.reviews_Count || 0})
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Review Button */}
+                        <button
+                            onClick={() => handleOpenReview(book.book_Id)}
+                            className="w-full mt-3 text-sm font-medium text-white dark:text-gray-200 dark:bg-gray-800 py-2 px-3 rounded-lg cursor-pointer transition hover:bg-gray-700 hover:shadow-lg bg-gray-900"
+                        >
+                            {local === "ar"
+                                ? "إضافة تقييم"
+                                : local === "en"
+                                    ? "Add Review"
+                                    : "Ajouter un avis"}
+                        </button>
+                    </div>
+                </div>
+            </ScrollAnimation>
+        );
+    })}
+</div>
+
         </>
     )
 }

@@ -17,9 +17,9 @@ const Logo: React.FC = () => {
         <Image
           src="/logo.png"
           alt="Logo"
-          width={60}
+          width={55}
           height={100}
-          className="w-13 rounded-lg mr-1"
+          className="lg:w-13 w-11 rounded-lg"
         />
 
         <span className="text-(--main-color) font-semibold text-2xl">

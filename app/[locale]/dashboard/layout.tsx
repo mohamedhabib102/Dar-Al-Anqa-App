@@ -33,7 +33,7 @@ const DashboardLayout: React.FC<DashboardProps> = ({ children }) => {
 //         }
 //    }, [userData?.role])
     return (
-        <>
+        <div className="dark:bg-gray-900">
             <Header />
             <div className="bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg border-b border-gray-700">
                 <nav className={
@@ -91,12 +91,12 @@ const DashboardLayout: React.FC<DashboardProps> = ({ children }) => {
                     </ul>
                 </nav>
             </div>
-            <section className="py-8 min-h-screen bg-gray-50">
+            <section className=" dark:bg-gray-900 py-8 min-h-screen bg-gray-50">
                 <CustomContainer>
                     {children}
                 </CustomContainer>
             </section>
-        </>
+        </div>
     )
 }
 export default DashboardLayout

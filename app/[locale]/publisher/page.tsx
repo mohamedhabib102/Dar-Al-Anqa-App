@@ -13,6 +13,14 @@ import ShowBookContent from "@/components/books/ShowBookContent"
 import OverlayWithdrawalReq from "@/ui/OverlayWithdrawalReq"
 import { useRouter } from "next/navigation"
 
+
+/*
+
+hhh
+54542202100
+Mohamed7000
+hhh@gmail.com
+*/
 interface AuthorBook {
     book_Id: number;
     user_ID: number;
@@ -131,7 +139,7 @@ const Author: React.FC = () => {
                 getBooks={getAuthorBooks}
             />
             <Header />
-            <section className="py-16 bg-gray-50 min-h-screen">
+            <section className="py-16 bg-gray-50 dark:bg-gray-900 min-h-screen">
                 <CustomContainer>
                     <CustomTitle
                         title={t("title")}
@@ -141,19 +149,19 @@ const Author: React.FC = () => {
                     {isMounted && isAccepted ? (
                         <div className="mb-8 flex justify-between">
                             <div className="flex items-center gap-2">
-                                <span className="text-gray-500 text-lg font-medium">{t("AllProfits")}</span>
+                                <span className="text-gray-500 dark:text-gray-300 text-lg font-medium">{t("AllProfits")}</span>
                                 <span className="text-(--main-color) text-lg font-medium">{totalProfit}</span>
                             </div>
                             <button
                                 onClick={() => setToggle(!toggle)}
-                                className="flex items-center gap-2 transition duration-300 cursor-pointer bg-(--main-color) text-white px-6 py-3 rounded-lg hover:bg-[#8b7a26] font-bold shadow-lg hover:shadow-xl"
+                                className="flex items-center gap-2  transition duration-300 cursor-pointer bg-(--main-color) text-white px-6 py-3 rounded-lg hover:bg-(--main-color-rgb) font-bold shadow-lg hover:shadow-xl"
                             >
                                 <FaPlus />
                                 {t("addNewBook")}
                             </button>
                         </div>
                     ) : (
-                        <p className="text-gray-500 text-lg font-semibold mb-4">
+                        <p className="text-gray-500 dark:text-gray-300 text-lg font-semibold mb-4">
                             *{tHead("accountNotAccepted")}!
                         </p>
                     )}
@@ -162,14 +170,14 @@ const Author: React.FC = () => {
                     {/* Withdrawal Requests Tracking Section */}
                     <div className="mb-8">
                         <div className="flex gap-4 justify-between items-center mb-6 border-b pb-4">
-                            <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
                                 <FaListAlt className="text-(--main-color)" />
                                 {locale === "ar" ? "تتبع طلباتي" : locale === "en" ? "Track My Orders" : "Suivi de mes commandes"}
                             </h3>
                         </div>
                         {withdrawalRequests.length === 0 ? (
-                            <div className="text-center py-8 bg-white rounded-lg shadow">
-                                <p className="text-gray-500">{locale === "ar" ? "لا توجد طلبات سحب" : locale === "en" ? "No withdrawal requests" : "Aucune demande de retrait"}</p>
+                            <div className="text-center py-8 bg-white dark:bg-gray-800 rounded-lg shadow">
+                                <p className="text-gray-500 dark:text-gray-300">{locale === "ar" ? "لا توجد طلبات سحب" : locale === "en" ? "No withdrawal requests" : "Aucune demande de retrait"}</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -231,18 +239,18 @@ const Author: React.FC = () => {
 
                     <div className="mb-6">
                         <div className="flex gap-4 justify-between items-center mb-6 border-b pb-4">
-                            <h3 className="text-2xl font-bold text-gray-800">{t("myBooks")}</h3>
+                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{t("myBooks")}</h3>
                             <button onClick={() => setToggleWithdrawal(!toggleWithdrawal)} className="cursor-pointer w-1/2 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 text-white py-2.5 rounded-lg transition-colors font-medium">{t("withdrawalRequest")}</button>
                         </div>
                         {books.length === 0 ? (
-                            <div className="text-center py-12 bg-white rounded-lg shadow">
-                                <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
-                                <p className="text-gray-500 text-lg">{t("noBooks")}</p>
+                            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow">
+                                <FaBook className="mx-auto text-6xl text-gray-300 dark:text-gray-500 mb-4" />
+                                <p className="text-gray-500 dark:text-gray-300 text-lg">{t("noBooks")}</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {books.map((book) => (
-                                    <div key={book.book_Id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                    <div key={book.book_Id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                                         <div className="relative h-64 w-full">
                                             <Image
                                                 src={book.image_Url || "/book.png"}
@@ -250,7 +258,7 @@ const Author: React.FC = () => {
                                                 fill
                                                 className="object-cover"
                                             />
-                                            <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-800 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
                                                 {book.is_Accepted ? <FaCheckCircle className="text-green-500 inline mr-1" /> : <FaClock className="text-yellow-500 inline mr-1" />}
                                                 {book.is_Accepted ? (locale === "ar" ? "مقبول" : "Accepted") : (locale === "ar" ? "قيد المراجعة" : "Pending")}
                                             </div>
@@ -258,22 +266,22 @@ const Author: React.FC = () => {
                                         <div className="p-6">
                                             <div className="flex justify-between items-center mb-4">
                                                 <div>
-                                                    <h4 className="text-xl font-bold text-gray-800 mb-2 truncate" title={book.book_Name}>{book.book_Name}</h4>
-                                                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 h-10">{book.book_Description}</p>
+                                                    <h4 className="text-xl font-bold text-gray-800 dark:text-white mb-2 truncate" title={book.book_Name}>{book.book_Name}</h4>
+                                                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 h-10">{book.book_Description}</p>
                                                 </div>
                                                 <div className="flex items-center gap-2">
                                                 <FaEye className="text-(--main-color)"/>
                                                 <span>{book.reviews_Count}</span>
                                             </div>
                                             </div>
-                                            <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
+                                            <div className="flex justify-between items-center mb-4 text-sm text-gray-500 dark:text-gray-300">
                                                 <span className="flex items-center gap-1"><FaDollarSign className="text-(--main-color)" /> {book.price}</span>
                                                 <span className="flex items-center gap-1"><FaShoppingCart className="text-(--main-color)" /> {book.purchases_Count}</span>
                                             </div>
 
                                             <button
                                                 onClick={() => handleViewBook(book)}
-                                                className="mb-4 w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 text-white py-2.5 rounded-lg transition-colors font-medium"
+                                                className="mb-4 w-full flex items-center justify-center gap-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 text-white py-2.5 rounded-lg transition-colors font-medium"
                                             >
                                                 <FaEye />
                                                 {t("view")}

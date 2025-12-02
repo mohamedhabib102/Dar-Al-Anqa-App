@@ -133,12 +133,12 @@ const BookById: React.FC = () => {
                         {/* Book Details */}
                         <ScrollAnimation delay={0.2}>
                             <div className="flex flex-col justify-center gap-6">
-                                <h1 className="text-4xl font-bold text-gray-800">{book.book_Name}</h1>
+                                <h1 className="text-4xl font-bold dark:text-white text-gray-800">{book.book_Name}</h1>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-lg text-gray-600">{t("author")}:</span>
+                                    <span className="text-lg text-gray-600 dark:text-gray-400">{t("author")}:</span>
                                     <span className="text-xl font-semibold text-(--main-color)">{book.user_Name || "غير محدد"}</span>
                                 </div>
-                                <p className="text-lg text-gray-700 leading-relaxed">{book.book_Description}</p>
+                                <p className="text-lg text-gray-700 dark:text-gray-400 leading-relaxed">{book.book_Description}</p>
                                 <div className="flex items-center gap-2">
                                     <span className="text-lg text-gray-600">{t("purchasesCount")}:</span>
                                     <span className="text-xl font-semibold text-(--main-color)">{book.purchases_Count}</span>

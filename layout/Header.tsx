@@ -13,6 +13,8 @@ import { useTranslations } from "use-intl";
 import LanguageSwitcher from "@/layout/LanguageSwitcher";
 import { useAuth } from "@/utils/contextapi";
 import { FaShoppingCart } from "react-icons/fa";
+import SwitchDarkMoode from "@/ui/SwitchDarkMoode";
+
 
 const Header: React.FC = () => {
     const [toggle, setToggle] = useState(false);
@@ -31,7 +33,7 @@ const Header: React.FC = () => {
             <OverlayHelp
                 toggle={toggle}
                 setToggle={setToggle} />
-            <section className="bg-gray-900 py-3.5 h-[81px] border-b border-gray-800" dir="ltr">
+            <section className="bg-gray-900 py-3.5 h-[81px] border-b border-gray-800 dark:border-header-border" dir="ltr">
                 <CustomContainer>
                     <nav className="flex items-center justify-between">
                         <Logo />
@@ -76,63 +78,65 @@ const Header: React.FC = () => {
                                 </li>
                             )}
                             {isMounted && userData?.role === "Publisher" && (
-                              <li>
-                                     <Link
-                                         href={locale === "ar" ? "/ar/publisher" : locale === "fr" ? "/fr/publisher" : "/en/publisher"}
-                                         className={`px-4 py-2 text-lg font-medium transition rounded-md
+                                <li>
+                                    <Link
+                                        href={locale === "ar" ? "/ar/publisher" : locale === "fr" ? "/fr/publisher" : "/en/publisher"}
+                                        className={`px-4 py-2 text-lg font-medium transition rounded-md
                                  ${pathName === `/${locale}/publisher`
-                                                 ? "text-white bg-(--main-color)"
-                                                 : "text-white bg-gray-800 hover:bg-(--main-color)"}`}
-                                     >
-                                         {t('publisher')}
-                                     </Link>
-                              </li>
+                                                ? "text-white bg-(--main-color)"
+                                                : "text-white bg-gray-800 hover:bg-(--main-color)"}`}
+                                    >
+                                        {t('publisher')}
+                                    </Link>
+                                </li>
                             )}
                             {isMounted && userData?.role === "Author" && (
-                              <li>
-                                <Link
+                                <li>
+                                    <Link
                                         href={locale === "ar" ? "/ar/author" : locale === "fr" ? "/fr/author" : "/en/author"}
                                         className={`px-4 py-2 text-lg font-medium transition rounded-md
                                  ${pathName === `/${locale}/author`
-                                                 ? "text-white bg-(--main-color)"
-                                                 : "text-white bg-gray-800 hover:bg-(--main-color)"}`}
-                                     >
-                                         {t('author')}
-                                     </Link>
-                              </li>
+                                                ? "text-white bg-(--main-color)"
+                                                : "text-white bg-gray-800 hover:bg-(--main-color)"}`}
+                                    >
+                                        {t('author')}
+                                    </Link>
+                                </li>
                             )}
+
                         </motion.ul>
 
                         <motion.div
                             initial={{ x: 50, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="flex items-center gap-4 flex-row-reverse">
+                            className="flex items-center gap-2 flex-row-reverse">
                             {isMounted && userData?.role === "Admin" && (
-                                <Link href={`/${locale}/dashboard`} className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-[#a08b21]">
+                                <Link href={`/${locale}/dashboard`} className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-(--main-color-rgb)">
                                     <span className="font-medium">{t('dashboard')}</span>
                                     <IoIosArrowForward size={18} className="transition duration-300  group-hover:translate-x-0.5" />
                                 </Link>
                             )}
-                            
-                            <Link 
+
+                            <Link
                                 href={`/${locale}/cart`}
-                                className="bg-(--main-color) text-white p-2 rounded-full shadow-lg hover:opacity-90 transition-opacity cursor-pointer"
+                                className="bg-(--main-color) text-white p-2 rounded-full shadow-lg hover:bg-(--main-color-rgb) transition-opacity cursor-pointer"
                                 title={locale === "ar" ? "السلة" : locale === "en" ? "Cart" : "Panier"}
                             >
                                 <FaShoppingCart size={18} />
                             </Link>
-                            
+                            <SwitchDarkMoode />
+
                             <ToggleNavbar setToggle={setToggle} toggle={toggle} />
                             {isMounted && userData?.userId ? (
                                 <button onClick={() => logout("/" + locale)}
-                                    className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-[#a08b21]">
+                                    className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-(--main-color-rgb)">
                                     <span className="font-medium">{t('logout')}</span>
                                     <IoIosArrowForward size={18} className="transition duration-300  group-hover:translate-x-0.5" />
                                 </button>
                             ) : (
                                 isMounted && (
-                                    <Link href={`/${locale}/sign-in`} className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-[#a08b21]">
+                                    <Link href={`/${locale}/sign-in`} className="cursor-pointer group lg:flex  hidden items-center gap-2 bg-(--main-color) text-white px-6 py-2.5 rounded-md transition-colors duration-200 hover:bg-(--main-color-rgb)">
                                         <span className="font-medium">{t('signIn')}</span>
                                         <IoIosArrowForward size={18} className="transition duration-300  group-hover:translate-x-0.5" />
                                     </Link>

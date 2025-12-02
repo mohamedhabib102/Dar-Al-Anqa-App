@@ -13,7 +13,7 @@ const Books: React.FC = ()=> {
     return (
         <>
         <Header/>
-        <section className="py-16">
+        <section className="py-16 dark:bg-gray-900">
             <CustomContainer>
                 <CustomTitle
                 title={t("books.title")}

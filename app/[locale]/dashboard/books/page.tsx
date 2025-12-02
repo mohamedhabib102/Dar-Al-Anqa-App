@@ -63,11 +63,11 @@ const BooksDashboard: React.FC = () => {
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="dark:bg-gray-900 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {books.length === 0 ? (
-                    <div className="col-span-full text-center py-12 bg-white rounded-lg shadow">
-                        <FaBook className="mx-auto text-6xl text-gray-300 mb-4" />
-                        <p className="text-gray-500 text-lg">
+                    <div className="col-span-full text-center py-12 bg-white dark:bg-gray-900 rounded-lg shadow">
+                        <FaBook className="mx-auto text-6xl text-gray-300 dark:text-white mb-4" />
+                        <p className="text-gray-500 dark:text-white text-lg">
                             {locale === "ar" ? "لا توجد كتب متاحة" : locale === "en" ? "No books available" : "Aucun livre disponible"}
                         </p>
                     </div>
@@ -75,7 +75,7 @@ const BooksDashboard: React.FC = () => {
                     books.map((book, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
+                            className="bg-white dark:bg-gray-900 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
                         >
                             {/* Book Image */}
                             <div className="relative h-64 w-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
@@ -89,12 +89,12 @@ const BooksDashboard: React.FC = () => {
                             </div>
 
                             {/* Book Details */}
-                            <div className="p-4">
-                                <h3 className="font-bold text-lg text-gray-800 mb-2 truncate" title={book.book_Name}>
+                            <div className="p-4 dark:bg-gray-900">
+                                <h3 className="font-bold text-lg text-gray-800 dark:text-white mb-2 truncate" title={book.book_Name}>
                                     {book.book_Name}
                                 </h3>
 
-                                <p className="text-sm text-gray-600 mb-3 line-clamp-2" title={book.book_Description}>
+                                <p className="text-sm text-gray-600 dark:text-white mb-3 line-clamp-2" title={book.book_Description}>
                                     {book.book_Description}
                                 </p>
 
@@ -108,12 +108,6 @@ const BooksDashboard: React.FC = () => {
                                         <span>{book.price}</span>
                                     </div>
                                 </div>
-
-                                {/* <div className="flex gap-2">
-                                    <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors cursor-pointer">
-                                        {locale === "ar" ? "حذف" : locale === "en" ? "Delete" : "Supprimer"}
-                                    </button>
-                                </div> */}
                             </div>
                         </div>
                     ))

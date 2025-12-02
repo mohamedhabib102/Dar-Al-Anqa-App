@@ -202,8 +202,8 @@ const Cart: React.FC = () => {
                         {/* Cart Items */}
                         <div className="lg:col-span-2 space-y-4">
                             {cartItems.length === 0 ? (
-                                <div className="text-center py-12 bg-white rounded-lg shadow">
-                                    <p className="text-gray-500 text-lg">
+                                <div className="text-center py-12 bg-white dark:bg-gray-900 rounded-lg shadow">
+                                    <p className="text-gray-500 dark:text-gray-200 text-lg">
                                         {locale === "ar" ? "السلة فارغة" : locale === "en" ? "Cart is empty" : "Le panier est vide"}
                                     </p>
                                 </div>
@@ -213,11 +213,11 @@ const Cart: React.FC = () => {
                                     return (
                                         <div
                                             key={index}
-                                            className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                                            className="bg-white dark:bg-gray-900 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800"
                                         >
                                             <div className="flex flex-row gap-4 p-4">
                                                 {/* Book Image - Optimized size */}
-                                                <div className="relative h-[120px] w-[85px] md:h-[140px] md:w-[100px] overflow-hidden bg-gray-100 rounded-lg shrink-0 shadow-sm">
+                                                <div className="relative h-[120px] w-[85px] md:h-[140px] md:w-[100px] overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-lg shrink-0 shadow-sm">
                                                     <Image
                                                         src={book?.image_Url || "/images/book.png"}
                                                         alt={book?.book_Name || (locale === "ar" ? "كتاب" : locale === "en" ? "Book" : "Livre")}
@@ -229,10 +229,10 @@ const Cart: React.FC = () => {
                                                 {/* Book Details */}
                                                 <div className="flex-1 flex flex-col justify-between">
                                                     <div>
-                                                        <h3 className="font-bold text-base md:text-lg text-gray-800 mb-1 line-clamp-2">
+                                                        <h3 className="font-bold text-base md:text-lg text-gray-800 dark:text-gray-200 mb-1 line-clamp-2">
                                                             {book?.book_Name || (locale === "ar" ? "كتاب" : locale === "en" ? "Book" : "Livre")}
                                                         </h3>
-                                                        <p className="text-sm text-gray-500 mb-3">
+                                                        <p className="text-sm text-gray-500 dark:text-gray-200 mb-3">
                                                             {locale === "ar" ? "كتاب إلكتروني" : locale === "en" ? "E-Book" : "Livre électronique"}
                                                         </p>
                                                     </div>
@@ -262,64 +262,49 @@ const Cart: React.FC = () => {
                         {/* Payment & Total Section */}
                         <div className="lg:col-span-1 space-y-4">
                             {/* Payment Methods */}
-                            <div className="bg-white rounded-xl shadow-md p-6">
-                                <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-200">
+                            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6">
+                                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
                                     {locale === "ar" ? "طرق الدفع المتاحة" : locale === "en" ? "Available Payment Methods" : "Méthodes de paiement disponibles"}
                                 </h3>
 
                                 <div className="space-y-3">
                                     {/* Credit/Debit Cards */}
-                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer">
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500 transition-all cursor-pointer">
                                         <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl">
                                             💳
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-semibold text-sm text-gray-800">
+                                            <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
                                                 {locale === "ar" ? "بطاقة ائتمان/خصم" : locale === "en" ? "Credit/Debit Card" : "Carte de crédit/débit"}
                                             </p>
-                                            <p className="text-xs text-gray-500">Visa, Mastercard, Mada</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-200">Visa, Mastercard, Mada</p>
                                         </div>
                                     </div>
 
                                     {/* Digital Wallets */}
-                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-all cursor-pointer">
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-500 transition-all cursor-pointer">
                                         <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xl">
                                             📱
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-semibold text-sm text-gray-800">
+                                            <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
                                                 {locale === "ar" ? "المحافظ الرقمية" : locale === "en" ? "Digital Wallets" : "Portefeuilles numériques"}
                                             </p>
-                                            <p className="text-xs text-gray-500">Apple Pay, STC Pay</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-200">Apple Pay, STC Pay</p>
                                         </div>
                                     </div>
 
                                     {/* Bank Transfer */}
-                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-green-400 hover:bg-green-50 transition-all cursor-pointer">
+                                    <div className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-500 transition-all cursor-pointer">
                                         <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white text-xl">
                                             🏦
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-semibold text-sm text-gray-800">
+                                            <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
                                                 {locale === "ar" ? "تحويل بنكي" : locale === "en" ? "Bank Transfer" : "Virement bancaire"}
                                             </p>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-gray-500 dark:text-gray-200">
                                                 {locale === "ar" ? "تحويل مباشر" : locale === "en" ? "Direct transfer" : "Transfert direct"}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Cash on Delivery */}
-                                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-yellow-400 hover:bg-yellow-50 transition-all cursor-pointer">
-                                        <div className="w-10 h-10 bg-linear-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center text-white text-xl">
-                                            💰
-                                        </div>
-                                        <div className="flex-1">
-                                            <p className="font-semibold text-sm text-gray-800">
-                                                {locale === "ar" ? "الدفع عند الاستلام" : locale === "en" ? "Cash on Delivery" : "Paiement à la livraison"}
-                                            </p>
-                                            <p className="text-xs text-gray-500">
-                                                {locale === "ar" ? "نقداً" : locale === "en" ? "Cash" : "Espèces"}
                                             </p>
                                         </div>
                                     </div>
@@ -333,13 +318,13 @@ const Cart: React.FC = () => {
                             </div>
 
                             {/* Order Summary */}
-                            <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
-                                <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-200">
+                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sticky top-4">
+                                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
                                     {locale === "ar" ? "ملخص الطلب" : locale === "en" ? "Order Summary" : "Résumé de la commande"}
-                                </h3>D:
-                                <div className="pt-3 border-t border-gray-200 mb-4">
+                                </h3>
+                                <div className="pt-3 border-t border-gray-200 dark:border-gray-800 mb-4">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-lg font-bold text-gray-800">
+                                        <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
                                             {locale === "ar" ? "الإجمالي" : locale === "en" ? "Total" : "Total"}
                                         </span>
                                         <span className="text-2xl font-bold text-(--main-color)">

@@ -215,7 +215,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
             ></div>
 
             <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${toggle ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"}`}>
-                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                     <div className="sticky top-0 bg-linear-to-r from-gray-900 to-gray-800 text-white p-6 rounded-t-2xl flex justify-between items-center">
                         <h2 className="text-2xl font-bold">{t("title")}</h2>
                         <button
@@ -228,7 +228,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
 
                     <form onSubmit={handleSubmit} className="p-6 space-y-6">
                         <div>
-                            <label htmlFor="book_Name" className="block text-gray-700 font-semibold mb-2 text-right">
+                            <label htmlFor="book_Name" className="block text-gray-700 dark:text-white font-semibold mb-2 text-right">
                                 {t("bookName")} <span className="text-red-500">{t("required")}</span>
                             </label>
                             <input
@@ -244,7 +244,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                         </div>
 
                         <div>
-                            <label htmlFor="book_Description" className="block text-gray-700 font-semibold mb-2 text-right">
+                            <label htmlFor="book_Description" className="block text-gray-700 dark:text-white font-semibold mb-2 text-right">
                                 {t("bookDescription")} <span className="text-red-500">{t("required")}</span>
                             </label>
                             <textarea
@@ -259,7 +259,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                         </div>
 
                         <div className="relative">
-                            <label htmlFor="book_Description" className="block text-gray-700 font-semibold mb-2 text-right">
+                            <label htmlFor="book_Description" className="block text-gray-700 dark:text-white font-semibold mb-2 text-right">
                                 {t("category")} <span className="text-red-500">{t("required")}</span>
                             </label>
                             {/* Selected tags */}
@@ -292,7 +292,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
 
                             {/* Dropdown options */}
                             {inputFocused && (
-                                <div className="absolute left-0 right-0 top-full mt-1 bg-white shadow-lg border border-gray-200 rounded-lg max-h-60 overflow-y-auto z-20">
+                                <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-gray-900 shadow-lg border border-gray-200 rounded-lg max-h-60 overflow-y-auto z-20">
                                     {category.map((cat) => (
                                         <div
                                             key={cat.category_Id}
@@ -308,7 +308,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                                     }
                                                 }));
                                             }}
-                                            className="px-4 py-3 text-gray-800 cursor-pointer hover:bg-gray-100 transition text-right"
+                                            className="px-4 py-3 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition text-right"
                                         >
                                             {cat.category_Name}
                                         </div>
@@ -318,7 +318,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                         </div>
 
                         <div>
-                            <label htmlFor="price" className="block text-gray-700 font-semibold mb-2 text-right">
+                            <label htmlFor="price" className="block text-gray-700 dark:text-white font-semibold mb-2 text-right">
                                 {t("price")} <span className="text-red-500">{t("required")}</span>
                             </label>
                             <input
@@ -331,7 +331,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                 min="0"
                                 step="0.01"
                                 placeholder={t("pricePlaceholder")}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none transition text-right"
+                                className="w-full px-4 py-3 dark:text-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--main-color) focus:border-transparent outline-none transition text-right"
                             />
                         </div>
 
@@ -347,7 +347,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                 />
                                 <label
                                     htmlFor="image-upload"
-                                    className="flex flex-col items-center justify-center w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-(--main-color) hover:bg-gray-50 transition-all"
+                                    className="flex flex-col items-center justify-center w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-(--main-color) hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
                                 >
                                     <FaImage size={48} className="text-gray-400 mb-3" />
                                     <span className="text-gray-600 font-medium">
@@ -373,7 +373,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                                 />
                                 <label
                                     htmlFor="pdf-upload"
-                                    className="flex flex-col items-center justify-center w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-(--main-color) hover:bg-gray-50 transition-all"
+                                    className="flex flex-col items-center justify-center w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-(--main-color) hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
                                 >
                                     <MdCloudUpload size={48} className="text-gray-400 mb-3" />
                                     <span className="text-gray-600 font-medium">
@@ -396,7 +396,7 @@ const AddNewBook: React.FC<PropsAddNewBook> = ({ toggle, setToggle, pathLink, ge
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="cursor-pointer flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-bold text-lg hover:bg-gray-300 transition-all"
+                                className="cursor-pointer flex-1 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white py-3 rounded-lg font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-all"
                             >
                                 {t("cancel")}
                             </button>

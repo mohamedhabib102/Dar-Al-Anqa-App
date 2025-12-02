@@ -94,7 +94,7 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
 
     return (
         <div className="fixed h-full inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative">
+            <div className="bg-white dark:bg-gray-800  rounded-lg shadow-xl w-full max-w-md p-6 relative">
                 <button
                     onClick={() => setToggle(false)}
                     className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
@@ -102,31 +102,31 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                     <IoClose size={24} />
                 </button>
 
-                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">
                    {locale === "ar" ? "تفاصيل طلب السحب" : locale === "en" ? "Withdrawal Details" : "Détails de retrait"}
                 </h2>
 
                 {loading ? (
                     <div className="text-center py-8">
-                        <p className="text-gray-500">{locale === "ar" ? "جاري التحميل..." : locale === "en" ? "Loading..." : "Chargement..."}</p>
+                        <p className="text-gray-500 dark:text-gray-300">{locale === "ar" ? "جاري التحميل..." : locale === "en" ? "Loading..." : "Chargement..."}</p>
                     </div>
                 ) : authorDetails ? (
                     <div className="space-y-4">
                         {/* Author Details */}
-                        <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                        <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "اسم المؤلف/الناشر:" : locale === "en" ? "Author/Publisher Name:" : "Nom de l’auteur / de l’éditeur:"}</span>
-                                <span className="text-base font-bold text-gray-800">{authorDetails.authorName}</span>
+                                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{locale === "ar" ? "اسم المؤلف/الناشر:" : locale === "en" ? "Author/Publisher Name:" : "Nom de l’auteur / de l’éditeur:"}</span>
+                                <span className="text-base font-bold text-gray-800 dark:text-gray-200">{authorDetails.authorName}</span>
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "رقم الهاتف:" : locale === "en" ? "Phone Number:" : "Numéro de téléphone:"}</span>
-                                <span className="text-base font-semibold text-gray-700">{authorDetails.phoneNumber}</span>
+                                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{locale === "ar" ? "رقم الهاتف:" : locale === "en" ? "Phone Number:" : "Numéro de téléphone:"}</span>
+                                <span className="text-base font-semibold text-gray-700 dark:text-gray-200">{authorDetails.phoneNumber}</span>
                             </div>
 
                             <div className="flex justify-between items-center pt-2 border-t">
-                                <span className="text-sm font-medium text-gray-600">{locale === "ar" ? "الرصيد" : locale === "en" ? "Total Balance" : "Solde total"}:</span>
-                                <span className="text-lg font-bold text-green-600">
+                                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{locale === "ar" ? "الرصيد" : locale === "en" ? "Total Balance" : "Solde total"}:</span>
+                                <span className="text-lg font-bold text-green-600 dark:text-green-400">
                                     {authorDetails.authorBalance} {locale === "ar" ? "ج.م" : locale === "en" ? "EGP" : "EGP"}
                                 </span>
                             </div>
@@ -137,14 +137,14 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
                             <button
                                 onClick={handleApprove}
                                 disabled={loading}
-                                className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 bg-green-500 dark:bg-green-600 dark:hover:bg-(--main-color-rgb) hover:bg-green-600 text-white dark:text-gray-800 py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 ✓ {locale === "ar" ? "موافقة" : locale === "en" ? "Approve" : "Approuver"}
                             </button>
                             <button
                                 onClick={handleReject}
                                 disabled={loading}
-                                className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 bg-red-500 dark:bg-red-600 dark:hover:bg-red-800 hover:bg-red-600 text-white py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 ✗ {locale === "ar" ? "رفض" : locale === "en" ? "Reject" : "Refuser"}
                             </button>
@@ -152,14 +152,14 @@ const OverlayApproveOrder: React.FC<OverlayApproveOrderProps> = ({
 
                         <button
                             onClick={() => setToggle(false)}
-                            className="w-full bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition font-medium mt-2"
+                            className="w-full bg-gray-200 dark:bg-(--main-color-rgb) dark:hover:bg-(--main-color) text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition font-medium mt-2"
                         >
                             {locale === "ar" ? "إلغاء" : locale === "en" ? "Cancel" : "Annuler"}
                         </button>
                     </div>
                 ) : (
                     <div className="text-center py-8">
-                        <p className="text-gray-500">{locale === "ar" ? "لا توجد بيانات" : locale === "en" ? "No data" : "Aucune donnée"}</p>
+                        <p className="text-gray-500 dark:text-gray-300">{locale === "ar" ? "لا توجد بيانات" : locale === "en" ? "No data" : "Aucune donnée"}</p>
                     </div>
                 )}
             </div>

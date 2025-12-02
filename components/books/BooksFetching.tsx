@@ -21,7 +21,8 @@ interface BooksFetchingProps {
     image: string;
     image_Url?: string;
     user_Name: string;
-    reviews_Count: number
+    reviews_Count: number;
+    totalReviews: number;
 }
 
 
@@ -205,14 +206,14 @@ const BooksFetching: React.FC<Props> = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
                     {filterSearch.map((book, index) => {
-                        const normalizedRating = Math.min(book.reviews_Count / 2.5, 5);
+                        const normalizedRating = Math.min(book.reviews_Count / book.totalReviews, 5);
                         const fullStars = Math.round(normalizedRating);
-                        // const reating = pepole / book.reviews_Count;
+                        // const reating = book.totalReviews / book.reviews_Count;
 
                         return (
                             <ScrollAnimation key={index} delay={index * 0.1}>
-                                <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden hover:-translate-y-2">
-                                    <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
+                                <div className="group relative dark:bg-gray-900 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800 overflow-hidden hover:-translate-y-2">
+                                    <div className="relative w-full h-48 dark:bg-gray-800 bg-gray-50 overflow-hidden">
                                         <Image
                                             src={book.image || book.image_Url || "/book.png"}
                                             alt={book.book_Name}
@@ -244,7 +245,7 @@ const BooksFetching: React.FC<Props> = () => {
                                     </div>
 
                                     <div className="p-4 text-right">
-                                        <h3 className="font-bold text-base text-gray-800 mb-2 truncate" title={book.book_Name}>
+                                        <h3 className="font-bold text-base dark:text-gray-200 text-gray-800 mb-2 truncate" title={book.book_Name}>
                                             {book.book_Name}
                                         </h3>
                                         <div className="flex items-center justify-between">

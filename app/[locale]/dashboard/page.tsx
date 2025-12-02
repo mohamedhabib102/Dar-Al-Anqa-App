@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
             />
 
             {/* Platform Earnings Section */}
-            <section className="bg-linear-to-r from-green-500 to-emerald-600 rounded-xl shadow-2xl p-8">
+            <section className="bg-linear-to-r dark:from-gray-900 dark:to-gray-800 from-green-500 to-emerald-600 rounded-xl shadow-2xl p-8">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full">
@@ -98,13 +98,13 @@ const Dashboard: React.FC = () => {
             </section>
 
             {/* Withdrawal Requests Section */}
-            <section className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">
+            <section className=" dark:bg-gray-900 bg-white rounded-lg shadow-md p-6">
+                <h2 className=" dark:text-white text-2xl font-bold mb-4 text-gray-800 border-b pb-2">
                     {t("withdrawalRequests.title")} ({withdrawals.length})
                 </h2>
 
                 {withdrawals.length === 0 ? (
-                    <p className="text-center text-gray-500 py-8">{locale === "ar" ? "لا توجد طلبات سحب معلقة" : locale === "en" ? "No Pending Withdrawal Requests" : "Aucune demande de retrait en attente"}</p>
+                    <p className="text-center dark:text-white text-gray-500 py-8">{locale === "ar" ? "لا توجد طلبات سحب معلقة" : locale === "en" ? "No Pending Withdrawal Requests" : "Aucune demande de retrait en attente"}</p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {withdrawals.map((withdrawal, index) => (
@@ -115,7 +115,7 @@ const Dashboard: React.FC = () => {
                                 {/* Header */}
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <h3 className="font-bold text-lg text-gray-800">
+                                        <h3 className="font-bold text-lg dark:text-white text-gray-800">
                                              {locale === "ar" ? "طلب" : locale === "en" ? "Request" : "Requête"}  # {index + 1}
                                         </h3>
                                         <p className="text-xs text-gray-500">

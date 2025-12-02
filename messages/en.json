@@ -42,6 +42,7 @@
         "name": "Full Name",
         "phone": "Phone Number",
         "password": "Password",
+        "email": "Email",
         "role": "Account Type",
         "next": "Next",
         "categories": "Categories",

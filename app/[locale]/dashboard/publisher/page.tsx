@@ -69,32 +69,32 @@ const PublisherDashboard: React.FC = () => {
 
             <div className="space-y-4">
                 {publishers.length === 0 ? (
-                    <div className="text-center py-12 bg-white rounded-lg shadow">
+                    <div className="text-center dark:bg-gray-900 py-12 bg-white rounded-lg shadow">
                         <p className="text-gray-500 text-lg">{t("no_publishers")}</p>
                     </div>
                 ) : (
                     publishers.map((publisher) => (
                         <div
                             key={publisher.user_Id}
-                            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
+                            className="bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
                         >
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-center">
 
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-full bg-(--main-color) flex items-center justify-center text-white font-bold text-lg">
+                                    <div className="w-12 h-12 rounded-full bg-(--main-color) dark:bg-(--main-color) flex items-center justify-center text-white font-bold text-lg">
                                         #{publisher.user_Id}
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-500">{t("user_id")}</p>
-                                        <p className="font-semibold text-gray-800">{publisher.user_Id}</p>
+                                        <p className="text-xs text-gray-500 dark:text-white">{t("user_id")}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-white">{publisher.user_Id}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    <FaUser className="text-(--main-color) text-2xl" />
+                                    <FaUser className="text-(--main-color) dark:text-(--main-color) text-2xl" />
                                     <div>
-                                        <p className="text-xs text-gray-500">{t("name")}</p>
-                                        <p className="font-semibold text-gray-800">{publisher.name}</p>
+                                        <p className="text-xs text-gray-500 dark:text-white">{t("name")}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-white">{publisher.name}</p>
                                     </div>
                                 </div>
 
