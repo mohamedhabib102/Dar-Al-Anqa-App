@@ -168,10 +168,10 @@ const Author: React.FC = () => {
                                                 {locale === "ar" ? "طلب" : locale === "en" ? "Request" : "Demande"} #{request.withdraw_Id}
                                             </h4>
                                             <span className={`text-xs px-3 py-1 rounded-full font-medium ${request.status === "Approved"
-                                                    ? "bg-green-100 dark:bg-green-800 text-green-800"
+                                                    ? "bg-green-100 dark:bg-green-800 text-green-800 dark:text-white"
                                                     : request.status === "Pending"
-                                                        ? "bg-yellow-100 dark:bg-yellow-800 text-yellow-800"
-                                                        : "bg-red-100 dark:bg-red-800 text-red-800"
+                                                        ? "bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-white"
+                                                        : "bg-red-100 dark:bg-red-800 text-red-800 dark:text-white"
                                                 }`}>
                                                 {request.status === "Approved" ? 
                                                 locale === "ar" ? "تمت الموافقة" : locale === "en" ? "Approved" : "Approuvé" : 

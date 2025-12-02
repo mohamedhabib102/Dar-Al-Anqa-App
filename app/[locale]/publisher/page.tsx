@@ -258,7 +258,7 @@ const Author: React.FC = () => {
                                                 fill
                                                 className="object-cover"
                                             />
-                                            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-800 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
+                                            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-800 dark:text-white backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-(--main-color) shadow-sm">
                                                 {book.is_Accepted ? <FaCheckCircle className="text-green-500 inline mr-1" /> : <FaClock className="text-yellow-500 inline mr-1" />}
                                                 {book.is_Accepted ? (locale === "ar" ? "مقبول" : "Accepted") : (locale === "ar" ? "قيد المراجعة" : "Pending")}
                                             </div>
