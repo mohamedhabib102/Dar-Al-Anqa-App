@@ -13,6 +13,7 @@ import api from "@/utils/api";
 import { TbLoader2 } from "react-icons/tb";
 import Cookies from "js-cookie";
 import { fetchCategories } from "@/utils/GetAllCategory";
+import { AxiosError } from "axios";
 
 interface authData {
   username: string;
@@ -135,8 +136,12 @@ const Login: React.FC = () => {
       } else if (userData.role === "Admin") {
         window.location.href = `/${locale}/dashboard`
       }
-    } catch (error) {
+    } catch (error: AxiosError|any) {
+      console.log(error);
       setMessage("Login failed.");
+      if (error.response.status === 400) {
+        setMessage(locale === "ar" ? " هذا المستخدم موجود بالفعل " : locale === "fr" ? "Cet utilisateur existe déjà" : "This user already exists");
+      }
     } finally {
       setLoading(false);
     }

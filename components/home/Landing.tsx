@@ -30,7 +30,7 @@ const Landing: React.FC = () => {
                 className="w-[90%] lg:w-[50%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-white text-center px-4"
             >
                 <h3 className="text-5xl  font-bold text-white dark:text-gray-100">
-                    {t("landing.title")}  '<span className="text-(--main-color)">{t("landing.subTitle")}</span>'
+                    {t("landing.title")}  '<span className="text-(--main-color) dark:text-(--main-color-rgb)">{t("landing.subTitle")}</span>'
                 </h3>
 
                 <p className="text-lg lg:w-[420px] md:w-96 w-auto m-auto leading-7 mt-4">
@@ -39,7 +39,7 @@ const Landing: React.FC = () => {
 
                 <Link
                     href={`/${locale}/books`}
-                    className="block w-fit mx-auto cursor-pointer transition duration-300 bg-(--main-color) hover:bg-(--main-color-rgb) text-white py-2 px-4 rounded mt-4">{t("landing.button")}
+                    className="block w-fit mx-auto cursor-pointer transition duration-300 bg-(--main-color) dark:bg-(--main-color-rgb) hover:bg-(--main-color-rgb) text-white py-2 px-4 rounded mt-4">{t("landing.button")}
                 </Link>
             </motion.div>
         </section>
