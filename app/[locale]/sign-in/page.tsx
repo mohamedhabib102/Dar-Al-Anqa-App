@@ -136,7 +136,7 @@ const Login: React.FC = () => {
       } else if (userData.role === "Admin") {
         window.location.href = `/${locale}/dashboard`
       }
-    } catch (error: AxiosError|any) {
+    } catch (error: AxiosError | any) {
       console.log(error);
       setMessage("Login failed.");
       if (error.response.status === 400) {
@@ -243,7 +243,7 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
-                <div className="group">
+              <div className="group">
                 <label className="text-gray-300 text-sm mb-2 block">{t("email")}</label>
                 <div className="relative">
                   <input
@@ -293,8 +293,8 @@ const Login: React.FC = () => {
                     key={cat.category_Id}
                     onClick={() => toggleCategory(cat.category_Id)}
                     className={`cursor-pointer p-4 rounded-xl border text-white transition ${selectedCategories.includes(cat.category_Id)
-                        ? "bg-(--main-color) border-(--main-color-rgb)"
-                        : "bg-black/20 border-white/10"
+                      ? "bg-(--main-color) border-(--main-color-rgb)"
+                      : "bg-black/20 border-white/10"
                       }`}
                   >
                     {cat.category_Name}
@@ -302,16 +302,25 @@ const Login: React.FC = () => {
                 ))}
               </div>
 
-              <button
-                onClick={handleSubmit}
-                className="cursor-pointer w-full bg-(--main-color) text-white font-bold py-4 rounded-xl mt-4"
-              >
-                {loading ? (
-                  <TbLoader2 className="animate-spin m-auto" />
-                ) : (
-                  t("register")
-                )}
-              </button>
+              <div className="flex items-center gap-4 mt-4">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="cursor-pointer w-1/3 bg-white/10 text-white font-bold py-4 rounded-xl border border-white/20 hover:bg-white/20 transition-all text-sm md:text-base"
+                >
+                  {t("back")}
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="cursor-pointer flex-1 bg-(--main-color) text-white font-bold py-4 rounded-xl"
+                >
+                  {loading ? (
+                    <TbLoader2 className="animate-spin m-auto" />
+                  ) : (
+                    t("register")
+                  )}
+                </button>
+              </div>
             </div>
           )}
         </div>

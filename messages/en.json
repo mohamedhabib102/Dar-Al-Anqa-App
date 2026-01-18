@@ -45,7 +45,8 @@
         "email": "Email",
         "role": "Account Type",
         "next": "Next",
-        "categories": "Categories",
+        "back": "Back",
+        "categories": "Choose your favorite book types",
         "register": "Register",
         "roleDescription": {
             "select": "Select",
@@ -204,17 +205,16 @@
         "enterAccountNumber": "Enter account number"
     },
     "PublisherDashboard": {
-  "publisher_title": "Publisher",
-  "publisher_description": "Manage registered publishers in the platform",
-  "no_publishers": "No publishers registered",
-  "user_id": "User ID",
-  "name": "Name",
-  "phone_number": "Phone Number",
-  "role": "Role",
-  "accepted": "Accepted",
-  "pending": "Pending",
-  "accept": "Accept",
-  "reject": "Reject"
-}
-
+        "publisher_title": "Publisher",
+        "publisher_description": "Manage registered publishers in the platform",
+        "no_publishers": "No publishers registered",
+        "user_id": "User ID",
+        "name": "Name",
+        "phone_number": "Phone Number",
+        "role": "Role",
+        "accepted": "Accepted",
+        "pending": "Pending",
+        "accept": "Accept",
+        "reject": "Reject"
+    }
 }

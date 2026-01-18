@@ -22,25 +22,31 @@ const Landing: React.FC = () => {
             {/* Black Overlay */}
             <div className={`absolute inset-0 bg-black/50 dark:bg-black/60`} />
 
-            {/* Content */}
             <motion.div
-                initial={{ y: 50, opacity: 0 }}
+                initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="w-[90%] lg:w-[50%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-white text-center px-4"
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="relative z-20 h-full flex flex-col items-center justify-center text-white text-center px-4 max-w-4xl mx-auto"
             >
-                <h3 className="text-5xl  font-bold text-white dark:text-gray-100">
-                    {t("landing.title")}  '<span className="text-(--main-color) dark:text-(--main-color-rgb)">{t("landing.subTitle")}</span>'
-                </h3>
+                <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+                    {t("landing.title")}
+                    <span className="block mt-2 text-(--main-color) dark:text-(--main-color-rgb)">
+                        {t("landing.subTitle")}
+                    </span>
+                </h1>
 
-                <p className="text-lg lg:w-[420px] md:w-96 w-auto m-auto leading-7 mt-4">
+                <p className="text-base md:text-lg opacity-90 max-w-xl mx-auto leading-relaxed mb-8">
                     {t("landing.description")}
                 </p>
 
                 <Link
                     href={`/${locale}/books`}
-                    className="block w-fit mx-auto cursor-pointer transition duration-300 bg-(--main-color) dark:bg-(--main-color-rgb) hover:bg-(--main-color-rgb) text-white py-2 px-4 rounded mt-4">{t("landing.button")}
+                    className="group relative inline-flex items-center gap-2 bg-(--main-color) hover:bg-(--main-color-rgb) text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1 active:scale-95 overflow-hidden"
+                >
+                    <span className="relative z-10">{t("landing.button")}</span>
+                    <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </Link>
+
             </motion.div>
         </section>
     );

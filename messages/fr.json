@@ -44,8 +44,9 @@
         "password": "Mot de passe",
         "role": "Type de compte",
         "next": "Suivant",
+        "back": "Retour",
         "email": "Email",
-        "categories": "Catégories",
+        "categories": "Choisissez vos types de livres préférés",
         "register": "S'inscrire",
         "roleDescription": {
             "select": "Sélectionner",

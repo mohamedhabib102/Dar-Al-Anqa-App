@@ -44,8 +44,9 @@
     "password": "كلمة المرور",
     "role": "نوع الحساب",
     "next": "التالي",
-    "categories": "الفئات",
-    "register": "تسجيل",
+    "back": "رجوع",
+    "categories": "اختار أنواع الكتب المفضلة",
+    "register": "إنشاء حساب",
     "email": "البريد الالكتروني",
     "roleDescription": {
       "select": "اختر",
@@ -204,17 +205,16 @@
     "enterAccountNumber": "أدخل رقم الحساب"
   },
   "PublisherDashboard": {
-  "publisher_title": "دور النشر",
-  "publisher_description": "إدارة دور النشر المسجلة في المنصة",
-  "no_publishers": "لا توجد دور نشر مسجلة",
-  "user_id": "معرف المستخدم",
-  "name": "الاسم",
-  "phone_number": "رقم الهاتف",
-  "role": "الدور",
-  "accepted": "مقبول",
-  "pending": "معلق",
-  "accept": "قبول",
-  "reject": "رفض"
-}
-
+    "publisher_title": "دور النشر",
+    "publisher_description": "إدارة دور النشر المسجلة في المنصة",
+    "no_publishers": "لا توجد دور نشر مسجلة",
+    "user_id": "معرف المستخدم",
+    "name": "الاسم",
+    "phone_number": "رقم الهاتف",
+    "role": "الدور",
+    "accepted": "مقبول",
+    "pending": "معلق",
+    "accept": "قبول",
+    "reject": "رفض"
+  }
 }
